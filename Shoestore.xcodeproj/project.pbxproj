@@ -8,12 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		332D69A222086696007820D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69A122086696007820D0 /* AppDelegate.swift */; };
-		332D69A422086696007820D0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69A322086696007820D0 /* ViewController.swift */; };
 		332D69A722086696007820D0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 332D69A522086696007820D0 /* Main.storyboard */; };
 		332D69A922086699007820D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 332D69A822086699007820D0 /* Assets.xcassets */; };
 		332D69AC22086699007820D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 332D69AA22086699007820D0 /* LaunchScreen.storyboard */; };
 		332D69B722086699007820D0 /* ShoestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69B622086699007820D0 /* ShoestoreTests.swift */; };
 		332D69C222086699007820D0 /* ShoestoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69C122086699007820D0 /* ShoestoreUITests.swift */; };
+		33AB7AE32209C74700805205 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE22209C74700805205 /* HomeViewController.swift */; };
+		33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE42209C75500805205 /* SearchViewController.swift */; };
+		33AB7AE72209C75E00805205 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE62209C75E00805205 /* ShopViewController.swift */; };
+		33AB7AE92209C76800805205 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE82209C76800805205 /* UserViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,7 +39,6 @@
 /* Begin PBXFileReference section */
 		332D699E22086696007820D0 /* Shoestore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoestore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		332D69A122086696007820D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		332D69A322086696007820D0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		332D69A622086696007820D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		332D69A822086699007820D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		332D69AB22086699007820D0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -47,6 +49,10 @@
 		332D69BD22086699007820D0 /* ShoestoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoestoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		332D69C122086699007820D0 /* ShoestoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoestoreUITests.swift; sourceTree = "<group>"; };
 		332D69C322086699007820D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		33AB7AE22209C74700805205 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		33AB7AE42209C75500805205 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		33AB7AE62209C75E00805205 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		33AB7AE82209C76800805205 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,11 +103,9 @@
 		332D69A022086696007820D0 /* Shoestore */ = {
 			isa = PBXGroup;
 			children = (
-				332D69A122086696007820D0 /* AppDelegate.swift */,
-				332D69A322086696007820D0 /* ViewController.swift */,
-				332D69A522086696007820D0 /* Main.storyboard */,
-				332D69A822086699007820D0 /* Assets.xcassets */,
-				332D69AA22086699007820D0 /* LaunchScreen.storyboard */,
+				33AB7AE12209C6CE00805205 /* Pojo */,
+				33AB7AE02209C6C200805205 /* Resources */,
+				33AB7ADF2209C6AD00805205 /* Classes */,
 				332D69AD22086699007820D0 /* Info.plist */,
 			);
 			path = Shoestore;
@@ -123,6 +127,35 @@
 				332D69C322086699007820D0 /* Info.plist */,
 			);
 			path = ShoestoreUITests;
+			sourceTree = "<group>";
+		};
+		33AB7ADF2209C6AD00805205 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		33AB7AE02209C6C200805205 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				332D69A122086696007820D0 /* AppDelegate.swift */,
+				332D69A522086696007820D0 /* Main.storyboard */,
+				332D69A822086699007820D0 /* Assets.xcassets */,
+				332D69AA22086699007820D0 /* LaunchScreen.storyboard */,
+				33AB7AE22209C74700805205 /* HomeViewController.swift */,
+				33AB7AE42209C75500805205 /* SearchViewController.swift */,
+				33AB7AE62209C75E00805205 /* ShopViewController.swift */,
+				33AB7AE82209C76800805205 /* UserViewController.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		33AB7AE12209C6CE00805205 /* Pojo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Pojo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -256,8 +289,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				332D69A422086696007820D0 /* ViewController.swift in Sources */,
+				33AB7AE72209C75E00805205 /* ShopViewController.swift in Sources */,
+				33AB7AE92209C76800805205 /* UserViewController.swift in Sources */,
+				33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */,
 				332D69A222086696007820D0 /* AppDelegate.swift in Sources */,
+				33AB7AE32209C74700805205 /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
