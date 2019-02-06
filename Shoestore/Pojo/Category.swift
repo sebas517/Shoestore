@@ -8,8 +8,7 @@
 
 import Foundation
 
-class Category
-{
+class Category{
     var id: Int
     var name: String
     
@@ -33,4 +32,13 @@ class Category
     func setId(id: Int) {
         self.id = id
     }
+}
+
+struct CategoryServer: Codable{
+    var id:Int
+    var nombre: String
+}
+
+struct CategoriesServer: Codable{
+    let categorias: [CategoryServer];
 }

@@ -21,6 +21,9 @@
 		33E328A8220AC9C5002B358F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A7220AC9C5002B358F /* User.swift */; };
 		33E328AA220ACFB7002B358F /* Shoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A9220ACFB7002B358F /* Shoe.swift */; };
 		33E328AC220AD529002B358F /* Pedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328AB220AD529002B358F /* Pedido.swift */; };
+		33E328AE220AD907002B358F /* OnResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328AD220AD907002B358F /* OnResponse.swift */; };
+		33E328B0220AD989002B358F /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328AF220AD989002B358F /* RestClient.swift */; };
+		33E328B2220AD9A6002B358F /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328B1220AD9A6002B358F /* Util.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		33E328A7220AC9C5002B358F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		33E328A9220ACFB7002B358F /* Shoe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoe.swift; sourceTree = "<group>"; };
 		33E328AB220AD529002B358F /* Pedido.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pedido.swift; sourceTree = "<group>"; };
+		33E328AD220AD907002B358F /* OnResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnResponse.swift; sourceTree = "<group>"; };
+		33E328AF220AD989002B358F /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
+		33E328B1220AD9A6002B358F /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +146,9 @@
 		33AB7ADF2209C6AD00805205 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				33E328AD220AD907002B358F /* OnResponse.swift */,
+				33E328AF220AD989002B358F /* RestClient.swift */,
+				33E328B1220AD9A6002B358F /* Util.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -305,9 +314,12 @@
 				33AB7AE92209C76800805205 /* UserViewController.swift in Sources */,
 				33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */,
 				332D69A222086696007820D0 /* AppDelegate.swift in Sources */,
+				33E328B0220AD989002B358F /* RestClient.swift in Sources */,
 				33E328AA220ACFB7002B358F /* Shoe.swift in Sources */,
 				33AB7AE32209C74700805205 /* HomeViewController.swift in Sources */,
+				33E328B2220AD9A6002B358F /* Util.swift in Sources */,
 				33E328AC220AD529002B358F /* Pedido.swift in Sources */,
+				33E328AE220AD907002B358F /* OnResponse.swift in Sources */,
 				33E328A6220AC8CD002B358F /* Category.swift in Sources */,
 				33E328A8220AC9C5002B358F /* User.swift in Sources */,
 			);
