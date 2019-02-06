@@ -33,12 +33,3 @@ class Category{
         self.id = id
     }
 }
-
-struct CategoryServer: Codable{
-    var id:Int
-    var nombre: String
-}
-
-struct CategoriesServer: Codable{
-    let categorias: [CategoryServer];
-}
