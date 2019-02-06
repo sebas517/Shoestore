@@ -17,6 +17,10 @@
 		33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE42209C75500805205 /* SearchViewController.swift */; };
 		33AB7AE72209C75E00805205 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE62209C75E00805205 /* ShopViewController.swift */; };
 		33AB7AE92209C76800805205 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE82209C76800805205 /* UserViewController.swift */; };
+		33E328A6220AC8CD002B358F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A5220AC8CD002B358F /* Category.swift */; };
+		33E328A8220AC9C5002B358F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A7220AC9C5002B358F /* User.swift */; };
+		33E328AA220ACFB7002B358F /* Shoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A9220ACFB7002B358F /* Shoe.swift */; };
+		33E328AC220AD529002B358F /* Pedido.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328AB220AD529002B358F /* Pedido.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		33AB7AE42209C75500805205 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		33AB7AE62209C75E00805205 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		33AB7AE82209C76800805205 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		33E328A5220AC8CD002B358F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		33E328A7220AC9C5002B358F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		33E328A9220ACFB7002B358F /* Shoe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoe.swift; sourceTree = "<group>"; };
+		33E328AB220AD529002B358F /* Pedido.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pedido.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +162,10 @@
 		33AB7AE12209C6CE00805205 /* Pojo */ = {
 			isa = PBXGroup;
 			children = (
+				33E328A5220AC8CD002B358F /* Category.swift */,
+				33E328A7220AC9C5002B358F /* User.swift */,
+				33E328A9220ACFB7002B358F /* Shoe.swift */,
+				33E328AB220AD529002B358F /* Pedido.swift */,
 			);
 			path = Pojo;
 			sourceTree = "<group>";
@@ -293,7 +305,11 @@
 				33AB7AE92209C76800805205 /* UserViewController.swift in Sources */,
 				33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */,
 				332D69A222086696007820D0 /* AppDelegate.swift in Sources */,
+				33E328AA220ACFB7002B358F /* Shoe.swift in Sources */,
 				33AB7AE32209C74700805205 /* HomeViewController.swift in Sources */,
+				33E328AC220AD529002B358F /* Pedido.swift in Sources */,
+				33E328A6220AC8CD002B358F /* Category.swift in Sources */,
+				33E328A8220AC9C5002B358F /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
