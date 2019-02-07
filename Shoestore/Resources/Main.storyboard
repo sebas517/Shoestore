@@ -17,7 +17,18 @@
                     <view key="view" contentMode="scaleToFill" id="dKc-an-w9x">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="PUD-VJ-w5S">
+                                <rect key="frame" x="0.0" y="40" width="375" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="PUD-VJ-w5S" firstAttribute="trailing" secondItem="alO-2F-Jv7" secondAttribute="trailing" id="JeX-q9-VH7"/>
+                            <constraint firstItem="PUD-VJ-w5S" firstAttribute="top" secondItem="alO-2F-Jv7" secondAttribute="top" constant="20" id="Zg2-gQ-2Fe"/>
+                            <constraint firstItem="PUD-VJ-w5S" firstAttribute="leading" secondItem="alO-2F-Jv7" secondAttribute="leading" id="czU-7w-bOx"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="alO-2F-Jv7"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="musica-searcher" id="oZf-M6-b4e"/>
