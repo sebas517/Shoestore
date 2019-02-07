@@ -16,8 +16,9 @@ class SearchViewController: UIViewController, OnResponse {
     //let testArray = ["Spain", "Canada", "Venezuela", "Suiza", "Italia", "Eslovenia", "China", "Australia", "Marruecos", "India"];
     private var categories: [Category] = []
     
-    var searchItem = [String]()
-    var currentSearchItem = [String]()
+    var categoriaId : Int?
+    var destinatario: Int?
+    var search : String?
     var searching = false
     var myIndex = 0
     
@@ -73,9 +74,9 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        myIndex = indexPath.row
-        performSegue(withIdentifier: "searchSegue", sender: self)
+        let categoriaId = categories[indexPath.row].getId()
     }
+    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -91,7 +92,32 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        
         return true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        switch selectedScope {
+            case 0:
+                let destinatario = 3
+            break
+            case 1:
+                let destinatario = 4
+                break
+            case 2:
+                let destinatario = 2
+                break
+            case 3:
+                let destinatario = 1
+                break
+            default:
+                return
+            }
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let destinationVC = SearchViewController()
+        destinationVC.search = searchBar.text
+        
+        destinationVC.performSegue(withIdentifier: "searchSegue", sender: self)
     }
 }
