@@ -16,6 +16,7 @@ class SearchViewController: UIViewController {
     let testArray = ["Spain", "Canada", "Venezuela", "Suiza", "Italia", "Eslovenia", "China", "Australia", "Marruecos", "India"];
     
     var searchItem = [String]()
+    var currentSearchItem = [String]()
     var searching = false
     
     override func viewDidLoad() {
@@ -66,5 +67,14 @@ extension SearchViewController: UISearchBarDelegate {
         searching = false
         searchBar.text = ""
         tableView.reloadData()
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        currentSearchItem = testArray.filter({searchItem -> Bool in
+            guard let text = searchBar.text else {return false}
+            return searchItem.contains(text)
+        })
+        
+        return true
     }
 }
