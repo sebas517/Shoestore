@@ -112,6 +112,13 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
+                                <label key="backgroundView" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pBf-02-ykl">
+                                    <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <nil key="textColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="6Fx-G0-9lF">
                                         <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
@@ -250,17 +257,17 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOw-PU-AmU">
-                                <rect key="frame" x="283" y="265" width="84" height="30"/>
+                                <rect key="frame" x="289" y="265" width="78" height="30"/>
                                 <state key="normal" title="Button" image="add-shoe"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MODELO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZW-aU-5sG">
-                                <rect key="frame" x="82" y="265" width="71" height="21"/>
+                                <rect key="frame" x="88" y="265" width="71" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A partir de: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqn-Lw-Zba">
-                                <rect key="frame" x="173" y="265" width="90" height="21"/>
+                                <rect key="frame" x="179" y="265" width="90" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -397,13 +404,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add-shoe" width="30" height="30"/>
-        <image name="filter" width="32" height="32"/>
-        <image name="home (1)" width="30" height="30"/>
-        <image name="man-user (1)" width="32" height="32"/>
-        <image name="musica-searcher" width="32" height="32"/>
+        <image name="add-shoe" width="24" height="24"/>
+        <image name="filter" width="24" height="24"/>
+        <image name="home (1)" width="24" height="24"/>
+        <image name="man-user (1)" width="24" height="24"/>
+        <image name="musica-searcher" width="24" height="24"/>
         <image name="shoe" width="225" height="225"/>
-        <image name="shopping-bag (1)" width="30" height="30"/>
+        <image name="shopping-bag (1)" width="24" height="24"/>
         <image name="user" width="512" height="512"/>
     </resources>
 </document>
