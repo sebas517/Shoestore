@@ -14,14 +14,14 @@ class HomeViewController: UIViewController, OnResponse {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let cliente = RestClient(service: "categoria",response: self) else {
+        guard let cliente = RestClient(service: "categoria/",response: self) else {
             return
         }
         cliente.request()
         // Do any additional setup after loading the view.
     }
     func onData(data: Data) {
-        print(data)
+        print(String(data:data,encoding:String.Encoding.utf8)!)
         do {
             let decoder = JSONDecoder()
             let categorias = try decoder.decode(Categorias.self, from:data)

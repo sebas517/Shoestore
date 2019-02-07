@@ -15,5 +15,5 @@ struct Categoria: Codable{
 }
 
 struct Categorias: Codable{
-    let categorias: [Categoria];
+    let categorias: [Categoria]
 }

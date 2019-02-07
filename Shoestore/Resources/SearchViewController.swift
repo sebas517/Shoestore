@@ -8,12 +8,13 @@
 
 import UIKit
 
-class SearchViewController: UIViewController {
+class SearchViewController: UIViewController, OnResponse {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
-    let testArray = ["Spain", "Canada", "Venezuela", "Suiza", "Italia", "Eslovenia", "China", "Australia", "Marruecos", "India"];
+    //let testArray = ["Spain", "Canada", "Venezuela", "Suiza", "Italia", "Eslovenia", "China", "Australia", "Marruecos", "India"];
+    private var categories: [Category] = []
     
     var searchItem = [String]()
     var currentSearchItem = [String]()
@@ -21,10 +22,30 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        guard let cliente = RestClient(service: "categoria/",response: self) else {
+            return
+        }
+        cliente.request()
     }
     
-
+    func onData(data: Data) {
+        print(String(data:data,encoding:String.Encoding.utf8)!)
+        do {
+            let decoder = JSONDecoder()
+            let categorias = try decoder.decode(Categorias.self, from:data)
+            
+            for categoryRest in categorias.categorias {
+                categories.append(Category(id: categoryRest.id, name: categoryRest.nombre))
+            }
+        } catch let parsingError {
+            print("Error", parsingError)
+        }
+    }
+    
+    func onDataError(message: String) {
+        print(message)
+    }
+    
     /*
     // MARK: - Navigation
 
@@ -38,27 +59,20 @@ class SearchViewController: UIViewController {
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if searching {
-            return searchItem.count
-        } else {
-            return testArray.count
-        }
+        return categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
-        if searching {
-            cell?.textLabel?.text = searchItem[indexPath.row]
-        } else {
-            cell?.textLabel?.text = testArray[indexPath.row]
-        }
+        cell?.textLabel?.text = categories[indexPath.row].getName().uppercased()
+        //tableView.reloadData()
+        
         return cell!
     }
 }
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String){
-        searchItem = testArray.filter({$0.lowercased().prefix(searchText.count) == searchText.lowercased()})
         searching = true
         tableView.reloadData()
     }
@@ -70,10 +84,6 @@ extension SearchViewController: UISearchBarDelegate {
     }
     
     func searchBar(_ searchBar: UISearchBar, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        currentSearchItem = testArray.filter({searchItem -> Bool in
-            guard let text = searchBar.text else {return false}
-            return searchItem.contains(text)
-        })
         
         return true
     }

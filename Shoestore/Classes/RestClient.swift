@@ -10,7 +10,7 @@ import Foundation
 
 class RestClient {
     
-    let urlApi: String = "https://doctrine-sebas-517.c9users.io/apislim/"
+    let urlApi: String = "https://doctrine-puvlo.c9users.io/slim/"
     let respuesta: OnResponse
     var urlPeticion: URLRequest
     
@@ -22,12 +22,13 @@ class RestClient {
         self.respuesta = response
         self.urlPeticion = URLRequest(url: url)
         self.urlPeticion.httpMethod = method
+        self.urlPeticion.addValue("application/json",forHTTPHeaderField: "Content-Type")
+        self.urlPeticion.addValue("application/json",forHTTPHeaderField: "Accept")
         if method != "GET" && data.count > 0 {
             guard let json = Util.dictToJson(data: data) else {
                 return nil
             }
-            self.urlPeticion.addValue("application/json",forHTTPHeaderField: "Content-Type")
-            self.urlPeticion.addValue("application/json",forHTTPHeaderField: "Accept")
+
             self.urlPeticion.httpBody = json
         }
     }
