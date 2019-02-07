@@ -19,6 +19,7 @@ class SearchViewController: UIViewController, OnResponse {
     var searchItem = [String]()
     var currentSearchItem = [String]()
     var searching = false
+    var myIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,8 @@ class SearchViewController: UIViewController, OnResponse {
             return
         }
         cliente.request()
+        
+        
     }
     
     func onData(data: Data) {
@@ -65,9 +68,13 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell")
         cell?.textLabel?.text = categories[indexPath.row].getName().uppercased()
-        //tableView.reloadData()
         
         return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        myIndex = indexPath.row
+        performSegue(withIdentifier: "searchSegue", sender: self)
     }
 }
 
