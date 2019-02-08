@@ -10,10 +10,14 @@ import UIKit
 
 class HomeTableViewController: UITableViewController, OnResponse {
     
+    @IBOutlet var tabla: UITableView!
     var shoes: [Shoe] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("carga")
+        
+        
         guard let cliente = RestClient(service: "zapato/",response: self) else {
             return
         }
@@ -21,8 +25,6 @@ class HomeTableViewController: UITableViewController, OnResponse {
     }
     
     func onData(data: Data) {
-        //print(String(data:data,encoding:String.Encoding.utf8)!)
-        print("-----------------")
         do {
             let decoder = JSONDecoder()
             let zapatos = try decoder.decode(Zapato.self, from:data)
@@ -36,6 +38,7 @@ class HomeTableViewController: UITableViewController, OnResponse {
             }
             
             
+            tabla.reloadData()
         } catch let parsingError {
             print("Error", parsingError)
         }
@@ -49,23 +52,28 @@ class HomeTableViewController: UITableViewController, OnResponse {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        print("secciones")
+        return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return 0
+        print("Tamaño")
+        return shoes.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Celda", for: indexPath) as! HomeCellTableViewCell
+        
+        //cell.imagen_zapato.image = shoes[indexPath.row].getImage()
+        cell.modelo.text = shoes[indexPath.row].getModel()
+        cell.precio.text = String(shoes[indexPath.row].getPrice())
+        cell.marca.text = shoes[indexPath.row].getBrand()
+        
         return cell
     }
-    */
+    
 
     /*
     // Override to support conditional editing of the table view.

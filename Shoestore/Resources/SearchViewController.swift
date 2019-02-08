@@ -41,6 +41,7 @@ class SearchViewController: UIViewController, OnResponse {
             for categoryRest in categorias.categorias {
                 categories.append(Category(id: categoryRest.id, name: categoryRest.nombre))
             }
+            tableView.reloadData()
         } catch let parsingError {
             print("Error", parsingError)
         }
