@@ -16,6 +16,9 @@
 		33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE42209C75500805205 /* SearchViewController.swift */; };
 		33AB7AE72209C75E00805205 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE62209C75E00805205 /* ShopViewController.swift */; };
 		33AB7AE92209C76800805205 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE82209C76800805205 /* UserViewController.swift */; };
+		33D95F53220D894F008E8BCE /* HomeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D95F52220D894F008E8BCE /* HomeTableViewController.swift */; };
+		33D95F55220D8965008E8BCE /* HomeCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D95F54220D8965008E8BCE /* HomeCellTableViewCell.swift */; };
+		33D95F57220D8A9F008E8BCE /* ShoeRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33D95F56220D8A9F008E8BCE /* ShoeRest.swift */; };
 		33E328A6220AC8CD002B358F /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A5220AC8CD002B358F /* Category.swift */; };
 		33E328A8220AC9C5002B358F /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A7220AC9C5002B358F /* User.swift */; };
 		33E328AA220ACFB7002B358F /* Shoe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33E328A9220ACFB7002B358F /* Shoe.swift */; };
@@ -60,6 +63,9 @@
 		33AB7AE42209C75500805205 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		33AB7AE62209C75E00805205 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		33AB7AE82209C76800805205 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		33D95F52220D894F008E8BCE /* HomeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTableViewController.swift; sourceTree = "<group>"; };
+		33D95F54220D8965008E8BCE /* HomeCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCellTableViewCell.swift; sourceTree = "<group>"; };
+		33D95F56220D8A9F008E8BCE /* ShoeRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoeRest.swift; sourceTree = "<group>"; };
 		33E328A5220AC8CD002B358F /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		33E328A7220AC9C5002B358F /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		33E328A9220ACFB7002B358F /* Shoe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shoe.swift; sourceTree = "<group>"; };
@@ -152,6 +158,7 @@
 				33E328AF220AD989002B358F /* RestClient.swift */,
 				33E328B1220AD9A6002B358F /* Util.swift */,
 				33E328B3220ADBAB002B358F /* CategoryRest.swift */,
+				33D95F56220D8A9F008E8BCE /* ShoeRest.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -167,6 +174,8 @@
 				33AB7AE62209C75E00805205 /* ShopViewController.swift */,
 				33AB7AE82209C76800805205 /* UserViewController.swift */,
 				33E328BB220AFFCA002B358F /* Main.storyboard */,
+				33D95F52220D894F008E8BCE /* HomeTableViewController.swift */,
+				33D95F54220D8965008E8BCE /* HomeCellTableViewCell.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -315,8 +324,11 @@
 			files = (
 				33AB7AE72209C75E00805205 /* ShopViewController.swift in Sources */,
 				33AB7AE92209C76800805205 /* UserViewController.swift in Sources */,
+				33D95F55220D8965008E8BCE /* HomeCellTableViewCell.swift in Sources */,
 				33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */,
 				332D69A222086696007820D0 /* AppDelegate.swift in Sources */,
+				33D95F53220D894F008E8BCE /* HomeTableViewController.swift in Sources */,
+				33D95F57220D8A9F008E8BCE /* ShoeRest.swift in Sources */,
 				33E328B0220AD989002B358F /* RestClient.swift in Sources */,
 				33E328AA220ACFB7002B358F /* Shoe.swift in Sources */,
 				33AB7AE32209C74700805205 /* HomeViewController.swift in Sources */,
