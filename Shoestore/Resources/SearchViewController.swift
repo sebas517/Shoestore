@@ -115,10 +115,16 @@ extension SearchViewController: UISearchBarDelegate {
             }
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "searchSegue" {
+            var vc = segue.destination as! ShoesViewController
+            vc.idcategoria = categoriaId
+            vc.iddestinatario = destinatario
+            vc.busqueda = search
+        }
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        let destinationVC = SearchViewController()
-        destinationVC.search = searchBar.text
-        
-        destinationVC.performSegue(withIdentifier: "searchSegue", sender: self)
+        performSegue(withIdentifier: "searchSegue", sender: self)
     }
 }

@@ -86,7 +86,7 @@
         <!--Search result - View Controller-->
         <scene sceneID="9LQ-lt-kCX">
             <objects>
-                <viewController id="E9P-Md-6eo" userLabel="Search result - View Controller" sceneMemberID="viewController">
+                <viewController id="E9P-Md-6eo" userLabel="Search result - View Controller" customClass="ShoesViewController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="3po-pH-8lM">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -178,6 +178,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="dnO-sa-Tlt"/>
                     </view>
+                    <connections>
+                        <outlet property="shoeCollection" destination="IzR-8O-0nH" id="cAC-rg-VQ9"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gm7-yN-7wR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
