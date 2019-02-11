@@ -444,7 +444,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5XF-b0-x48">
                                             <rect key="frame" x="24" y="19" width="343" height="323"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-shoe" translatesAutoresizingMaskIntoConstraints="NO" id="gRT-sp-Ric">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-shoe" translatesAutoresizingMaskIntoConstraints="NO" id="gRT-sp-Ric">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="262.5"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="259" translatesAutoresizingMaskIntoConstraints="NO" id="3v4-fM-Izd">

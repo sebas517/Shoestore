@@ -43,13 +43,13 @@ class ShoesViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 1
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 0
+        return 10
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -58,6 +58,15 @@ class ShoesViewController: UICollectionViewController {
         // Configure the cell
     
         return cell
+    }
+    
+    func configureCell(cell: UICollectionViewCell, forItemAtIndexPath: NSIndexPath) {
+        //3
+//        let imgView = UIImageView(frame: CGRectMake(0, 0, layout.itemSize.width, layout.itemSize.height))
+//        imgView.contentMode = .ScaleAspectFit
+//        imgView.image = UIImage(named: "img1.jpg")
+//        cell.addSubview(imgView)
+        
     }
 
     // MARK: UICollectionViewDelegate

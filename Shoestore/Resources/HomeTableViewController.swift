@@ -65,6 +65,18 @@ class HomeTableViewController: UITableViewController, OnResponse {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Celda", for: indexPath) as! HomeCellTableViewCell
+        let urlImagen = shoes[indexPath.row].getImage()
+        if let url = URL(string: urlImagen) {
+            let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
+            
+            cola.async {
+                if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        cell.imagen_zapato.image = imagen
+                    }
+                }
+            }
+        }
         
         //cell.imagen_zapato.image = shoes[indexPath.row].getImage()
         cell.modelo.text = shoes[indexPath.row].getModel()
