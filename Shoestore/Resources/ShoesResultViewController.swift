@@ -9,7 +9,9 @@
 import UIKit
 
 class ShoesResultViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, OnResponse{
+
     
+    @IBOutlet weak var shoeCollection: UICollectionView!
     var shoes: [Shoe] = []
     
     func onData(data: Data) {
@@ -69,12 +71,17 @@ class ShoesResultViewController: UIViewController, UICollectionViewDataSource,  
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellShoe", for: indexPath) as! ShoesViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellShoe", for: indexPath) as! SearchResultViewCell
         
         
-        cell.busqueda = "\(search)"
+        cell.search = search
         return cell
         
+    }
+    
+    
+    override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
+        print("SEGUE")
     }
     /*
      // MARK: - Navigation

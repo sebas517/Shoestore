@@ -31,6 +31,7 @@
 		33E328BC220AFFCA002B358F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 33E328BB220AFFCA002B358F /* Main.storyboard */; };
 		33EBBAC22212BA2100C64662 /* ShoesResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */; };
 		33EBBAC42212BAB300C64662 /* SearchResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */; };
+		33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		33E328BB220AFFCA002B358F /* Main.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesResultViewController.swift; sourceTree = "<group>"; };
 		33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewCell.swift; sourceTree = "<group>"; };
+		33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +183,7 @@
 				33AB7AE82209C76800805205 /* UserViewController.swift */,
 				33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */,
 				33E328BB220AFFCA002B358F /* Main.storyboard */,
+				33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */,
 				33D95F52220D894F008E8BCE /* HomeTableViewController.swift */,
 				33D95F54220D8965008E8BCE /* HomeCellTableViewCell.swift */,
 				33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */,
@@ -345,6 +348,7 @@
 				33E328AA220ACFB7002B358F /* Shoe.swift in Sources */,
 				33AB7AE32209C74700805205 /* HomeViewController.swift in Sources */,
 				33E328B2220AD9A6002B358F /* Util.swift in Sources */,
+				33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */,
 				33E328AC220AD529002B358F /* Pedido.swift in Sources */,
 				33E328AE220AD907002B358F /* OnResponse.swift in Sources */,
 				33E328A6220AC8CD002B358F /* Category.swift in Sources */,

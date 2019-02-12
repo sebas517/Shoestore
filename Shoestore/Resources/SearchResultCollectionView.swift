@@ -1,8 +1,8 @@
 //
-//  ShoesViewController.swift
+//  SearchResultCollectionView.swift
 //  Shoestore
 //
-//  Created by dam on 11/2/19.
+//  Created by dam on 12/02/2019.
 //  Copyright © 2019 dam. All rights reserved.
 //
 
@@ -10,14 +10,8 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class ShoesViewController: UICollectionViewController {
-    
-    var idcategoria: Int?
-    var iddestinatario: Int?
-    var busqueda: String?
+class SearchResultCollectionView: UICollectionViewController {
 
-    @IBOutlet weak var shoeCollection: UICollectionView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -44,13 +38,13 @@ class ShoesViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 0
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 10
+        return 0
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -59,15 +53,6 @@ class ShoesViewController: UICollectionViewController {
         // Configure the cell
     
         return cell
-    }
-    
-    func configureCell(cell: UICollectionViewCell, forItemAtIndexPath: NSIndexPath) {
-        //3
-//        let imgView = UIImageView(frame: CGRectMake(0, 0, layout.itemSize.width, layout.itemSize.height))
-//        imgView.contentMode = .ScaleAspectFit
-//        imgView.image = UIImage(named: "img1.jpg")
-//        cell.addSubview(imgView)
-        
     }
 
     // MARK: UICollectionViewDelegate
