@@ -15,7 +15,6 @@ class HomeTableViewController: UITableViewController, OnResponse {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("carga")
         
         
         guard let cliente = RestClient(service: "zapato/",response: self) else {
@@ -30,12 +29,12 @@ class HomeTableViewController: UITableViewController, OnResponse {
             let zapatos = try decoder.decode(Zapato.self, from:data)
             
             for zapatoRest in zapatos.zapato {
-                shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, description: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+                shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, idDestinatario: Int(zapatoRest.iddestinatario) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, description: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
             }
             
-            for shoe in shoes {
+            /*for shoe in shoes {
                 print("\(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getPrice())")
-            }
+            }*/
             
             
             tabla.reloadData()
@@ -52,13 +51,11 @@ class HomeTableViewController: UITableViewController, OnResponse {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        print("secciones")
         return 1
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print("Tamaño")
         return shoes.count
     }
 
@@ -122,14 +119,28 @@ class HomeTableViewController: UITableViewController, OnResponse {
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        super.prepare(for: segue, sender: sender)
+        
+        guard let DetailViewController = segue.destination as? DetailViewController else {
+            fatalError("Unexpected destination: \(segue.destination)")
+        }
+        guard let selectedShoeCell = sender as? HomeCellTableViewCell else {
+            fatalError("Unexpected sender: \(sender)")
+        }
+        
+        guard let indexPath = tableView.indexPath(for: selectedShoeCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        
+        let selectedShoe = shoes[indexPath.row]
+        DetailViewController.shoe = selectedShoe
+        
     }
-    */
+    
 
 }

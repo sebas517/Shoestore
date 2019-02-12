@@ -11,6 +11,7 @@ import Foundation
 class Shoe{
     var id: Int
     var category: Int
+    var idDestinatario: Int
     var brand: String
     var model: String
     var price: Float
@@ -24,10 +25,11 @@ class Shoe{
     var stock: Int
     var image: String
     
-    init(id: Int, category: Int, brand: String, model: String, price: Float, color: String, coverMaterial: String, insideMaterial: String, soleMaterial: String, numberFrom: Int, numberTo: Int, description: String, stock: Int, image: String) {
+    init(id: Int, category: Int, idDestinatario:Int, brand: String, model: String, price: Float, color: String, coverMaterial: String, insideMaterial: String, soleMaterial: String, numberFrom: Int, numberTo: Int, description: String, stock: Int, image: String) {
         
         self.id = id
         self.category = category
+        self.idDestinatario = idDestinatario
         self.brand = brand
         self.model = model
         self.price = price
@@ -48,6 +50,10 @@ class Shoe{
     
     func getCategory() -> Int {
         return self.category
+    }
+    
+    func getIdDestinatario()->Int{
+        return self.idDestinatario
     }
     
     func getBrand() -> String {
@@ -100,6 +106,10 @@ class Shoe{
     
     func setCategory(category: Int) {
         self.category = category
+    }
+    
+    func setIdDestinatario (idDestinatario: Int) {
+        self.idDestinatario = idDestinatario
     }
 
     func setBrand(brand: String) {

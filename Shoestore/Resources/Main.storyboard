@@ -95,13 +95,13 @@
                                 <rect key="frame" x="8" y="40" width="375" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="SHOESTORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e36-m7-N57">
-                                        <rect key="frame" x="0.0" y="0.0" width="293" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km5-EG-rVa">
-                                        <rect key="frame" x="297" y="0.0" width="78" height="48"/>
+                                        <rect key="frame" x="289" y="0.0" width="86" height="48"/>
                                         <state key="normal" title="Button" image="filter"/>
                                     </button>
                                 </subviews>
@@ -280,7 +280,7 @@
         <!--Detail shoe - View Controller-->
         <scene sceneID="nqH-ge-caI">
             <objects>
-                <viewController id="RZf-LZ-XqO" userLabel="Detail shoe - View Controller" sceneMemberID="viewController">
+                <viewController id="RZf-LZ-XqO" userLabel="Detail shoe - View Controller" customClass="DetailViewController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QVr-Ol-E1A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -309,17 +309,17 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mOw-PU-AmU">
-                                <rect key="frame" x="289" y="265" width="78" height="30"/>
+                                <rect key="frame" x="283" y="265" width="84" height="30"/>
                                 <state key="normal" title="Button" image="add-shoe"/>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MODELO" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kZW-aU-5sG">
-                                <rect key="frame" x="88" y="265" width="71" height="21"/>
+                                <rect key="frame" x="82" y="265" width="71" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A partir de: " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iqn-Lw-Zba">
-                                <rect key="frame" x="179" y="265" width="90" height="21"/>
+                                <rect key="frame" x="173" y="265" width="90" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -434,7 +434,7 @@
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="5XF-b0-x48">
                                             <rect key="frame" x="24" y="19" width="343" height="323"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="add-shoe" translatesAutoresizingMaskIntoConstraints="NO" id="gRT-sp-Ric">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gRT-sp-Ric">
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="262.5"/>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="bottom" spacing="259" translatesAutoresizingMaskIntoConstraints="NO" id="3v4-fM-Izd">
@@ -483,6 +483,7 @@
                                     <outlet property="marca" destination="yyF-eN-lJ0" id="ToC-is-0ed"/>
                                     <outlet property="modelo" destination="cGi-lq-8xK" id="Y19-yp-o6b"/>
                                     <outlet property="precio" destination="T7Z-QS-l0B" id="cMe-YF-Ool"/>
+                                    <segue destination="RZf-LZ-XqO" kind="show" identifier="showShoe" id="tFD-81-YZT"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -520,13 +521,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="add-shoe" width="24" height="24"/>
-        <image name="filter" width="24" height="24"/>
-        <image name="home (1)" width="24" height="24"/>
-        <image name="man-user (1)" width="24" height="24"/>
-        <image name="musica-searcher" width="24" height="24"/>
+        <image name="add-shoe" width="30" height="30"/>
+        <image name="filter" width="32" height="32"/>
+        <image name="home (1)" width="30" height="30"/>
+        <image name="man-user (1)" width="32" height="32"/>
+        <image name="musica-searcher" width="32" height="32"/>
         <image name="shoe" width="225" height="225"/>
-        <image name="shopping-bag (1)" width="24" height="24"/>
+        <image name="shopping-bag (1)" width="30" height="30"/>
         <image name="user" width="512" height="512"/>
     </resources>
 </document>
