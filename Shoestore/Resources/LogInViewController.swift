@@ -10,6 +10,9 @@ import UIKit
 
 class LogInViewController: UIViewController {
 
+    @IBAction func btnBack(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 

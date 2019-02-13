@@ -234,6 +234,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="man-user (1)" id="WdP-2U-zS7"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <segue destination="Myv-fe-aFt" kind="show" id="1Va-5w-8AP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdt-fJ-TV1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -339,7 +342,6 @@
         <!--Detail shoe - View Controller-->
         <scene sceneID="nqH-ge-caI">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Cxv-Dt-l3s" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="RZf-LZ-XqO" userLabel="Detail shoe - View Controller" customClass="DetailViewController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QVr-Ol-E1A">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
@@ -464,6 +466,7 @@
                         <viewLayoutGuide key="safeArea" id="N0h-hJ-FXm"/>
                     </view>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Cxv-Dt-l3s" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1698" y="-1593"/>
         </scene>
@@ -493,9 +496,6 @@
                                 <rect key="frame" x="163" y="445" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LOG IN"/>
-                                <connections>
-                                    <segue destination="UgE-8E-5nL" kind="show" identifier="logInSegue" id="45R-gf-68m"/>
-                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Don't have an accout?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arK-SE-P5J">
                                 <rect key="frame" x="57" y="526" width="159" height="30"/>
@@ -513,14 +513,29 @@
                                 <rect key="frame" x="71" y="80" width="233" height="212"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybZ-Hu-H50">
+                                <rect key="frame" x="0.0" y="36" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <color key="barTintColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem id="JYJ-yd-h6Y">
+                                        <barButtonItem key="leftBarButtonItem" title="Back" id="rle-Lm-c4K">
+                                            <connections>
+                                                <action selector="btnBack:" destination="Q5n-Uc-SOh" id="2Av-lP-mJ3"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="SAE-1A-hdc"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gv3-4l-9K3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="Q5n-Uc-SOh" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-3370.4000000000001" y="-716.49175412293857"/>
+            <point key="canvasLocation" x="-729" y="14"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="exR-GD-NBn">
