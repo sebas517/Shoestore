@@ -70,6 +70,7 @@ class HomeTableViewController: UITableViewController, OnResponse {
                 if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
                     DispatchQueue.main.async {
                         cell.imagen_zapato.image = imagen
+                        cell.imagen_zapato.contentMode = UIView.ContentMode.scaleAspectFit
                     }
                 }
             }
@@ -77,7 +78,7 @@ class HomeTableViewController: UITableViewController, OnResponse {
         
         //cell.imagen_zapato.image = shoes[indexPath.row].getImage()
         cell.modelo.text = shoes[indexPath.row].getModel()
-        cell.precio.text = String(shoes[indexPath.row].getPrice())
+        cell.precio.text = "\(String(shoes[indexPath.row].getPrice()))€"
         cell.marca.text = shoes[indexPath.row].getBrand()
         
         return cell
