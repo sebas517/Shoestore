@@ -12,6 +12,9 @@ class DetailViewController: UIViewController {
     
     var shoe:Shoe?
 
+    @IBAction func btnBack(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         if  let shoe = shoe{
