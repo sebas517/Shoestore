@@ -12,6 +12,7 @@
 		332D69AC22086699007820D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 332D69AA22086699007820D0 /* LaunchScreen.storyboard */; };
 		332D69B722086699007820D0 /* ShoestoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69B622086699007820D0 /* ShoestoreTests.swift */; };
 		332D69C222086699007820D0 /* ShoestoreUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69C122086699007820D0 /* ShoestoreUITests.swift */; };
+		3369030D2212FD120060DB12 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3369030C2212FD120060DB12 /* LogInViewController.swift */; };
 		3380D6F822116B3800A009BA /* ShoesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3380D6F722116B3800A009BA /* ShoesViewController.swift */; };
 		33AB7AE52209C75500805205 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE42209C75500805205 /* SearchViewController.swift */; };
 		33AB7AE72209C75E00805205 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33AB7AE62209C75E00805205 /* ShopViewController.swift */; };
@@ -63,6 +64,7 @@
 		332D69BD22086699007820D0 /* ShoestoreUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShoestoreUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		332D69C122086699007820D0 /* ShoestoreUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoestoreUITests.swift; sourceTree = "<group>"; };
 		332D69C322086699007820D0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3369030C2212FD120060DB12 /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		3380D6F722116B3800A009BA /* ShoesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoesViewController.swift; sourceTree = "<group>"; };
 		33AB7AE42209C75500805205 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		33AB7AE62209C75E00805205 /* ShopViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */,
 				3380D6F722116B3800A009BA /* ShoesViewController.swift */,
 				33F7BA182212F0F700F70DFA /* DetailViewController.swift */,
+				3369030C2212FD120060DB12 /* LogInViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -351,6 +354,7 @@
 				33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */,
 				33E328AC220AD529002B358F /* Pedido.swift in Sources */,
 				33E328AE220AD907002B358F /* OnResponse.swift in Sources */,
+				3369030D2212FD120060DB12 /* LogInViewController.swift in Sources */,
 				33E328A6220AC8CD002B358F /* Category.swift in Sources */,
 				33E328A8220AC9C5002B358F /* User.swift in Sources */,
 				33E328B4220ADBAB002B358F /* CategoryRest.swift in Sources */,
