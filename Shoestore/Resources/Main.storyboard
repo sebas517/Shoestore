@@ -95,13 +95,13 @@
                                 <rect key="frame" x="8" y="40" width="375" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="SHOESTORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e36-m7-N57">
-                                        <rect key="frame" x="0.0" y="0.0" width="293" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km5-EG-rVa">
-                                        <rect key="frame" x="297" y="0.0" width="78" height="48"/>
+                                        <rect key="frame" x="289" y="0.0" width="86" height="48"/>
                                         <state key="normal" title="Button" image="filter"/>
                                     </button>
                                 </subviews>
@@ -595,6 +595,9 @@
                                 <rect key="frame" x="163" y="445" width="49" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LOG IN"/>
+                                <connections>
+                                    <action selector="loginBtn:" destination="Q5n-Uc-SOh" eventType="touchUpInside" id="u0w-Pg-UqR"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Don't have an accout?" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="arK-SE-P5J">
                                 <rect key="frame" x="57" y="526" width="159" height="30"/>
@@ -801,13 +804,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="filter" width="24" height="24"/>
-        <image name="home (1)" width="24" height="24"/>
-        <image name="man-user (1)" width="24" height="24"/>
-        <image name="musica-searcher" width="24" height="24"/>
+        <image name="filter" width="32" height="32"/>
+        <image name="home (1)" width="30" height="30"/>
+        <image name="man-user (1)" width="32" height="32"/>
+        <image name="musica-searcher" width="32" height="32"/>
         <image name="shoe" width="225" height="225"/>
         <image name="shoe1" width="800" height="600"/>
-        <image name="shopping-bag (1)" width="24" height="24"/>
+        <image name="shopping-bag (1)" width="30" height="30"/>
         <image name="user" width="512" height="512"/>
     </resources>
 </document>

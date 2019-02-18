@@ -33,6 +33,7 @@
 		33EBBAC42212BAB300C64662 /* SearchResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */; };
 		33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */; };
 		33F7BA192212F0F700F70DFA /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F7BA182212F0F700F70DFA /* DetailViewController.swift */; };
+		33FFD70C221AA21200C59C56 /* UserRest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33FFD70B221AA21200C59C56 /* UserRest.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +86,7 @@
 		33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewCell.swift; sourceTree = "<group>"; };
 		33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCollectionView.swift; sourceTree = "<group>"; };
 		33F7BA182212F0F700F70DFA /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		33FFD70B221AA21200C59C56 /* UserRest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRest.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				33E328B1220AD9A6002B358F /* Util.swift */,
 				33E328B3220ADBAB002B358F /* CategoryRest.swift */,
 				33D95F56220D8A9F008E8BCE /* ShoeRest.swift */,
+				33FFD70B221AA21200C59C56 /* UserRest.swift */,
 			);
 			path = Classes;
 			sourceTree = "<group>";
@@ -353,6 +356,7 @@
 				33E328B2220AD9A6002B358F /* Util.swift in Sources */,
 				33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */,
 				33E328AC220AD529002B358F /* Pedido.swift in Sources */,
+				33FFD70C221AA21200C59C56 /* UserRest.swift in Sources */,
 				33E328AE220AD907002B358F /* OnResponse.swift in Sources */,
 				3369030D2212FD120060DB12 /* LogInViewController.swift in Sources */,
 				33E328A6220AC8CD002B358F /* Category.swift in Sources */,
