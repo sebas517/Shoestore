@@ -14,27 +14,18 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var model: UILabel!
     @IBOutlet weak var category: UILabel!
     @IBOutlet weak var price: UILabel!
-    
     @IBOutlet weak var stock: UILabel!
     @IBOutlet weak var insideMaterial: UILabel!
     @IBOutlet weak var coverMaterial: UILabel!
-    
     @IBOutlet weak var soleMaterial: UILabel!
-    @IBOutlet weak var number: UILabel!
+    @IBOutlet weak var destinatary: UILabel!
+    @IBOutlet weak var numbers: UILabel!
     
-    /*var price: Float
-     var color: String
-     var coverMaterial: String
-     var insideMaterial: String
-     var soleMaterial: String
-     var numberFrom: Int
-     var numberTo: Int
-     var description: String
-     var stock: Int
-     var image: String
-     */
+     var shoes: [Shoe] = []
     
-    @IBOutlet weak var btnShop: UIButton!
+    @IBOutlet weak var color: UILabel!
+    
+    @IBOutlet weak var collectionRelatedShoes: UICollectionView!
     var shoe:Shoe?
     
     override func viewDidLoad() {
@@ -49,6 +40,8 @@ class DetailViewController: UIViewController {
                     if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
                         DispatchQueue.main.async {
                             self.imgzap.image = imagen
+                             self.imgzap.contentMode = .scaleAspectFit
+                            
                         }
                     }
                 }
@@ -59,78 +52,75 @@ class DetailViewController: UIViewController {
             model.text = "\(shoe.model)"
             category.text = "botines, hombre"
             price.text = "\(shoe.price)"
-            
-            //   stock.text = "\(shoe.stock)"
-            
             coverMaterial.text = "\(shoe.coverMaterial)"
-            
             insideMaterial.text = "\(shoe.insideMaterial)"
-            
             soleMaterial.text = "\(shoe.soleMaterial)"
-            number.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
-            //descrption.text = "\(shoe.description)"
+            numbers.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
+            stock.text = "\(shoe.stock)"
+            color.text = "\(shoe.color)"
             
-            /*   if(shoe.idDestinatario == 1){
-             destinatary.text = "Mujer"
-             }
-             else if(shoe.idDestinatario == 2){
-             destinatary.text = "Hombre"
-             
-             }
-             else if(shoe.idDestinatario == 3){
-             destinatary.text = "Niño"
-             }
-             else if(shoe.idDestinatario == 4){
-             destinatary.text = "Niña"
-             }
-             */
-            
-            //descrption.text = "\(shoe.description)"
-            
-            
-            
-            print("\(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getPrice())")
-            
-            
-            
-            // Do any additional setup after loading the view.
+            if(shoe.idDestinatario == 1){
+                destinatary.text = "Mujer"
+            }
+            else if(shoe.idDestinatario == 2){
+                destinatary.text = "Hombre"
+            }
+            else if(shoe.idDestinatario == 3){
+                destinatary.text = "Niño"
+            }
+            else if(shoe.idDestinatario == 4){
+                destinatary.text = "Niña"
+            }
         }
-        
-        
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
-    }
-    
-    @IBAction func shop(_ sender: Any) {
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        
         guard let ShopViewController = segue.destination as? ShopViewController else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
         /*guard let selectedShoeCell = sender as? HomeCellTableViewCell else {
          fatalError("Unexpected sender: \(sender)")
          }
-         
          guard let indexPath = tableView.indexPath(for: selectedShoeCell) else {
          fatalError("The selected cell is not bng displayed by the table")
-         }*/
-        
+         }*/  
         let selectedShoe = shoe
-        //ShopViewController.shoe = selectedShoe
+        ShopViewController.shoe = selectedShoe
     }
     
     
     
+    
+    //Funciones para zapatos relacionados
+    
+    
+    
+    func onData(data: Data) {
+        do {
+            let decoder = JSONDecoder()
+            let zapatos = try decoder.decode(Zapato.self, from:data)
+            
+            for zapatoRest in zapatos.zapato {
+                shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe?.category ?? 0, idDestinatario: shoe?.idDestinatario ?? 0, brand: "\(shoe?.brand)" , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, description: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+            }
+            
+            /*for shoe in shoes {
+             print("\(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getPrice())")
+             }*/
+            
+            
+            collectionRelatedShoes.reloadData()
+            
+        } catch let parsingError {
+            print("Error", parsingError)
+        }
+    }
+    
+    func onDataError(message: String) {
+        print("error")
+    }
+    
+    
 }
+

@@ -117,10 +117,10 @@ extension SearchViewController: UISearchBarDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSegue" {
-            var vc = segue.destination as! ShoesViewController
-            vc.idcategoria = categoriaId
-            vc.iddestinatario = destinatario
-            vc.busqueda = search
+            var vc = segue.destination as! ShoesResultViewController
+            vc.categoria = categoriaId
+            vc.destinatario = destinatario
+            vc.search = search
         }
     }
     

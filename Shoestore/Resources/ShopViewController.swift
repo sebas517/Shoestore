@@ -9,11 +9,11 @@
 import UIKit
 
 class ShopViewController: UIViewController {
-
+   var shoe:Shoe?
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        print("Zapato recibido: \(shoe?.brand) - \(shoe?.model)")
     }
     
 
