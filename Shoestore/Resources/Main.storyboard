@@ -95,13 +95,13 @@
                                 <rect key="frame" x="8" y="40" width="375" height="48"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" verticalHuggingPriority="251" text="SHOESTORE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="e36-m7-N57">
-                                        <rect key="frame" x="0.0" y="0.0" width="293" height="48"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="285" height="48"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="40"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="km5-EG-rVa">
-                                        <rect key="frame" x="297" y="0.0" width="78" height="48"/>
+                                        <rect key="frame" x="289" y="0.0" width="86" height="48"/>
                                         <state key="normal" title="Button" image="filter"/>
                                     </button>
                                 </subviews>
@@ -831,26 +831,101 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poi-48-03i">
+                                <rect key="frame" x="0.0" y="20" width="375" height="239"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellShop" rowHeight="143" id="33Y-RK-eTn" customClass="ShopCellTableViewCell" customModule="Shoestore" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="143"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="33Y-RK-eTn" id="WEl-E6-w7y">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="142.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="23" translatesAutoresizingMaskIntoConstraints="NO" id="62X-80-RUk">
+                                                    <rect key="frame" x="8" y="8" width="367" height="134.5"/>
+                                                    <subviews>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RMO-cB-1Zg">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                        </imageView>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="19" translatesAutoresizingMaskIntoConstraints="NO" id="f8V-nh-k3g">
+                                                            <rect key="frame" x="151" y="0.0" width="216" height="60"/>
+                                                            <subviews>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" spacing="100" translatesAutoresizingMaskIntoConstraints="NO" id="uPs-Ls-z6O">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="184" height="20.5"/>
+                                                                    <subviews>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U6y-bL-9pM">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mVM-ym-C4s">
+                                                                            <rect key="frame" x="142" y="0.0" width="42" height="20.5"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                </stackView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zod-L3-ed7">
+                                                                    <rect key="frame" x="0.0" y="39.5" width="42" height="20.5"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
+                                                    </subviews>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="62X-80-RUk" firstAttribute="leading" secondItem="WEl-E6-w7y" secondAttribute="leading" constant="8" id="4hV-LC-7zt"/>
+                                                <constraint firstAttribute="trailing" secondItem="62X-80-RUk" secondAttribute="trailing" id="Fr7-3h-poV"/>
+                                                <constraint firstAttribute="bottom" secondItem="62X-80-RUk" secondAttribute="bottom" id="rff-rq-eza"/>
+                                                <constraint firstItem="62X-80-RUk" firstAttribute="top" secondItem="WEl-E6-w7y" secondAttribute="top" constant="8" id="ycO-6D-EKc"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="brand" destination="Zod-L3-ed7" id="QiB-bi-0UH"/>
+                                            <outlet property="imgShoe" destination="RMO-cB-1Zg" id="Wqw-U5-9OJ"/>
+                                            <outlet property="model" destination="U6y-bL-9pM" id="OBp-tR-lwZ"/>
+                                            <outlet property="price" destination="mVM-ym-C4s" id="tou-UI-u9d"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="poi-48-03i" secondAttribute="bottom" constant="432" id="4Ta-96-boY"/>
+                            <constraint firstItem="poi-48-03i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Am6-9z-nsf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="poi-48-03i" secondAttribute="trailing" id="Vlo-ih-4aq"/>
+                            <constraint firstItem="poi-48-03i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="zaE-o8-PUS"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <tabBarItem key="tabBarItem" title="" image="shopping-bag (1)" id="6q9-Nq-ibS"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="tableView" destination="poi-48-03i" id="fJl-O5-Npz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2503" y="36"/>
+            <point key="canvasLocation" x="-2503.1999999999998" y="35.532233883058474"/>
         </scene>
     </scenes>
     <resources>
-        <image name="filter" width="24" height="24"/>
-        <image name="home (1)" width="24" height="24"/>
-        <image name="man-user (1)" width="24" height="24"/>
-        <image name="musica-searcher" width="24" height="24"/>
+        <image name="filter" width="32" height="32"/>
+        <image name="home (1)" width="30" height="30"/>
+        <image name="man-user (1)" width="32" height="32"/>
+        <image name="musica-searcher" width="32" height="32"/>
         <image name="shoe" width="225" height="225"/>
         <image name="shoe1" width="800" height="600"/>
-        <image name="shopping-bag (1)" width="24" height="24"/>
-        <image name="shopping-bag-blue" width="23.736263275146484" height="23.736263275146484"/>
+        <image name="shopping-bag (1)" width="30" height="30"/>
+        <image name="shopping-bag-blue" width="30" height="30"/>
         <image name="user" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>

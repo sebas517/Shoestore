@@ -8,7 +8,9 @@
 
 import Foundation
 
-class Shoe{
+class Shoe: NSObject, NSCoding{
+    
+    
     var id: Int
     var category: Int
     var idDestinatario: Int
@@ -21,11 +23,47 @@ class Shoe{
     var soleMaterial: String
     var numberFrom: Int
     var numberTo: Int
-    var description: String
+    var desc: String
     var stock: Int
     var image: String
     
-    init(id: Int, category: Int, idDestinatario:Int, brand: String, model: String, price: Float, color: String, coverMaterial: String, insideMaterial: String, soleMaterial: String, numberFrom: Int, numberTo: Int, description: String, stock: Int, image: String) {
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(category, forKey: "category")
+        aCoder.encode(idDestinatario, forKey: "idDestinatario")
+        aCoder.encode(brand, forKey: "brand")
+        aCoder.encode(model, forKey: "model")
+        aCoder.encode(price, forKey: "price")
+        aCoder.encode(color, forKey: "color")
+        aCoder.encode(coverMaterial, forKey: "coverMaterial")
+        aCoder.encode(insideMaterial, forKey: "insideMaterial")
+        aCoder.encode(soleMaterial, forKey: "soleMaterial")
+        aCoder.encode(numberTo, forKey: "numberTo")
+        aCoder.encode(numberFrom, forKey: "numberFrom")
+        aCoder.encode(desc, forKey: "description")
+        aCoder.encode(stock, forKey: "stock")
+        aCoder.encode(image, forKey: "image")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.id = aDecoder.decodeInteger(forKey: "id")
+        self.category = aDecoder.decodeInteger(forKey: "category")
+        self.idDestinatario = aDecoder.decodeInteger(forKey: "idDestinatario")
+        self.brand = aDecoder.decodeObject(forKey: "brand") as? String ?? ""
+        self.model = aDecoder.decodeObject(forKey: "model") as? String ?? ""
+        self.price = aDecoder.decodeFloat(forKey: "price")
+        self.color = aDecoder.decodeObject(forKey: "color") as? String ?? ""
+        self.coverMaterial = aDecoder.decodeObject(forKey: "coverMaterial") as? String ?? ""
+        self.insideMaterial =  aDecoder.decodeObject(forKey: "insideMaterial") as? String ?? ""
+        self.soleMaterial = aDecoder.decodeObject(forKey: "soleMaterial") as? String ?? ""
+        self.numberFrom = aDecoder.decodeInteger(forKey: "numberFrom")
+        self.numberTo = aDecoder.decodeInteger(forKey: "numberTo")
+        self.desc = aDecoder.decodeObject(forKey: "description") as? String ?? ""
+        self.stock = aDecoder.decodeInteger(forKey: "stoc")
+        self.image = aDecoder.decodeObject(forKey: "image") as? String ?? ""
+    }
+    
+    init(id: Int, category: Int, idDestinatario:Int, brand: String, model: String, price: Float, color: String, coverMaterial: String, insideMaterial: String, soleMaterial: String, numberFrom: Int, numberTo: Int, desc: String, stock: Int, image: String) {
         
         self.id = id
         self.category = category
@@ -39,7 +77,7 @@ class Shoe{
         self.soleMaterial = soleMaterial
         self.numberFrom = numberFrom
         self.numberTo = numberTo
-        self.description = description
+        self.desc = desc
         self.stock = stock
         self.image = image
     }
@@ -93,7 +131,7 @@ class Shoe{
     }
     
     func getDescription() -> String {
-        return self.description
+        return self.desc
     }
     
     func getStock() -> Int{
@@ -148,8 +186,8 @@ class Shoe{
         self.numberTo = numberTo
     }
     
-    func setDescription(description: String) {
-        self.description = description
+    func setDescription(desc: String) {
+        self.desc = desc
     }
     
     func setStock(stock: Int)  {

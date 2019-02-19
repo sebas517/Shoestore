@@ -28,8 +28,6 @@ class SearchViewController: UIViewController, OnResponse {
             return
         }
         cliente.request()
-        
-        
     }
     
     func onData(data: Data) {
@@ -75,7 +73,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let categoriaId = categories[indexPath.row].getId()
+        //let categoriaId = categories[indexPath.row].getId()
+        //print(categoriaId)
     }
     
 }
