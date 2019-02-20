@@ -8,7 +8,9 @@
 
 import Foundation
 
-class User{
+class User: NSObject, NSCoding{
+    
+    
     var id: Int
     var login: String
     var key: String
@@ -19,6 +21,32 @@ class User{
     var signedUp: Date
     var active: Bool
     var admin: Bool
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(login, forKey: "login")
+        aCoder.encode(key, forKey: "key")
+        aCoder.encode(email, forKey: "email")
+        aCoder.encode(lastname, forKey: "lastname")
+        aCoder.encode(address, forKey: "address")
+        aCoder.encode(signedUp, forKey: "signedUp")
+        aCoder.encode(active, forKey: "active")
+        aCoder.encode(admin, forKey: "admin")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.id = aDecoder.decodeInteger(forKey: "id")
+        self.login = aDecoder.decodeObject(forKey: "login") as? String ?? ""
+        self.key = aDecoder.decodeObject(forKey: "key") as? String ?? ""
+        self.email = aDecoder.decodeObject(forKey: "email") as? String ?? ""
+        self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
+        self.lastname = aDecoder.decodeObject(forKey: "model") as? String ?? ""
+        self.address = aDecoder.decodeObject(forKey: "model") as? String ?? ""
+        self.signedUp = aDecoder.decodeObject(forKey: "signedUp") as! Date
+        self.active = aDecoder.decodeBool(forKey: "active")
+        self.admin = aDecoder.decodeBool(forKey: "admin")
+        
+    }
     
     init(id: Int, login: String, key: String, email: String, name: String, lastname: String, address: String, signedUp: Date, active: Bool, admin: Bool) {
         self.id = id
