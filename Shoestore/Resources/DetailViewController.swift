@@ -8,7 +8,8 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, OnResponse, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var imgzap: UIImageView!
     @IBOutlet weak var model: UILabel!
@@ -20,16 +21,71 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var soleMaterial: UILabel!
     @IBOutlet weak var destinatary: UILabel!
     @IBOutlet weak var numbers: UILabel!
-    
-     var shoes: [Shoe] = []
-    
     @IBOutlet weak var color: UILabel!
-    
     @IBOutlet weak var collectionRelatedShoes: UICollectionView!
+    
+    var relatedShoes: [Shoe] = []
     var shoe:Shoe?
+    var shoes: [Shoe] = []
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return relatedShoes.count
+    }
+    
+    //  func collectionView(_ collectionView: UICollectionView, //numberOfItemsInSection section: Int, IndexPath: IndexPath) -> Int {
+    // return 1}
+    
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        print("entra antes de creare la celda")
+        let celda: DetailCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "shoeCell", for: indexPath) as! DetailCollectionViewCell
+        let tamanioPantalla = UIScreen.main.bounds
+        let anchoCelda = (tamanioPantalla.width/5.0)
+        //var imagen = relatedShoes[indexPath.row].image
+        var shoeAux: Shoe = relatedShoes[indexPath.row]
+        celda.shoe = shoeAux
+        let urlImagen =  celda.shoe?.getImage()
+        
+        if  let url = URL(string: urlImagen!) {
+            let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
+            cola.async {
+                if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        celda.imagen.image = imagen
+                        celda.imagen.contentMode = UIView.ContentMode.scaleAspectFit
+                        
+                        
+                    }
+                }
+            }
+        }
+        
+        celda.brand.text = relatedShoes[indexPath.row].getBrand()
+        celda.price.text = "\(String(relatedShoes[indexPath.row].getPrice()))€"
+        
+        
+        
+        
+        //  celda.brand.text =  relatedShoes[indexPath.row].getBrand()
+        
+        //  celda.price.text = "\(relatedShoes[indexPath.row].price)"
+        
+        // celda.brand.text = "\(relatedShoes[indexPath.row].brand)"
+        
+        
+        return celda
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        guard let cliente = RestClient(service: "zapato/",response: self) else {
+            return
+        }
+        cliente.request()
+        
         //Asignacion imagen
         if  let shoe = shoe{
             let urlImagen = shoe.getImage()
@@ -40,15 +96,15 @@ class DetailViewController: UIViewController {
                     if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
                         DispatchQueue.main.async {
                             self.imgzap.image = imagen
-                             self.imgzap.contentMode = .scaleAspectFit
-                            
+                            self.imgzap.contentMode = .scaleAspectFit
                         }
                     }
                 }
             }
-            //Asignacion resto de campos
-            brand.text = "\(shoe.brand)"
             
+            //Asignacion resto de campos
+            print("Id destinarario zapato escogido: \(shoe.getIdDestinatario())")
+            brand.text = "\(shoe.brand)"
             model.text = "\(shoe.model)"
             category.text = "botines, hombre"
             price.text = "\(shoe.price)"
@@ -58,7 +114,6 @@ class DetailViewController: UIViewController {
             numbers.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
             stock.text = "\(shoe.stock)"
             color.text = "\(shoe.color)"
-            
             if(shoe.idDestinatario == 1){
                 destinatary.text = "Mujer"
             }
@@ -84,32 +139,28 @@ class DetailViewController: UIViewController {
          }
          guard let indexPath = tableView.indexPath(for: selectedShoeCell) else {
          fatalError("The selected cell is not bng displayed by the table")
-         }*/  
+         }*/
         let selectedShoe = shoe
         ShopViewController.shoe = selectedShoe
     }
     
-    
-    
-    
     //Funciones para zapatos relacionados
-    
-    
-    
     func onData(data: Data) {
         do {
             let decoder = JSONDecoder()
             let zapatos = try decoder.decode(Zapato.self, from:data)
             
             for zapatoRest in zapatos.zapato {
-                shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe?.category ?? 0, idDestinatario: shoe?.idDestinatario ?? 0, brand: "\(shoe?.brand)" , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+                print("Entra en bucle zapatorest")
+                if (relatedShoes.count < 3){
+                    relatedShoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe?.category ?? 0, idDestinatario: shoe?.idDestinatario ?? 0, brand: "\(shoe?.brand)" , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+                }
             }
             
-            /*for shoe in shoes {
-             print("\(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getPrice())")
-             }*/
-            
-            
+            for shoe in relatedShoes {
+                print("RELACIONADA \(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getIdDestinatario())")
+                
+            }
             collectionRelatedShoes.reloadData()
             
         } catch let parsingError {
@@ -123,4 +174,6 @@ class DetailViewController: UIViewController {
     
     
 }
+
+
 
