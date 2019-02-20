@@ -26,14 +26,12 @@ class ShopViewController: UIViewController {
             saveShoe(shoe: shoe)
         }
     }
-
     func saveShoe(shoe: Shoe) {
         shoes.append(shoe)
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "shopBag")
         tableView.reloadData()
     }
-    
     func loadShoes() {
         guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
             print("'shopBag' not found in UserDefaults")

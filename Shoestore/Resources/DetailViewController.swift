@@ -9,17 +9,6 @@
 import UIKit
 
 class DetailViewController: UIViewController {
-    @IBOutlet weak var brand: UILabel!
-    @IBOutlet weak var imgzap: UIImageView!
-    @IBOutlet weak var model: UILabel!
-    @IBOutlet weak var category: UILabel!
-    @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var stock: UILabel!
-    @IBOutlet weak var insideMaterial: UILabel!
-    @IBOutlet weak var coverMaterial: UILabel!
-    @IBOutlet weak var soleMaterial: UILabel!
-    @IBOutlet weak var destinatary: UILabel!
-    @IBOutlet weak var numbers: UILabel!
     
      var shoes: [Shoe] = []
     
