@@ -116,6 +116,67 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		332CB1BA221D89C400844A67 /* Shop */ = {
+			isa = PBXGroup;
+			children = (
+				33FEE2E9221BEAF400383915 /* ShopCellTableViewCell.swift */,
+				33AB7AE62209C75E00805205 /* ShopViewController.swift */,
+			);
+			path = Shop;
+			sourceTree = "<group>";
+		};
+		332CB1BB221D89E200844A67 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				33AB7AE82209C76800805205 /* UserViewController.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
+		332CB1BC221D89FB00844A67 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				33D95F52220D894F008E8BCE /* HomeTableViewController.swift */,
+				33D95F54220D8965008E8BCE /* HomeCellTableViewCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
+		332CB1BD221D8A6200844A67 /* SearchResult */ = {
+			isa = PBXGroup;
+			children = (
+				33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */,
+				33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */,
+				33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */,
+				3380D6F722116B3800A009BA /* ShoesViewController.swift */,
+			);
+			path = SearchResult;
+			sourceTree = "<group>";
+		};
+		332CB1BE221D8A7A00844A67 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				33AB7AE42209C75500805205 /* SearchViewController.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		332CB1BF221D8B6300844A67 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				33F7BA182212F0F700F70DFA /* DetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		332CB1C0221D8B7700844A67 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3369030C2212FD120060DB12 /* LogInViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
 		332D699522086696007820D0 = {
 			isa = PBXGroup;
 			children = (
@@ -181,22 +242,17 @@
 		33AB7AE02209C6C200805205 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				332CB1C0221D8B7700844A67 /* Login */,
+				332CB1BF221D8B6300844A67 /* Detail */,
+				332CB1BE221D8A7A00844A67 /* Search */,
+				332CB1BD221D8A6200844A67 /* SearchResult */,
+				332CB1BC221D89FB00844A67 /* Home */,
+				332CB1BB221D89E200844A67 /* User */,
+				332CB1BA221D89C400844A67 /* Shop */,
 				332D69A122086696007820D0 /* AppDelegate.swift */,
 				332D69A822086699007820D0 /* Assets.xcassets */,
-				33FEE2E9221BEAF400383915 /* ShopCellTableViewCell.swift */,
 				332D69AA22086699007820D0 /* LaunchScreen.storyboard */,
-				33AB7AE42209C75500805205 /* SearchViewController.swift */,
-				33AB7AE62209C75E00805205 /* ShopViewController.swift */,
-				33AB7AE82209C76800805205 /* UserViewController.swift */,
-				33EBBAC32212BAB300C64662 /* SearchResultViewCell.swift */,
 				33E328BB220AFFCA002B358F /* Main.storyboard */,
-				33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */,
-				33D95F52220D894F008E8BCE /* HomeTableViewController.swift */,
-				33D95F54220D8965008E8BCE /* HomeCellTableViewCell.swift */,
-				33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */,
-				3380D6F722116B3800A009BA /* ShoesViewController.swift */,
-				33F7BA182212F0F700F70DFA /* DetailViewController.swift */,
-				3369030C2212FD120060DB12 /* LogInViewController.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";

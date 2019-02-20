@@ -605,10 +605,10 @@
             </objects>
             <point key="canvasLocation" x="-1698.4000000000001" y="-1593.5532233883059"/>
         </scene>
-        <!--View Controller-->
+        <!--Log In View Controller-->
         <scene sceneID="thQ-6M-X9h">
             <objects>
-                <viewController id="Myv-fe-aFt" sceneMemberID="viewController">
+                <viewController id="Myv-fe-aFt" customClass="LogInViewController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="buH-F7-vDV">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -632,6 +632,7 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="LOG IN"/>
                                 <connections>
+                                    <action selector="loginBtn:" destination="Myv-fe-aFt" eventType="touchUpInside" id="el7-e6-hL0"/>
                                     <action selector="loginBtn:" destination="Q5n-Uc-SOh" eventType="touchUpInside" id="u0w-Pg-UqR"/>
                                 </connections>
                             </button>
@@ -659,7 +660,7 @@
                                     <navigationItem id="JYJ-yd-h6Y">
                                         <barButtonItem key="leftBarButtonItem" title="Back" id="rle-Lm-c4K">
                                             <connections>
-                                                <action selector="btnBack:" destination="Q5n-Uc-SOh" id="2Av-lP-mJ3"/>
+                                                <action selector="btnBack:" destination="Myv-fe-aFt" id="f9F-xj-BMK"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -819,7 +820,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fJ1-by-V09" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3071" y="-1717"/>
+            <point key="canvasLocation" x="-2338" y="-1558"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Sqr-Q0-88d">
