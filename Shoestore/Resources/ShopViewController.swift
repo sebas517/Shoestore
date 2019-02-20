@@ -27,7 +27,6 @@ class ShopViewController: UIViewController {
         }
     }
 
-    
     func saveShoe(shoe: Shoe) {
         shoes.append(shoe)
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
