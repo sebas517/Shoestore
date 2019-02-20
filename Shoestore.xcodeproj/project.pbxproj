@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		332CB1C2221D8FC100844A67 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CB1C1221D8FC100844A67 /* UserViewController.swift */; };
+		332CB1C4221D8FCF00844A67 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CB1C3221D8FCF00844A67 /* ShopViewController.swift */; };
+		332CB1C6221D8FDE00844A67 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CB1C5221D8FDE00844A67 /* SearchViewController.swift */; };
 		332D69A222086696007820D0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332D69A122086696007820D0 /* AppDelegate.swift */; };
 		332D69A922086699007820D0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 332D69A822086699007820D0 /* Assets.xcassets */; };
 		332D69AC22086699007820D0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 332D69AA22086699007820D0 /* LaunchScreen.storyboard */; };
@@ -52,6 +55,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		332CB1C1221D8FC100844A67 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		332CB1C3221D8FCF00844A67 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
+		332CB1C5221D8FDE00844A67 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		332D699E22086696007820D0 /* Shoestore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shoestore.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		332D69A122086696007820D0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		332D69A822086699007820D0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -113,6 +119,7 @@
 		332CB1BA221D89C400844A67 /* Shop */ = {
 			isa = PBXGroup;
 			children = (
+				332CB1C3221D8FCF00844A67 /* ShopViewController.swift */,
 				33FEE2E9221BEAF400383915 /* ShopCellTableViewCell.swift */,
 			);
 			path = Shop;
@@ -121,6 +128,7 @@
 		332CB1BB221D89E200844A67 /* User */ = {
 			isa = PBXGroup;
 			children = (
+				332CB1C1221D8FC100844A67 /* UserViewController.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -147,6 +155,7 @@
 		332CB1BE221D8A7A00844A67 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				332CB1C5221D8FDE00844A67 /* SearchViewController.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -392,15 +401,18 @@
 			files = (
 				3380D6F822116B3800A009BA /* ShoesViewController.swift in Sources */,
 				33D95F55220D8965008E8BCE /* HomeCellTableViewCell.swift in Sources */,
+				332CB1C4221D8FCF00844A67 /* ShopViewController.swift in Sources */,
 				33F7BA192212F0F700F70DFA /* DetailViewController.swift in Sources */,
 				332D69A222086696007820D0 /* AppDelegate.swift in Sources */,
 				33D95F53220D894F008E8BCE /* HomeTableViewController.swift in Sources */,
 				33D95F57220D8A9F008E8BCE /* ShoeRest.swift in Sources */,
 				33EBBAC22212BA2100C64662 /* ShoesResultViewController.swift in Sources */,
+				332CB1C2221D8FC100844A67 /* UserViewController.swift in Sources */,
 				3339E8F2221D89D100E3FBD9 /* DetailCollectionViewCell.swift in Sources */,
 				33FEE2EA221BEAF400383915 /* ShopCellTableViewCell.swift in Sources */,
 				33E328B0220AD989002B358F /* RestClient.swift in Sources */,
 				33E328AA220ACFB7002B358F /* Shoe.swift in Sources */,
+				332CB1C6221D8FDE00844A67 /* SearchViewController.swift in Sources */,
 				33E328B2220AD9A6002B358F /* Util.swift in Sources */,
 				33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */,
 				33E328AC220AD529002B358F /* Pedido.swift in Sources */,
