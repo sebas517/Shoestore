@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3317C850221EAB6F0095CAE3 /* SearchResultViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3317C84F221EAB6F0095CAE3 /* SearchResultViewCell.swift */; };
 		332CB1C2221D8FC100844A67 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CB1C1221D8FC100844A67 /* UserViewController.swift */; };
 		332CB1C4221D8FCF00844A67 /* ShopViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CB1C3221D8FCF00844A67 /* ShopViewController.swift */; };
 		332CB1C6221D8FDE00844A67 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 332CB1C5221D8FDE00844A67 /* SearchViewController.swift */; };
@@ -55,6 +56,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3317C84F221EAB6F0095CAE3 /* SearchResultViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchResultViewCell.swift; sourceTree = "<group>"; };
 		332CB1C1221D8FC100844A67 /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		332CB1C3221D8FCF00844A67 /* ShopViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShopViewController.swift; sourceTree = "<group>"; };
 		332CB1C5221D8FDE00844A67 /* SearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
@@ -148,6 +150,7 @@
 				33EBBAC52212C30300C64662 /* SearchResultCollectionView.swift */,
 				33EBBAC12212BA2100C64662 /* ShoesResultViewController.swift */,
 				3380D6F722116B3800A009BA /* ShoesViewController.swift */,
+				3317C84F221EAB6F0095CAE3 /* SearchResultViewCell.swift */,
 			);
 			path = SearchResult;
 			sourceTree = "<group>";
@@ -412,6 +415,7 @@
 				33FEE2EA221BEAF400383915 /* ShopCellTableViewCell.swift in Sources */,
 				33E328B0220AD989002B358F /* RestClient.swift in Sources */,
 				33E328AA220ACFB7002B358F /* Shoe.swift in Sources */,
+				3317C850221EAB6F0095CAE3 /* SearchResultViewCell.swift in Sources */,
 				332CB1C6221D8FDE00844A67 /* SearchViewController.swift in Sources */,
 				33E328B2220AD9A6002B358F /* Util.swift in Sources */,
 				33EBBAC62212C30300C64662 /* SearchResultCollectionView.swift in Sources */,
