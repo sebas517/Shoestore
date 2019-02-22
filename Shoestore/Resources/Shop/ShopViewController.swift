@@ -32,6 +32,12 @@ class ShopViewController: UIViewController {
         preferences.set(shopBag, forKey: "shopBag")
         tableView.reloadData()
     }
+    func deleteShopBag(){
+        shoes = []
+        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        preferences.set(shopBag, forKey: "shopBag")
+        tableView.reloadData()
+    }
     func loadShoes() {
         guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
             print("'shopBag' not found in UserDefaults")
@@ -48,7 +54,11 @@ class ShopViewController: UIViewController {
         }
         
     }
+    
 
+    @IBAction func reset_shop(_ sender: Any) {
+        deleteShopBag()
+    }
 }
 
 
