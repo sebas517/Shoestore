@@ -24,9 +24,11 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     @IBOutlet weak var color: UILabel!
     @IBOutlet weak var collectionRelatedShoes: UICollectionView!
     
+    var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var relatedShoes: [Shoe] = []
     var shoe:Shoe?
     var shoes: [Shoe] = []
+    var categories:[Category] = []
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return relatedShoes.count
@@ -37,15 +39,16 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        print("entra antes de creare la celda")
+
         let celda: DetailCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "shoeCell", for: indexPath) as! DetailCollectionViewCell
         let tamanioPantalla = UIScreen.main.bounds
         let anchoCelda = (tamanioPantalla.width/5.0)
         //var imagen = relatedShoes[indexPath.row].image
-        var shoeAux: Shoe = relatedShoes[indexPath.row]
+        
+        let shoeAux: Shoe = relatedShoes[indexPath.row]
         celda.shoe = shoeAux
         let urlImagen =  celda.shoe?.getImage()
-        
+
         if  let url = URL(string: urlImagen!) {
             let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
             cola.async {
@@ -55,16 +58,15 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
                         celda.imagen.contentMode = UIView.ContentMode.scaleAspectFit
                         
                         
+                        
                     }
                 }
             }
         }
         
-        celda.brand.text = relatedShoes[indexPath.row].getBrand()
-        celda.price.text = "\(String(relatedShoes[indexPath.row].getPrice()))€"
+       // celda.brand.text = relatedShoes[indexPath.row].getBrand()
         
-        
-        
+       // celda.price.text = "\(String(relatedShoes[indexPath.row].getPrice()))€"
         
         //  celda.brand.text =  relatedShoes[indexPath.row].getBrand()
         
@@ -76,17 +78,43 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         return celda
     }
     
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         self.shoe = relatedShoes[indexPath.row]
+        mostrarZapato()
         
+    }
+    
+    func actualizarZapatosRelacinados(shoeRelacionated:Shoe?){
+        relatedShoes = []
+        if  let shoe = shoeRelacionated{
+            for zapatoRest in shoes {
+                if  (shoe.category  == Int(zapatoRest.category) ?? 0 && shoe.idDestinatario == Int(zapatoRest.idDestinatario) ?? 0
+                    && shoe.model != zapatoRest.model){
+                    //  if(shoe?.model != zapatoRest.modelo){
+                    relatedShoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe.category ?? 0, idDestinatario: shoe.idDestinatario ?? 0, brand: zapatoRest.brand , model: zapatoRest.model, price: zapatoRest.price, color: zapatoRest.color, coverMaterial: zapatoRest.coverMaterial, insideMaterial: zapatoRest.insideMaterial, soleMaterial: zapatoRest.soleMaterial, numberFrom:zapatoRest.numberFrom, numberTo: zapatoRest.numberTo, desc: zapatoRest.desc, stock: zapatoRest.stock , image: zapatoRest.image))
+
+                }
+            }
+            collectionRelatedShoes.reloadData()
+        }
+    }
+    
+    func llamarCliente(){
         guard let cliente = RestClient(service: "zapato/",response: self) else {
             return
         }
         cliente.request()
-        
-        //Asignacion imagen
+    }
+    
+    
+    func llamarClienteCategorias(){
+        guard let cliente = RestClient(service: "categoria/",response: self) else {
+            return
+        }
+        cliente.request()
+    }
+    
+    func mostrarZapato(){
         if  let shoe = shoe{
             let urlImagen = shoe.getImage()
             if let url = URL(string: urlImagen) {
@@ -103,10 +131,16 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             }
             
             //Asignacion resto de campos
-            print("Id destinarario zapato escogido: \(shoe.getIdDestinatario())")
             brand.text = "\(shoe.brand)"
             model.text = "\(shoe.model)"
-            category.text = "botines, hombre"
+            
+            
+            for categoria in categories{
+                if (categoria.id == shoe.category){
+                    category.text = categoria.getName()
+                }
+            }
+            //category.text = "botines, hombre"
             price.text = "\(shoe.price)"
             coverMaterial.text = "\(shoe.coverMaterial)"
             insideMaterial.text = "\(shoe.insideMaterial)"
@@ -115,18 +149,36 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             stock.text = "\(shoe.stock)"
             color.text = "\(shoe.color)"
             if(shoe.idDestinatario == 1){
-                destinatary.text = "Mujer"
-            }
-            else if(shoe.idDestinatario == 2){
-                destinatary.text = "Hombre"
-            }
-            else if(shoe.idDestinatario == 3){
-                destinatary.text = "Niño"
-            }
-            else if(shoe.idDestinatario == 4){
                 destinatary.text = "Niña"
             }
+            else if(shoe.idDestinatario == 2){
+                destinatary.text = "Niño"
+            }
+            else if(shoe.idDestinatario == 3){
+                destinatary.text = "Hombre"
+            }
+            else if(shoe.idDestinatario == 4){
+                destinatary.text = "Mujer"
+            }
+        actualizarZapatosRelacinados(shoeRelacionated: shoe)
         }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        activityIndicator.center = self.view.center
+        activityIndicator.style = UIActivityIndicatorView.Style.gray
+        activityIndicator.hidesWhenStopped = true
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
+        
+        llamarCliente()
+        llamarClienteCategorias()
+
+        //Asignacion imagen
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -149,22 +201,36 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         do {
             let decoder = JSONDecoder()
             let zapatos = try decoder.decode(Zapato.self, from:data)
-            
             for zapatoRest in zapatos.zapato {
-                print("Entra en bucle zapatorest")
-                if (relatedShoes.count < 3){
-                    relatedShoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe?.category ?? 0, idDestinatario: shoe?.idDestinatario ?? 0, brand: "\(shoe?.brand)" , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+                shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, idDestinatario: Int(zapatoRest.iddestinatario) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+            }
+            
+            
+            /*for zapatoRest in zapatos.zapato {
+                if  (shoe?.category  == Int(zapatoRest.idcategoria) ?? 0 && shoe?.idDestinatario == Int(zapatoRest.iddestinatario) ?? 0
+                    && shoe?.model != zapatoRest.modelo){
+                  //  if(shoe?.model != zapatoRest.modelo){
+                    relatedShoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe?.category ?? 0, idDestinatario: shoe?.idDestinatario ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
+                    
+                    
+               // }
                 }
-            }
+            }*/
             
-            for shoe in relatedShoes {
-                print("RELACIONADA \(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getIdDestinatario())")
-                
-            }
-            collectionRelatedShoes.reloadData()
             
-        } catch let parsingError {
-            print("Error", parsingError)
+            
+        } catch {
+        }
+        do {
+            
+            let decoder = JSONDecoder()
+            let categorias = try decoder.decode(Categorias.self, from:data)
+            for categoryRest in categorias.categorias {
+                categories.append(Category(id: categoryRest.id, name: categoryRest.nombre))
+            }
+            mostrarZapato()
+            activityIndicator.stopAnimating()
+        } catch {
         }
     }
     
