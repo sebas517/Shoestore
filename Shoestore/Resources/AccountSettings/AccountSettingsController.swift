@@ -9,14 +9,28 @@
 import Foundation
 import UIKit
 
-class AccountSettingsController: UIViewController, OnResponse {
+class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate, OnResponse {
+    
+    let imagePicker = UIImagePickerController()
     
     
+    @IBAction func imageTap(_ sender: Any) {
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .photoLibrary
+        
+        present(imagePicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if info[UIImagePickerController.InfoKey.originalImage] != nil {
+            
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(self.handleTap(_:)))
+        imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
     }
     
     func onData(data: Data) {

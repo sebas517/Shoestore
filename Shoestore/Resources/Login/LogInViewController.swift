@@ -54,17 +54,6 @@ class LogInViewController: UIViewController, OnResponse {
                     }
                 }
             }
-            
-//            for userRest in usuarios.usuario {
-//                users.append(User(id: Int(userRest.id) ?? 0, login: String(userRest.login), key: String(userRest.clave), email: userRest.correo , name: userRest.nombre, lastname: String(userRest.apellidos), address: userRest.direccion, signedUp: Date(userRest.fecha_alta), active: userRest.activo, admin: userRest.admin))
-//            }
-            
-            /*for shoe in shoes {
-             print("\(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getPrice())")
-             }*/
-            
-            
-            //tabla.reloadData()
         } catch let parsingError {
             print("Error", parsingError)
         }
@@ -77,6 +66,7 @@ class LogInViewController: UIViewController, OnResponse {
     public func saveUser(user: User) {
         let preferences = UserDefaults.standard
         preferences.set(user, forKey: "user")
+        preferences.set(user.getId(), forKey: "userId")
         let didSave = preferences.synchronize()
         if !didSave {
             
