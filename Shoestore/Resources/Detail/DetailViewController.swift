@@ -48,7 +48,6 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         let shoeAux: Shoe = relatedShoes[indexPath.row]
         celda.shoe = shoeAux
         let urlImagen =  celda.shoe?.getImage()
-
         if  let url = URL(string: urlImagen!) {
             let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
             cola.async {
@@ -56,9 +55,6 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
                     DispatchQueue.main.async {
                         celda.imagen.image = imagen
                         celda.imagen.contentMode = UIView.ContentMode.scaleAspectFit
-                        
-                        
-                        
                     }
                 }
             }
@@ -80,8 +76,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          self.shoe = relatedShoes[indexPath.row]
-        mostrarZapato()
-        
+        mostrarZapato()   
     }
     
     func actualizarZapatosRelacinados(shoeRelacionated:Shoe?){
@@ -119,7 +114,6 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             let urlImagen = shoe.getImage()
             if let url = URL(string: urlImagen) {
                 let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
-                
                 cola.async {
                     if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
                         DispatchQueue.main.async {
@@ -129,12 +123,9 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
                     }
                 }
             }
-            
             //Asignacion resto de campos
             brand.text = "\(shoe.brand)"
             model.text = "\(shoe.model)"
-            
-            
             for categoria in categories{
                 if (categoria.id == shoe.category){
                     category.text = categoria.getName()
@@ -237,6 +228,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     func onDataError(message: String) {
         print("error")
     }
+    
     
     
 }
