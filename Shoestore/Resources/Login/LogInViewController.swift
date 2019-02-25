@@ -11,27 +11,39 @@ import UIKit
 class LogInViewController: UIViewController, OnResponse {
     var user:User!
     
+    @IBOutlet weak var loginText: UITextField!
+    @IBOutlet weak var passwordText: UITextField!
+    @IBOutlet weak var wrongText: UILabel!
+    
     @IBAction func loginBtn(_ sender: Any) {
-        guard let cliente = RestClient(service: "usuario/",response: self) else {
-            return
+        print("HEY")
+        if loginText.text == "" || passwordText.text == ""{
+            wrongText.isHidden = false
+        } else {
+            let login = loginText.text
+            let password = passwordText.text
+            print("\(login!), \(password!)")
+            
+            guard let cliente = RestClient(service: "usuario/\(login!)/key/\(password!)",response: self) else {
+                return
+            }
+            cliente.request()
         }
-        cliente.request()
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordText.isSecureTextEntry = true
     }
     
     func onData(data: Data) {
         do {
             let decoder = JSONDecoder()
             let usuarios = try decoder.decode(Usuario.self, from:data)
+            print("\(usuarios)")
             
             if usuarios.usuario.count < 1 {
                 print("Usuario o clave incorrectos")
             } else {
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy'-'MM'-'dd'T'HH':'mm':'ssZZZ"
-                
                 user = User(id: Int(usuarios.usuario[0].id)!, login: usuarios.usuario[0].login, key: usuarios.usuario[0].clave, email: usuarios.usuario[0].correo, name: usuarios.usuario[0].nombre, lastname: usuarios.usuario[0].apellidos, address: usuarios.usuario[0].direccion, signedUp: stringToDate(usuarios.usuario[0].fecha_alta), active: Bool(usuarios.usuario[0].activo)!, admin: Bool(usuarios.usuario[0].admin)!)
                 
                 saveUser(user: user)
@@ -72,9 +84,14 @@ class LogInViewController: UIViewController, OnResponse {
     }
 
     public func stringToDate(_ strings: String) -> Date {
-        
         let formatter = DateFormatter()
-        return formatter.date(from: strings)!
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        let date = formatter.date(from:strings)!
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+        let finalDate = calendar.date(from:components)
+        return finalDate!
     }
     
 }
