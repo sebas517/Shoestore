@@ -17,10 +17,6 @@ class LogInViewController: UIViewController, OnResponse {
         }
         cliente.request()
     }
-    
-    @IBAction func btnBack(_ sender: UIBarButtonItem) {
-        dismiss(animated: true, completion: nil)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
     }
@@ -39,6 +35,12 @@ class LogInViewController: UIViewController, OnResponse {
                 user = User(id: Int(usuarios.usuario[0].id)!, login: usuarios.usuario[0].login, key: usuarios.usuario[0].clave, email: usuarios.usuario[0].correo, name: usuarios.usuario[0].nombre, lastname: usuarios.usuario[0].apellidos, address: usuarios.usuario[0].direccion, signedUp: stringToDate(usuarios.usuario[0].fecha_alta), active: Bool(usuarios.usuario[0].activo)!, admin: Bool(usuarios.usuario[0].admin)!)
                 
                 saveUser(user: user)
+                if UserDefaults.standard.object(forKey: "user") == nil {
+                    if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserViewController") as? UserViewController
+                    {
+                        present(vc, animated: true, completion: nil)
+                    }
+                }
             }
             
 //            for userRest in usuarios.usuario {
