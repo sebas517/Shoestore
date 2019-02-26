@@ -13,12 +13,13 @@ class ShopViewController: UIViewController {
     var shoe:Shoe?
     var shoes:[Shoe] = []
     let preferences = UserDefaults.standard
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tabla: UITableView!
     override func viewDidLoad() {
         navigationItem.leftBarButtonItem = editButtonItem
         super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
+        tabla.delegate = self
+        tabla.dataSource = self
+        tabla.setEditing(true, animated: true)
         shoes = []
         loadShoes()
         
@@ -30,13 +31,13 @@ class ShopViewController: UIViewController {
         shoes.append(shoe)
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "shopBag")
-        tableView.reloadData()
+        tabla.reloadData()
     }
     func deleteShopBag(){
         shoes = []
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "shopBag")
-        tableView.reloadData()
+        tabla.reloadData()
     }
     func loadShoes() {
         guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
@@ -50,15 +51,13 @@ class ShopViewController: UIViewController {
         }
         if (shoes.count > 0) {
             self.shoes = shoes
-            tableView.reloadData()
+            tabla.reloadData()
         }
         
     }
     
 
-    @IBAction func reset_shop(_ sender: Any) {
-        deleteShopBag()
-    }
+    
 }
 
 
@@ -99,7 +98,7 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
             // Delete the row from the data source
             shoes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            preferences.set(shoes, forKey: "shoes")
+            preferences.set(shoes, forKey: "shopBag")
         }
     }
 }
