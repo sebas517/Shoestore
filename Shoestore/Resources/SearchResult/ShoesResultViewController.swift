@@ -8,24 +8,84 @@
 
 import UIKit
 
-class ShoesResultViewController: UIViewController, UICollectionViewDataSource,  UICollectionViewDelegate, OnResponse{
-
+class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+    
     
     @IBOutlet weak var shoeCollection: UICollectionView!
     var shoes: [Shoe] = []
+    var shoesFound: [Shoe] = []
+    var categoria: Int? = -1
+    var destinatario: Int?
+    var search: String?
+    var categories:[Category] = []
+    var shoe: Shoe!
+   
+    @IBOutlet weak var collectionShoesFound: UICollectionView!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        llamarCliente()
+        // llamarClienteCategorias()
+        print("Recibido \(categoria)  \(destinatario) \(search)")
+        
+        /*  if (search != "" && categoria != -1){
+         guard let cliente = RestClient(service: "zapato/\(categoria)/destinatario/\(destinatario)/busqueda/\(search)",response: self)
+         else {
+         return
+         }
+         cliente.request()
+         }else if(categoria != -1){
+         guard let cliente = RestClient(service: "zapato/destinatario/\(destinatario)/busqueda/\(search)",response: self) else {
+         return
+         }
+         cliente.request()
+         
+         }*/
+        // Do any additional setup after loading the view.
+    }
     
     func onData(data: Data) {
         do {
             let decoder = JSONDecoder()
             let zapatos = try decoder.decode(Zapato.self, from:data)
-            
             for zapatoRest in zapatos.zapato {
                 shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, idDestinatario: Int(zapatoRest.iddestinatario) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
             }
-            
-            for shoe in shoes {
-                print("SALIDA \(shoe.getId())...\(shoe.getBrand())...\(shoe.getModel())...\(shoe.getPrice())")
+            print ("entra en el ONDATA")
+            if (categoria != nil){
+                for shoe in shoes {
+                    if (shoe.category == categoria && shoe.idDestinatario == shoe.idDestinatario){
+                        if (shoe.model == search || shoe.brand == search){
+                            shoesFound.append(shoe)
+                        }
+                    }
+                }
+            }else if(categoria == nil){
+                for shoe in shoes {
+                    if (shoe.idDestinatario == shoe.idDestinatario){
+                        if (shoe.model == search || shoe.brand == search){
+                            shoesFound.append(shoe)
+                        }
+                    }
+                }
             }
+            
+            collectionShoesFound.reloadData()
+            
+            //--Si no se encuentran zapatos en la busqueda, lanza un alert y carga todos los zapatos de la BD  
+            if (shoesFound.count <= 0){
+                let alerta = UIAlertController(title: "No se ha encontraod",
+                                              message: "No hay coincdencias con los datos introducidos",
+                                              preferredStyle: UIAlertController.Style.alert)
+                let accion = UIAlertAction(title: "Cerrar",
+                                           style: UIAlertAction.Style.default) { _ in
+                                            alerta.dismiss(animated: true, completion: nil) }
+                alerta.addAction(accion)
+                self.present(alerta, animated: true, completion: nil)
+                loadAllShoes()
+            }
+            
             
             
             //      tabla.reloadData()
@@ -40,44 +100,76 @@ class ShoesResultViewController: UIViewController, UICollectionViewDataSource,  
     }
     
     
+    func loadAllShoes(){
+       var shoeInsert: [Shoe] = []
+        if (shoes.count > 0){
+            for shoeAux in shoes{
+            shoesFound.append(shoeAux)
+            }
+             collectionShoesFound.reloadData()
+        }
+    }
+    
     @IBOutlet weak var btnFilter: UIButton!
     let searchBrand: String! = nil
-    var search: String! = ""
-    var destinatario: Int! = -1
-    var categoria: Int! = -1
+    //  var search: String! = ""
+    //var destinatario: Int! = -1
+    // var categoria: Int! = -1
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        if (search != "" && categoria != -1){
-            guard let cliente = RestClient(service: "zapato/\(categoria)/destinatario/\(destinatario)/busqueda/\(search)",response: self) else {
-                return
-            }
-            cliente.request()
-        }else if(categoria != -1){
-            guard let cliente = RestClient(service: "zapato/destinatario/\(destinatario)/busqueda/\(search)",response: self) else {
-                return
-            }
-            cliente.request()
-            
+    
+    func llamarCliente(){
+        guard let cliente = RestClient(service: "zapato/",response: self) else {
+            return
         }
-        // Do any additional setup after loading the view.
+        cliente.request()
     }
     
+    
+    func llamarClienteCategorias(){
+        guard let cliente = RestClient(service: "categoria/",response: self) else {
+            return
+        }
+        cliente.request()
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int ) -> Int{
-        return 1
+        return shoesFound.count
         
     }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.shoe = shoesFound[indexPath.row]
+      //  mostrarZapato()
+    }
+    
+    
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellShoe", for: indexPath) as! SearchResultViewCell
-        
-        
-        cell.search = search
-        return cell
-        
+        let celda: SearchResultViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "searchResultCell", for: indexPath) as! SearchResultViewCell
+        let tamanioPantalla = UIScreen.main.bounds
+        let anchoCelda = (tamanioPantalla.width/5.0)
+        //var imagen = relatedShoes[indexPath.row].image
+        let shoeAux: Shoe = shoesFound[indexPath.row]
+        celda.Brand.text = "\(shoeAux.brand.uppercased())"
+        celda.model.text = shoeAux.model.uppercased()
+        celda.price.text = String("\(shoeAux.getPrice()) €")
+        let urlImagen =  shoeAux.getImage()
+        if  let url = URL(string: urlImagen) {
+            let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
+            cola.async {
+                if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
+                    DispatchQueue.main.async {
+                        celda.imagen.image = imagen
+                        celda.imagen.contentMode = UIView.ContentMode.scaleAspectFit
+                    }
+                }
+            }
+        }
+         return celda
     }
+
     
     
     override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
@@ -92,6 +184,34 @@ class ShoesResultViewController: UIViewController, UICollectionViewDataSource,  
      // Pass the selected object to the new view controller.
      }
      */
+    @IBAction func filter(_ sender: Any) {
+        
+        print("Filtrar")
+    }
+    
+    
+    //----SEGE
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        
+        guard let ShopViewController = segue.destination as? ShopViewController else {
+            fatalError("Unexpected destination: \(segue.destination)")
+        }
+        
+        guard let selectedShoeCell = sender as? SearchResultViewCell else {
+            fatalError("Unexpected sender: \(sender)")
+        }
+        
+        guard let indexPath = collectionShoesFound.indexPath(for: selectedShoeCell) else {
+            fatalError("The selected cell is not being displayed by the table")
+        }
+        
+        let selectedShoe = shoesFound[indexPath.row]
+        ShopViewController.shoe = selectedShoe
+    }
+    
+    
     
 }
+
 

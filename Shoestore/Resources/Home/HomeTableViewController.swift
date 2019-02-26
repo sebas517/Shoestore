@@ -17,6 +17,7 @@ class HomeTableViewController: UITableViewController, OnResponse {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Util.loadCategories()
         
         activityIndicator.center = self.view.center
         activityIndicator.style = UIActivityIndicatorView.Style.gray

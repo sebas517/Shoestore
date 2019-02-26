@@ -1,4 +1,4 @@
-//
+
 //  SearchViewController.swift
 //  Shoestore
 //
@@ -9,7 +9,7 @@
 import UIKit
 
 class SearchViewController: UIViewController, OnResponse {
-
+    
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     
@@ -50,14 +50,14 @@ class SearchViewController: UIViewController, OnResponse {
     }
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
@@ -73,7 +73,7 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let categoriaId = categories[indexPath.row].getId()
+        categoriaId = categories[indexPath.row].getId()
         //print(categoriaId)
     }
     
@@ -97,29 +97,30 @@ extension SearchViewController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
         switch selectedScope {
-            case 0:
-                let destinatario = 3
+        case 0:
+            destinatario = 3
             break
-            case 1:
-                let destinatario = 4
-                break
-            case 2:
-                let destinatario = 2
-                break
-            case 3:
-                let destinatario = 1
-                break
-            default:
-                return
-            }
+        case 1:
+            destinatario = 4
+            break
+        case 2:
+            destinatario = 2
+            break
+        case 3:
+            destinatario = 1
+            break
+        default:
+            return
+        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSegue" {
+            print("manda en el segue: \(categoriaId) , \(destinatario), \(search)")
             var vc = segue.destination as! ShoesResultViewController
             vc.categoria = categoriaId
             vc.destinatario = destinatario
-            vc.search = search
+            vc.search = searchBar.text
         }
     }
     
@@ -127,3 +128,4 @@ extension SearchViewController: UISearchBarDelegate {
         performSegue(withIdentifier: "searchSegue", sender: self)
     }
 }
+

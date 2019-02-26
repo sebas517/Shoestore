@@ -8,14 +8,60 @@
 
 import UIKit
 
-class UserViewController: UIViewController {
-
+class UserViewController: UIViewController, OnResponse {
+    var user:User!
+    
+    @IBOutlet var usernameText: UITextField!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        let usuario = UserDefaults.standard
+        
+        if usuario.object(forKey: "user") == nil {
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController
+            {
+                present(vc, animated: true, completion: nil)
+            }
+        } else {
+            guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self) else {
+                return
+            }
+            cliente.request()
+        }
 
         // Do any additional setup after loading the view.
     }
     
+    func onData(data: Data) {
+        do {
+            let decoder = JSONDecoder()
+            let usuarios = try decoder.decode(Usuario.self, from:data)
+            print("\(usuarios)")
+            
+            if usuarios.usuario.count < 1 {
+                print("Usuario o clave incorrectos")
+            } else {
+                user = User(id: Int(usuarios.usuario[0].id)!, login: usuarios.usuario[0].login, key: usuarios.usuario[0].clave, email: usuarios.usuario[0].correo, name: usuarios.usuario[0].nombre, lastname: usuarios.usuario[0].apellidos, address: usuarios.usuario[0].direccion, signedUp: stringToDate(usuarios.usuario[0].fecha_alta), active: Bool(usuarios.usuario[0].activo)!, admin: Bool(usuarios.usuario[0].admin)!)
+            }
+        } catch let parsingError {
+            print("Error", parsingError)
+        }
+    }
+    
+    func onDataError(message: String) {
+        print("error AccountSettings")
+    }
+    
+    public func stringToDate(_ strings: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        let date = formatter.date(from:strings)!
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month, .day, .hour], from: date)
+        let finalDate = calendar.date(from:components)
+        return finalDate!
+    }
 
     /*
     // MARK: - Navigation

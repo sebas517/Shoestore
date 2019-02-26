@@ -11,6 +11,7 @@ import UIKit
 class SearchResultViewCell: UICollectionViewCell {
     var search: String?
     @IBOutlet weak var Brand: UILabel!
+    @IBOutlet weak var imagen: UIImageView!
     
     @IBOutlet weak var model: UILabel!
     @IBOutlet weak var price: UILabel!
