@@ -12,6 +12,12 @@ class UserViewController: UIViewController, OnResponse {
     var user:User!
     
     @IBOutlet var usernameText: UITextField!
+    @IBAction func logOut(_ sender: Any) {
+        UserDefaults.standard.set(nil, forKey: "userData")
+        UserDefaults.standard.set(nil, forKey: "userKey")
+        
+        dismiss(animated: true, completion: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +27,7 @@ class UserViewController: UIViewController, OnResponse {
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController
             {
                 present(vc, animated: true, completion: nil)
+                //performSegue(withIdentifier: "toLogin", sender: self)
             }
         } else {
             guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self) else {

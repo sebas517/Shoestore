@@ -57,10 +57,10 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     }
     
     func loadData() {
-        nameTf.text = usuario?.getName()/* ?? "Usuario"*/
-        surnameTf.text = usuario?.getLastname()/* ?? "Clave"*/
-        adressTf.text = usuario?.getAddress()/* ?? "Direccion"*/
-        emailTf.text = usuario?.getEmail()/* ?? "E-mail"*/
+        nameTf.text = usuario?.getName()
+        surnameTf.text = usuario?.getLastname()
+        adressTf.text = usuario?.getAddress()
+        emailTf.text = usuario?.getEmail()
     }
     
     @IBAction func saveButton(_ sender: Any) {
