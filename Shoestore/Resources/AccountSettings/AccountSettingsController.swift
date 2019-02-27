@@ -10,6 +10,9 @@ import Foundation
 import UIKit
 
 class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate, OnResponse {
+    var usuario:User?
+    var usuarios:[User] = []
+    let preferences = UserDefaults.standard
     
     let imagePicker = UIImagePickerController()
     
@@ -31,6 +34,9 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         super.viewDidLoad()
         
         imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        usuarios = []
+        loadUsers()
+        loadData()
     }
     
     func onData(data: Data) {
@@ -39,5 +45,25 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     func onDataError(message: String) {
         print("onError")
+    }
+    
+    func loadUsers() {
+        guard let users = UserDefaults.standard.object(forKey: "user") as? NSData else {
+            print ("user not found in UserDefaults")
+            return
+        }
+        
+        guard let usuarios = NSKeyedUnarchiver.unarchiveObject(with: users as Data) as? [User] else{
+        print("Could not unarchive from placesData")
+        return
+        }
+    
+        if(usuarios.count > 0) {
+            self.usuarios = usuarios
+        }
+    }
+    
+    func loadData() {
+        
     }
 }

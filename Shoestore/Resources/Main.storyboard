@@ -33,7 +33,7 @@
                                 </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Yrs-dM-a2T">
-                                <rect key="frame" x="0.0" y="140" width="375" height="527"/>
+                                <rect key="frame" x="0.0" y="140" width="375" height="478"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="Ugm-Kr-kHV" rowHeight="91" style="IBUITableViewCellStyleDefault" id="9qx-UW-rle">
@@ -725,9 +725,6 @@
                                                 <rect key="frame" x="16" y="7" width="83" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <state key="normal" title="Back"/>
-                                                <connections>
-                                                    <segue destination="LdV-nu-vl8" kind="show" id="c4Q-OS-ymP"/>
-                                                </connections>
                                             </button>
                                         </barButtonItem>
                                     </navigationItem>
@@ -912,7 +909,7 @@
         <scene sceneID="Sqr-Q0-88d">
             <objects>
                 <navigationController id="z0x-aX-bfh" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" image="shopping-bag (1)" id="Ief-ng-JEi"/>
+                    <tabBarItem key="tabBarItem" title="" image="shopping-bag (1)" badgeValue="0" id="Ief-ng-JEi"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X6f-3c-aLX">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -934,7 +931,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="143" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="poi-48-03i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="506"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="462"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cellShop" rowHeight="143" id="33Y-RK-eTn" customClass="ShopCellTableViewCell" customModule="Shoestore" customModuleProvider="target">
@@ -1036,9 +1033,8 @@
         <image name="user" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="R5O-dA-R2A"/>
-        <segue reference="zBE-cK-IiA"/>
+        <segue reference="UNH-Fc-EQo"/>
+        <segue reference="bLC-RA-tPw"/>
         <segue reference="jKl-xL-egi"/>
-        <segue reference="c4Q-OS-ymP"/>
     </inferredMetricsTieBreakers>
 </document>
