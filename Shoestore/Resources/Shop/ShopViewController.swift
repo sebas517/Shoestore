@@ -102,7 +102,12 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
             // Delete the row from the data source
             shoes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            setBadgeValue(value: "\(shoes.count)")
+            if  shoes.count > 0 {
+                setBadgeValue(value: "\(shoes.count)")
+            }else{
+                shopBag.badgeValue = nil
+            }
+            
             updateShoes()
         }
     }
