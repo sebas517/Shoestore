@@ -34,10 +34,10 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     }
     
     func onData(data: Data) {
-        <#code#>
+        print("onData")
     }
     
     func onDataError(message: String) {
-        <#code#>
+        print("onError")
     }
 }
