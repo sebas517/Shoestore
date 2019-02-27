@@ -27,6 +27,7 @@ class LogInViewController: UIViewController, OnResponse {
             guard let cliente = RestClient(service: "usuario/\(login!)/key/\(password!)",response: self) else {
                 return
             }
+            
             cliente.request()
         }
     }
@@ -46,13 +47,26 @@ class LogInViewController: UIViewController, OnResponse {
             } else {
                 //print("\(usuarios.usuario[0])")
                 for usuarioRest in usuarios.usuario{
-                    print("foreach---\(usuarioRest.login)...\(usuarioRest.clave)" )
+                    print("foreach---\(usuarioRest)" )
                      user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false)
                 }
-                /*let user = User(id: Int(usuarios.usuario[0].id) ?? 0, login: usuarios.usuario[0].login , key: usuarios.usuario[0].clave , email: usuarios.usuario[0].correo , name: usuarios.usuario[0].nombre , lastname: usuarios.usuario[0].apellidos , address: usuarios.usuario[0].direccion , signedUp: stringToDate(usuarios.usuario[0].fecha_alta), active: Bool(usuarios.usuario[0].activo)!, admin: Bool(usuarios.usuario[0].admin)!)*/
+                print("\(user?.getName()) usuario ")
+                
                         
                 saveUser(user: user)
-                if UserDefaults.standard.object(forKey: "user") == nil {
+                guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+                    print("'shopBag' not found in UserDefaults")
+                    return
+                }
+                
+                guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+                    print("Could not unarchive from placesData")
+                    return
+                }
+                print("Nombre pref --- \(user.getName()) .. \(user.getSignedUp())")
+                
+                
+                if UserDefaults.standard.object(forKey: "userData") != nil {
                     if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserViewController") as? UserViewController
                     {
                         present(vc, animated: true, completion: nil)
@@ -75,10 +89,6 @@ class LogInViewController: UIViewController, OnResponse {
             let userNS = NSKeyedArchiver.archivedData(withRootObject: userToSave)
             preferences.set(userNS, forKey: "userData")
             preferences.set(userToSave.getId(), forKey: "userId")
-            let didSave = preferences.synchronize()
-            if !didSave {
-                print("error al guardar usuario")
-            }
         }
     }
 

@@ -26,6 +26,7 @@ class User: NSObject, NSCoding{
         aCoder.encode(id, forKey: "id")
         aCoder.encode(login, forKey: "login")
         aCoder.encode(key, forKey: "key")
+        aCoder.encode(name, forKey: "name")
         aCoder.encode(email, forKey: "email")
         aCoder.encode(lastname, forKey: "lastname")
         aCoder.encode(address, forKey: "address")
@@ -40,8 +41,8 @@ class User: NSObject, NSCoding{
         self.key = aDecoder.decodeObject(forKey: "key") as? String ?? ""
         self.email = aDecoder.decodeObject(forKey: "email") as? String ?? ""
         self.name = aDecoder.decodeObject(forKey: "name") as? String ?? ""
-        self.lastname = aDecoder.decodeObject(forKey: "model") as? String ?? ""
-        self.address = aDecoder.decodeObject(forKey: "model") as? String ?? ""
+        self.lastname = aDecoder.decodeObject(forKey: "lastname") as? String ?? ""
+        self.address = aDecoder.decodeObject(forKey: "address") as? String ?? ""
         self.signedUp = aDecoder.decodeObject(forKey: "signedUp") as! Date
         self.active = aDecoder.decodeBool(forKey: "active")
         self.admin = aDecoder.decodeBool(forKey: "admin")

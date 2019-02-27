@@ -9,9 +9,9 @@
 import Foundation
 import UIKit
 
-class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate, OnResponse {
+class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate/*, OnResponse*/{
+    
     var usuario:User?
-    var usuarios:[User] = []
     let preferences = UserDefaults.standard
     
     @IBOutlet weak var nameTf: UITextField!
@@ -37,40 +37,67 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        /*imagePicker.delegate = (self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate)*/
-        usuarios = []
         loadUsers()
         loadData()
     }
     
-    func onData(data: Data) {
+    func loadUsers() {
+        guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+            print("'shopBag' not found in UserDefaults")
+            return
+        }
+        
+        guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+            print("Could not unarchive from placesData")
+            return
+        }
+        
+        usuario = user
+        
+    }
+    
+    func loadData() {
+        nameTf.text = usuario?.getName()/* ?? "Usuario"*/
+        surnameTf.text = usuario?.getLastname()/* ?? "Clave"*/
+        adressTf.text = usuario?.getAddress()/* ?? "Direccion"*/
+        emailTf.text = usuario?.getEmail()/* ?? "E-mail"*/
+    }
+    
+    @IBAction func saveButton(_ sender: Any) {
+        usuario?.setName(name: nameTf.text!)
+        usuario?.setLastname(lastname: surnameTf.text!)
+        usuario?.setAddress(address: adressTf.text!)
+        usuario?.setEmail(email: emailTf.text!)
+        
+        saveUser(user: usuario)
+        
+        let datosUser:[String : Any] = ["login" : usuario?.getId(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
+        print("\(datosUser)")
+        
+        /*guard let cliente = RestClient(service: "usuario/", response: self, "PUT", datosUser) else {
+            return
+        }
+        
+        cliente.request()*/
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    public func saveUser(user: User?) {
+        if let userToSave = user {
+            let preferences = UserDefaults.standard
+            //preferences.set(user, forKey: "user")
+            let userNS = NSKeyedArchiver.archivedData(withRootObject: userToSave)
+            preferences.set(userNS, forKey: "userData")
+            preferences.set(userToSave.getId(), forKey: "userId")
+        }
+    }
+    
+    /*func onData(data: Data) {
         print("onData")
     }
     
     func onDataError(message: String) {
         print("onError")
-    }
-    
-    func loadUsers() {
-        guard let users = UserDefaults.standard.object(forKey: "userData") as? NSData else {
-            print ("user not found in UserDefaults")
-            return
-        }
-        
-        guard let usuarios = NSKeyedUnarchiver.unarchiveObject(with: users as Data) as? [User] else{
-        print("Could not unarchive from placesData")
-        return
-        }
-    
-        if(usuarios.count > 0) {
-            self.usuarios = usuarios
-        }
-    }
-    
-    func loadData() {
-        nameTf.text = usuarios[0].name
-        surnameTf.text = usuarios[0].lastname
-        adressTf.text = usuarios[0].address
-        emailTf.text = usuarios[0].email
-    }
+    }*/
 }

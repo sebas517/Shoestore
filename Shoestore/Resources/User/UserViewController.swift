@@ -17,7 +17,7 @@ class UserViewController: UIViewController, OnResponse {
         super.viewDidLoad()
         let usuario = UserDefaults.standard
         
-        if usuario.object(forKey: "user") == nil {
+        if usuario.object(forKey: "userData") == nil {
             if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController
             {
                 present(vc, animated: true, completion: nil)
