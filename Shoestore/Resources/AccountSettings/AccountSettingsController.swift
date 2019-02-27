@@ -14,8 +14,12 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     var usuarios:[User] = []
     let preferences = UserDefaults.standard
     
-    let imagePicker = UIImagePickerController()
+    @IBOutlet weak var nameTf: UITextField!
+    @IBOutlet weak var surnameTf: UITextField!
+    @IBOutlet weak var adressTf: UITextField!
+    @IBOutlet weak var emailTf: UITextField!
     
+    let imagePicker = UIImagePickerController()
     
     @IBAction func imageTap(_ sender: Any) {
         imagePicker.allowsEditing = false
@@ -33,7 +37,7 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        /*imagePicker.delegate = (self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate)*/
         usuarios = []
         loadUsers()
         loadData()
@@ -48,7 +52,7 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     }
     
     func loadUsers() {
-        guard let users = UserDefaults.standard.object(forKey: "user") as? NSData else {
+        guard let users = UserDefaults.standard.object(forKey: "userData") as? NSData else {
             print ("user not found in UserDefaults")
             return
         }
@@ -64,6 +68,9 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     }
     
     func loadData() {
-        
+        nameTf.text = usuarios[0].name
+        surnameTf.text = usuarios[0].lastname
+        adressTf.text = usuarios[0].address
+        emailTf.text = usuarios[0].email
     }
 }
