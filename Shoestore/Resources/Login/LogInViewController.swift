@@ -27,6 +27,7 @@ class LogInViewController: UIViewController, OnResponse {
             guard let cliente = RestClient(service: "usuario/\(login!)/key/\(password!)",response: self) else {
                 return
             }
+            
             cliente.request()
         }
     }

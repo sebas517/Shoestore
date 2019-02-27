@@ -311,6 +311,9 @@
                                 <rect key="frame" x="170" y="555" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButton:" destination="vxZ-tb-7yJ" eventType="touchUpInside" id="CiP-Ia-LN8"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -972,7 +975,6 @@
         <!--Navigation Controller-->
         <scene sceneID="ZsV-BZ-Os9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7hv-a6-jO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iZP-eB-9mQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home (1)" id="B8f-IK-Kjj"/>
                     <toolbarItems/>
@@ -985,6 +987,7 @@
                         <segue destination="PH8-g2-wyZ" kind="relationship" relationship="rootViewController" id="19J-F1-ina"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hv-a6-jO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-2430" y="-1717"/>
         </scene>

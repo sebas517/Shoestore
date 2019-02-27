@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate{
+class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate/*, OnResponse*/{
+    
     var usuario:User?
     let preferences = UserDefaults.standard
     
@@ -61,4 +62,42 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         adressTf.text = usuario?.getAddress()/* ?? "Direccion"*/
         emailTf.text = usuario?.getEmail()/* ?? "E-mail"*/
     }
+    
+    @IBAction func saveButton(_ sender: Any) {
+        usuario?.setName(name: nameTf.text!)
+        usuario?.setLastname(lastname: surnameTf.text!)
+        usuario?.setAddress(address: adressTf.text!)
+        usuario?.setEmail(email: emailTf.text!)
+        
+        saveUser(user: usuario)
+        
+        let datosUser:[String : Any] = ["login" : usuario?.getId(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
+        print("\(datosUser)")
+        
+        /*guard let cliente = RestClient(service: "usuario/", response: self, "PUT", datosUser) else {
+            return
+        }
+        
+        cliente.request()*/
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    public func saveUser(user: User?) {
+        if let userToSave = user {
+            let preferences = UserDefaults.standard
+            //preferences.set(user, forKey: "user")
+            let userNS = NSKeyedArchiver.archivedData(withRootObject: userToSave)
+            preferences.set(userNS, forKey: "userData")
+            preferences.set(userToSave.getId(), forKey: "userId")
+        }
+    }
+    
+    /*func onData(data: Data) {
+        print("onData")
+    }
+    
+    func onDataError(message: String) {
+        print("onError")
+    }*/
 }
