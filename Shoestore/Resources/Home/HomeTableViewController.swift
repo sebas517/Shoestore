@@ -12,12 +12,20 @@ class HomeTableViewController: UITableViewController, OnResponse {
     
     @IBOutlet var tabla: UITableView!
     var shoes: [Shoe] = []
+    var shoesShopBag: [Shoe] = []
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //Util.loadCategories()
+        loadShoes()
+        if  shoesShopBag.count > 0 {
+            print("actualizamos Cesta")
+            self.tabBarController?.tabBar.items?[2].badgeValue = "\(shoesShopBag.count)"
+        }else{
+            self.tabBarController?.tabBar.items?[2].badgeValue = nil
+        }
         
         activityIndicator.center = self.view.center
         activityIndicator.style = UIActivityIndicatorView.Style.gray
@@ -51,6 +59,23 @@ class HomeTableViewController: UITableViewController, OnResponse {
     func onDataError(message: String) {
         print("error")
     }
+    func loadShoes() {
+        shoesShopBag = []
+        guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
+            print("'shopBag' not found in UserDefaults")
+            return
+        }
+        
+        guard let shoes = NSKeyedUnarchiver.unarchiveObject(with: shopBag as Data) as? [Shoe] else {
+            print("Could not unarchive from placesData")
+            return
+        }
+        if (shoes.count > 0) {
+            self.shoesShopBag = shoes
+        }
+        
+    }
+    
 
     // MARK: - Table view data source
 

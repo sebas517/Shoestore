@@ -182,10 +182,14 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     //-------------_CESTA_---------------
     
     @IBAction func addBag(_ sender: Any) {
+        if let shoe = shoe {
+          saveShoe(shoe: shoe)
+        }
         
     }
     
     func loadShoes() {
+        shoesShopBag = []
         guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
             print("'shopBag' not found in UserDefaults")
             return
@@ -202,8 +206,8 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     }
     
     func saveShoe(shoe: Shoe) {
-        shoes.append(shoe)
-        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        shoesShopBag.append(shoe)
+        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoesShopBag)
         preferences.set(shopBag, forKey: "shopBag")
     }
     

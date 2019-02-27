@@ -10,6 +10,8 @@ import UIKit
 
 class ShopViewController: UIViewController {
     
+    @IBOutlet weak var shopBag: UITabBarItem!
+
     var shoe:Shoe?
     var shoes:[Shoe] = []
     let preferences = UserDefaults.standard
@@ -25,6 +27,10 @@ class ShopViewController: UIViewController {
             saveShoe(shoe: shoe)
         }
     }
+    public func setBadgeValue(value: String){
+        shopBag.badgeValue = value
+    }
+    
     func saveShoe(shoe: Shoe) {
         shoes.append(shoe)
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
@@ -56,11 +62,6 @@ class ShopViewController: UIViewController {
             tableView.reloadData()
         }
         
-    }
-    
-    
-    @IBAction func reset_shop(_ sender: Any) {
-        deleteShopBag()
     }
 }
 
@@ -97,11 +98,11 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
      print("estoy pulsando la fila \(indexPath.row)")
      }*/
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        print("estoy pulsando la fila \(indexPath.row)")
         if editingStyle == .delete {
             // Delete the row from the data source
             shoes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
+            setBadgeValue(value: "\(shoes.count)")
             updateShoes()
         }
     }
