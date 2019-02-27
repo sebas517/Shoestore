@@ -19,7 +19,8 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     var search: String?
     var categories:[Category] = []
     var shoe: Shoe!
-   
+    var shoeSelected: Shoe!
+    
     @IBOutlet weak var collectionShoesFound: UICollectionView!
     
     
@@ -55,17 +56,30 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
             print ("entra en el ONDATA")
             if (categoria != nil){
                 for shoe in shoes {
-                    if (shoe.category == categoria && shoe.idDestinatario == shoe.idDestinatario){
+                    if (shoe.category == categoria && shoe.idDestinatario == destinatario){
                         if (shoe.model == search || shoe.brand == search){
                             shoesFound.append(shoe)
+                            print ("entra en el primer if")
                         }
                     }
                 }
-            }else if(categoria == nil){
+            }else {
                 for shoe in shoes {
-                    if (shoe.idDestinatario == shoe.idDestinatario){
-                        if (shoe.model == search || shoe.brand == search){
+                    if (shoe.idDestinatario == destinatario){
+                        var comprobar = shoe.brand
+                        comprobar += " "
+                        comprobar += shoe.model
+                        //  comprobar = "\(comprobar.uppercased())"
+                        print ("el optional contienee  \(comprobar)")
+                        print ("la zapatilla contiene \(shoe.brand) \(shoe.model)")
+                        print("el search contiene \(search)")
+                        if (comprobar.uppercased() == search?.uppercased()){
                             shoesFound.append(shoe)
+                            print("entra, son iguales")  
+                        }
+                        else if (shoe.model == search || shoe.brand == search ){
+                            shoesFound.append(shoe)
+                            print("entra, con marca o modelo")
                         }
                     }
                 }
@@ -73,11 +87,11 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
             
             collectionShoesFound.reloadData()
             
-            //--Si no se encuentran zapatos en la busqueda, lanza un alert y carga todos los zapatos de la BD  
+            //--Si no se encuentran zapatos en la busqueda, lanza un alert y carga todos los zapatos de la BD
             if (shoesFound.count <= 0){
                 let alerta = UIAlertController(title: "No se ha encontraod",
-                                              message: "No hay coincdencias con los datos introducidos",
-                                              preferredStyle: UIAlertController.Style.alert)
+                                               message: "No hay coincdencias con los datos introducidos",
+                                               preferredStyle: UIAlertController.Style.alert)
                 let accion = UIAlertAction(title: "Cerrar",
                                            style: UIAlertAction.Style.default) { _ in
                                             alerta.dismiss(animated: true, completion: nil) }
@@ -101,12 +115,12 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     
     func loadAllShoes(){
-       var shoeInsert: [Shoe] = []
+        var shoeInsert: [Shoe] = []
         if (shoes.count > 0){
             for shoeAux in shoes{
-            shoesFound.append(shoeAux)
+                shoesFound.append(shoeAux)
             }
-             collectionShoesFound.reloadData()
+            collectionShoesFound.reloadData()
         }
     }
     
@@ -139,8 +153,9 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.shoe = shoesFound[indexPath.row]
-      //  mostrarZapato()
+        self.shoeSelected = shoesFound[indexPath.row]
+        print("pulsado zapato \(shoeSelected.brand)")
+        //  mostrarZapato()
     }
     
     
@@ -167,9 +182,10 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                 }
             }
         }
-         return celda
+        return celda
     }
-
+    
+    
     
     
     override func unwind(for unwindSegue: UIStoryboardSegue, towards subsequentVC: UIViewController) {
@@ -213,5 +229,6 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     
 }
+
 
 
