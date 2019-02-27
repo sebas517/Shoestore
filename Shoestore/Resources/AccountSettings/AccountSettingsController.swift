@@ -10,9 +10,16 @@ import Foundation
 import UIKit
 
 class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate, OnResponse {
+    var usuario:User?
+    var usuarios:[User] = []
+    let preferences = UserDefaults.standard
+    
+    @IBOutlet weak var nameTf: UITextField!
+    @IBOutlet weak var surnameTf: UITextField!
+    @IBOutlet weak var adressTf: UITextField!
+    @IBOutlet weak var emailTf: UITextField!
     
     let imagePicker = UIImagePickerController()
-    
     
     @IBAction func imageTap(_ sender: Any) {
         imagePicker.allowsEditing = false
@@ -30,7 +37,10 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imagePicker.delegate = self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate
+        /*imagePicker.delegate = (self as! UIImagePickerControllerDelegate & UINavigationControllerDelegate)*/
+        usuarios = []
+        loadUsers()
+        loadData()
     }
     
     func onData(data: Data) {
@@ -39,5 +49,28 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     func onDataError(message: String) {
         print("onError")
+    }
+    
+    func loadUsers() {
+        guard let users = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+            print ("user not found in UserDefaults")
+            return
+        }
+        
+        guard let usuarios = NSKeyedUnarchiver.unarchiveObject(with: users as Data) as? [User] else{
+        print("Could not unarchive from placesData")
+        return
+        }
+    
+        if(usuarios.count > 0) {
+            self.usuarios = usuarios
+        }
+    }
+    
+    func loadData() {
+        nameTf.text = usuarios[0].name
+        surnameTf.text = usuarios[0].lastname
+        adressTf.text = usuarios[0].address
+        emailTf.text = usuarios[0].email
     }
 }
