@@ -72,6 +72,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="alO-2F-Jv7"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="musica-searcher" id="At9-MZ-RQi"/>
                     <navigationItem key="navigationItem" id="55g-Dc-FOr"/>
                     <connections>
                         <outlet property="searchBar" destination="PUD-VJ-w5S" id="54c-Ma-cDp"/>
@@ -247,6 +248,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="4YX-Bq-ddx"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="man-user (1)" id="hD2-om-XuX"/>
                     <navigationItem key="navigationItem" id="sW8-5J-Kjg"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -307,22 +309,6 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save"/>
                             </button>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G1O-2k-nfH">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <items>
-                                    <navigationItem title="Account Settings" id="WNK-uv-LGe">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="pfP-Rn-Zv3"/>
-                                        <barButtonItem key="leftBarButtonItem" style="plain" id="FNR-lS-S9i">
-                                            <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="XBq-2G-22T">
-                                                <rect key="frame" x="16" y="7" width="83" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <state key="normal" title="Back"/>
-                                            </button>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VJL-NC-gW9"/>
@@ -401,6 +387,7 @@
                                         <state key="normal" title="Button" image="shopping-bag-blue"/>
                                         <connections>
                                             <action selector="addBag:" destination="RZf-LZ-XqO" eventType="touchUpInside" id="T7u-uV-lvh"/>
+                                            <segue destination="UgE-8E-5nL" kind="show" id="zQD-Ya-5Bu"/>
                                         </connections>
                                     </button>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="150" translatesAutoresizingMaskIntoConstraints="NO" id="ZI7-Ig-7mb">
@@ -717,25 +704,25 @@
             </objects>
             <point key="canvasLocation" x="208.80000000000001" y="13.943028485757123"/>
         </scene>
-        <!--Tab Bar Controller-->
+        <!--Tabbar View Controller-->
         <scene sceneID="exR-GD-NBn">
             <objects>
-                <tabBarController id="UgE-8E-5nL" sceneMemberID="viewController">
+                <tabBarController id="UgE-8E-5nL" customClass="TabbarViewController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="EXD-Xv-Shm">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </tabBar>
                     <connections>
-                        <segue destination="iZP-eB-9mQ" kind="relationship" relationship="viewControllers" id="YrC-Sx-N7g"/>
-                        <segue destination="Gou-ke-H4J" kind="relationship" relationship="viewControllers" id="1b9-eA-IzC"/>
-                        <segue destination="z0x-aX-bfh" kind="relationship" relationship="viewControllers" id="IGu-Nw-4mv"/>
-                        <segue destination="3Dr-zq-Nga" kind="relationship" relationship="viewControllers" id="eoa-2w-M7f"/>
+                        <segue destination="PH8-g2-wyZ" kind="relationship" relationship="viewControllers" id="oFd-cI-ewN"/>
+                        <segue destination="LdV-nu-vl8" kind="relationship" relationship="viewControllers" id="GtJ-Mg-cGf"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="R1D-Zw-vYb"/>
+                        <segue destination="re6-Gc-JoJ" kind="relationship" relationship="viewControllers" id="mGy-FG-JRc"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OU6-1c-SPN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3070" y="-1039"/>
+            <point key="canvasLocation" x="-3124" y="-1135"/>
         </scene>
         <!--Home Table View Controller-->
         <scene sceneID="rLR-WD-ouc">
@@ -853,6 +840,7 @@
                             <outlet property="delegate" destination="PH8-g2-wyZ" id="1Eq-mK-pmx"/>
                         </connections>
                     </tableView>
+                    <tabBarItem key="tabBarItem" title="" image="home (1)" id="Upq-0Y-QCl"/>
                     <navigationItem key="navigationItem" id="adR-HN-vu8"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
@@ -878,7 +866,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KwC-QV-JqU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3361" y="-205"/>
+            <point key="canvasLocation" x="-3692" y="-215"/>
         </scene>
         <!--Shop View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -968,19 +956,22 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <tabBarItem key="tabBarItem" title="" image="shopping-bag (1)" id="Cba-8J-aZA"/>
                     <navigationItem key="navigationItem" id="6Sj-Qq-VP4"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="shopBag" destination="Cba-8J-aZA" id="AvC-cY-yRb"/>
                         <outlet property="tableView" destination="poi-48-03i" id="fJl-O5-Npz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2556" y="-206"/>
+            <point key="canvasLocation" x="-2772" y="-206"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZsV-BZ-Os9">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7hv-a6-jO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iZP-eB-9mQ" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="home (1)" id="B8f-IK-Kjj"/>
                     <toolbarItems/>
@@ -993,9 +984,8 @@
                         <segue destination="PH8-g2-wyZ" kind="relationship" relationship="rootViewController" id="19J-F1-ina"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7hv-a6-jO8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2338.4000000000001" y="-1558.4707646176912"/>
+            <point key="canvasLocation" x="-2430" y="-1717"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1wb-GF-73W">
@@ -1048,7 +1038,10 @@
         <image name="user" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="UNH-Fc-EQo"/>
+        <segue reference="R1D-Zw-vYb"/>
+        <segue reference="19J-F1-ina"/>
         <segue reference="nmb-tX-66Q"/>
+        <segue reference="mGy-FG-JRc"/>
+        <segue reference="GtJ-Mg-cGf"/>
     </inferredMetricsTieBreakers>
 </document>
