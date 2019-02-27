@@ -75,7 +75,8 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                         print("el search contiene \(search)")
                         if (comprobar.uppercased() == search?.uppercased()){
                             shoesFound.append(shoe)
-                            print("entra, son iguales")  
+                            print("entra, son iguales")
+                            
                         }
                         else if (shoe.model == search || shoe.brand == search ){
                             shoesFound.append(shoe)
@@ -170,14 +171,17 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
         celda.Brand.text = "\(shoeAux.brand.uppercased())"
         celda.model.text = shoeAux.model.uppercased()
         celda.price.text = String("\(shoeAux.getPrice()) €")
+        
         let urlImagen =  shoeAux.getImage()
         if  let url = URL(string: urlImagen) {
             let cola = DispatchQueue(label: "bajar.imagen", qos: .default, attributes: .concurrent)
+            
             cola.async {
                 if let data = try? Data(contentsOf: url), let imagen = UIImage(data: data) {
                     DispatchQueue.main.async {
                         celda.imagen.image = imagen
                         celda.imagen.contentMode = UIView.ContentMode.scaleAspectFit
+                        
                     }
                 }
             }
@@ -217,6 +221,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
         guard let selectedShoeCell = sender as? SearchResultViewCell else {
             fatalError("Unexpected sender: \(sender)")
         }
+        
         
         guard let indexPath = collectionShoesFound.indexPath(for: selectedShoeCell) else {
             fatalError("The selected cell is not being displayed by the table")
