@@ -9,18 +9,16 @@
 import UIKit
 
 class ShopViewController: UIViewController {
-
+    
     var shoe:Shoe?
     var shoes:[Shoe] = []
     let preferences = UserDefaults.standard
-    @IBOutlet weak var tabla: UITableView!
+    @IBOutlet weak var tableView: UITableView!
     override func viewDidLoad() {
-        navigationItem.leftBarButtonItem = editButtonItem
         super.viewDidLoad()
-        tabla.delegate = self
-        tabla.dataSource = self
-        tabla.setEditing(true, animated: true)
-        shoes = []
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.setEditing(true, animated: true)
         loadShoes()
         
         if let shoe = shoe {
@@ -31,13 +29,17 @@ class ShopViewController: UIViewController {
         shoes.append(shoe)
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "shopBag")
-        tabla.reloadData()
+        tableView.reloadData()
+    }
+    func updateShoes(){
+        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        preferences.set(shopBag, forKey: "shopBag")
     }
     func deleteShopBag(){
         shoes = []
         let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "shopBag")
-        tabla.reloadData()
+        tableView.reloadData()
     }
     func loadShoes() {
         guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
@@ -51,13 +53,15 @@ class ShopViewController: UIViewController {
         }
         if (shoes.count > 0) {
             self.shoes = shoes
-            tabla.reloadData()
+            tableView.reloadData()
         }
         
     }
     
-
     
+    @IBAction func reset_shop(_ sender: Any) {
+        deleteShopBag()
+    }
 }
 
 
@@ -84,21 +88,21 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
             }
         }
         
-        cell.model.text = shoes[indexPath.row].getModel()
+        cell.brand.text = shoes[indexPath.row].getModel()
         cell.price.text = "\(String(shoes[indexPath.row].getPrice()))€"
-        cell.brand.text = shoes[indexPath.row].getBrand()
+        cell.model.text = shoes[indexPath.row].getBrand()
         return cell
     }
     /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("estoy pulsando la fila \(indexPath.row)")
-    }*/
+     print("estoy pulsando la fila \(indexPath.row)")
+     }*/
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         print("estoy pulsando la fila \(indexPath.row)")
         if editingStyle == .delete {
             // Delete the row from the data source
             shoes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
-            preferences.set(shoes, forKey: "shopBag")
+            updateShoes()
         }
     }
 }

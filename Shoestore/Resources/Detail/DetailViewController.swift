@@ -9,6 +9,9 @@
 import UIKit
 
 class DetailViewController: UIViewController, OnResponse, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+    @IBAction func back(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var imgzap: UIImageView!
@@ -19,7 +22,6 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     @IBOutlet weak var insideMaterial: UILabel!
     @IBOutlet weak var coverMaterial: UILabel!
     @IBOutlet weak var soleMaterial: UILabel!
-    @IBOutlet weak var destinatary: UILabel!
     @IBOutlet weak var numbers: UILabel!
     @IBOutlet weak var color: UILabel!
     @IBOutlet weak var collectionRelatedShoes: UICollectionView!
@@ -27,8 +29,10 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var relatedShoes: [Shoe] = []
     var shoe:Shoe?
+    var shoesShopBag:[Shoe] = []
     var shoes: [Shoe] = []
     var categories:[Category] = []
+    let preferences = UserDefaults.standard
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return relatedShoes.count
@@ -126,12 +130,25 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             //Asignacion resto de campos
             brand.text = "\(shoe.brand)"
             model.text = "\(shoe.model)"
+            var categoriaDestinatario = ""
             for categoria in categories{
                 if (categoria.id == shoe.category){
-                    category.text = categoria.getName()
+                   categoriaDestinatario = categoria.getName()
                 }
             }
-            //category.text = "botines, hombre"
+            if(shoe.idDestinatario == 1){
+                categoriaDestinatario = categoriaDestinatario + ", Niña"
+            }
+            else if(shoe.idDestinatario == 2){
+                categoriaDestinatario = categoriaDestinatario + ", Niño"
+            }
+            else if(shoe.idDestinatario == 3){
+                categoriaDestinatario = categoriaDestinatario + ", Hombre"
+            }
+            else if(shoe.idDestinatario == 4){
+                categoriaDestinatario = categoriaDestinatario + ", Mujer"
+            }
+            category.text = categoriaDestinatario
             price.text = "\(shoe.price)"
             coverMaterial.text = "\(shoe.coverMaterial)"
             insideMaterial.text = "\(shoe.insideMaterial)"
@@ -139,18 +156,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             numbers.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
             stock.text = "\(shoe.stock)"
             color.text = "\(shoe.color)"
-            if(shoe.idDestinatario == 1){
-                destinatary.text = "Niña"
-            }
-            else if(shoe.idDestinatario == 2){
-                destinatary.text = "Niño"
-            }
-            else if(shoe.idDestinatario == 3){
-                destinatary.text = "Hombre"
-            }
-            else if(shoe.idDestinatario == 4){
-                destinatary.text = "Mujer"
-            }
+            
         actualizarZapatosRelacinados(shoeRelacionated: shoe)
         }
     }
@@ -164,6 +170,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
+        loadShoes()
         
         llamarCliente()
         llamarClienteCategorias()
@@ -172,19 +179,48 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         
     }
     
+    //-------------_CESTA_---------------
+    
+    @IBAction func addBag(_ sender: Any) {
+        
+    }
+    
+    func loadShoes() {
+        guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
+            print("'shopBag' not found in UserDefaults")
+            return
+        }
+        
+        guard let shoes = NSKeyedUnarchiver.unarchiveObject(with: shopBag as Data) as? [Shoe] else {
+            print("Could not unarchive from placesData")
+            return
+        }
+        if (shoes.count > 0) {
+            self.shoesShopBag = shoes
+        }
+        
+    }
+    
+    func saveShoe(shoe: Shoe) {
+        shoes.append(shoe)
+        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        preferences.set(shopBag, forKey: "shopBag")
+    }
+    
+    //-------------_CESTA_---------------
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
-        guard let ShopViewController = segue.destination as? ShopViewController else {
+        /*guard let ShopViewController = segue.destination as? ShopViewController else {
             fatalError("Unexpected destination: \(segue.destination)")
-        }
+        }*/
         /*guard let selectedShoeCell = sender as? HomeCellTableViewCell else {
          fatalError("Unexpected sender: \(sender)")
          }
          guard let indexPath = tableView.indexPath(for: selectedShoeCell) else {
          fatalError("The selected cell is not bng displayed by the table")
          }*/
-        let selectedShoe = shoe
-        ShopViewController.shoe = selectedShoe
+        /*let selectedShoe = shoe
+        ShopViewController.shoe = selectedShoe*/
     }
     
     //Funciones para zapatos relacionados
