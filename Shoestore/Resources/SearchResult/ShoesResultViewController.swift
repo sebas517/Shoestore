@@ -228,6 +228,9 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
         
         let selectedShoe = shoesFound[indexPath.row]
         DetailViewController.shoe = selectedShoe
+        
+       
+        
     }
     
     

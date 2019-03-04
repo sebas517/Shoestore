@@ -111,4 +111,7 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
             updateShoes()
         }
     }
+    
+    
+    
 }
