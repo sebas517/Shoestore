@@ -116,6 +116,11 @@ extension SearchViewController: UISearchBarDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "searchSegue" {
+            if (destinatario != 1 && destinatario != 2 && destinatario != 3 && destinatario != 4)
+            {destinatario = 3
+                
+            }
+            
             print("manda en el segue: \(categoriaId) , \(destinatario), \(search)")
             var vc = segue.destination as! ShoesResultViewController
             vc.categoria = categoriaId

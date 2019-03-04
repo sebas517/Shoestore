@@ -69,29 +69,28 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                         var comprobar = shoe.brand
                         comprobar += " "
                         comprobar += shoe.model
-                        //  comprobar = "\(comprobar.uppercased())"
-                        print ("el optional contienee  \(comprobar)")
-                        print ("la zapatilla contiene \(shoe.brand) \(shoe.model)")
-                        print("el search contiene \(search)")
-                        if (comprobar.uppercased() == search?.uppercased()){
+                      
+                        print ("buscnado")
+                        print ("\(comprobar.uppercased())")
+                        if (shoe.model.uppercased() == search?.uppercased() || shoe.brand.uppercased() == search?.uppercased() ){
+                            if (!shoesFound.contains(shoe)){
                             shoesFound.append(shoe)
+                            }
                             print("entra, son iguales")
-                            
                         }
-                        else if (shoe.model == search || shoe.brand == search ){
-                            shoesFound.append(shoe)
-                            print("entra, con marca o modelo")
+                        else if (comprobar.uppercased() == search?.uppercased() ){
+                            print("BSUUSQUEDA IGUAL A  ")
+                            print(comprobar)
+                             shoesFound.append(shoe)
                         }
                     }
                 }
             }
-            
             collectionShoesFound.reloadData()
-            
             //--Si no se encuentran zapatos en la busqueda, lanza un alert y carga todos los zapatos de la BD
             if (shoesFound.count <= 0){
-                let alerta = UIAlertController(title: "No se ha encontraod",
-                                               message: "No hay coincdencias con los datos introducidos",
+                let alerta = UIAlertController(title: "No se ha encontrado la búsqueda",
+                                               message: "Por favor, revise los datos introducidos",
                                                preferredStyle: UIAlertController.Style.alert)
                 let accion = UIAlertAction(title: "Cerrar",
                                            style: UIAlertAction.Style.default) { _ in
@@ -214,7 +213,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         
-        guard let ShopViewController = segue.destination as? ShopViewController else {
+        guard let DetailViewController = segue.destination as? DetailViewController else {
             fatalError("Unexpected destination: \(segue.destination)")
         }
         
@@ -228,7 +227,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
         }
         
         let selectedShoe = shoesFound[indexPath.row]
-        ShopViewController.shoe = selectedShoe
+        DetailViewController.shoe = selectedShoe
     }
     
     

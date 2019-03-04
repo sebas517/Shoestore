@@ -300,10 +300,14 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             preconditionFailure ("Expected a Label")
         }
         
-        label.font = UIFont(name: "Times New Roman", size: 1.0)
+        label.font = UIFont(name: "Arial-BoldMT", size: 10)
+        
       //  selectNumber.text = pickerData[row]
         return label
     }
+    
+    
+
     
     
     
