@@ -15,7 +15,9 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     @IBOutlet weak var selectNumber: UIPickerView!
     
+    @IBOutlet weak var destinatary: UILabel!
     
+    @IBOutlet weak var colorShoe: UILabel!
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var imgzap: UIImageView!
     @IBOutlet weak var model: UILabel!
@@ -136,29 +138,35 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             //Asignacion resto de campos
             brand.text = "\(shoe.brand)"
             model.text = "\(shoe.model) - \(shoe.color)"
-            var categoriaDestinatario = ""
+            var categoriaShoe = ""
+            var destinatario = ""
             for categoria in categories{
                 if (categoria.id == shoe.category){
-                    categoriaDestinatario = categoria.getName()
+                    categoriaShoe = categoria.getName()
                 }
             }
             if(shoe.idDestinatario == 1){
-                categoriaDestinatario = categoriaDestinatario + ", Niña"
+                destinatario = "Niña"
             }
             else if(shoe.idDestinatario == 2){
-                categoriaDestinatario = categoriaDestinatario + ", Niño"
+                destinatario="Niño"
             }
             else if(shoe.idDestinatario == 3){
-                categoriaDestinatario = categoriaDestinatario + ", Hombre"
+                destinatario="Hombre"
             }
             else if(shoe.idDestinatario == 4){
-                categoriaDestinatario = categoriaDestinatario + ", Mujer"
+                destinatario="Mujer"
             }
-            category.text = categoriaDestinatario
+            category.text = categoriaShoe
+            destinatary.text = destinatario
+            colorShoe.text = "\(shoe.color)"
             price.text = "\(shoe.price)"
             coverMaterial.text = "\(shoe.coverMaterial)"
             insideMaterial.text = "\(shoe.insideMaterial)"
             soleMaterial.text = "\(shoe.soleMaterial)"
+          
+            loadSelectorNumero()
+            
             //  numbers.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
            // stock.text = "\(shoe.stock)"
             if (shoe.stock > 0){
@@ -176,17 +184,8 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         //-------Selector de numeros para el zapato
-        selectNumber.delegate = self as? UIPickerViewDelegate
-        selectNumber.dataSource = self as? UIPickerViewDataSource
-        var cont: Int = (shoe?.numberFrom)!
-        let numMax: Int = (shoe?.numberTo)!
-        if (cont > 0){
-            while(cont < numMax+1){
-                numbersArray.append(String(cont))
-                cont = cont + 1
-            }
-            
-        }
+       loadSelectorNumero()
+    
         
         // selectNumber.selectRow(0, inComponent: 1, animated: true)
         
@@ -205,6 +204,24 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         
     }
     
+    
+    func loadSelectorNumero(){
+    
+    selectNumber.delegate = self as? UIPickerViewDelegate
+    selectNumber.dataSource = self as? UIPickerViewDataSource
+         numbersArray = []
+    var cont: Int = (shoe?.numberFrom)!
+    let numMax: Int = (shoe?.numberTo)!
+    if (cont > 0){
+    while(cont < numMax+1){
+    numbersArray.append(String(cont))
+    cont = cont + 1
+    }
+    
+    }
+    
+    
+    }
     //-------------_CESTA_---------------
     
     @IBAction func addBag(_ sender: Any) {
@@ -305,11 +322,6 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
       //  selectNumber.text = pickerData[row]
         return label
     }
-    
-    
-
-    
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         print("entra en ppicker")
