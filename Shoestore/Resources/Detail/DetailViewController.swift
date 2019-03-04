@@ -8,10 +8,13 @@
 
 import UIKit
 
-class DetailViewController: UIViewController, OnResponse, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
+class DetailViewController: UIViewController, OnResponse, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate{
     @IBAction func back(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
+    
+    @IBOutlet weak var selectNumber: UIPickerView!
+    
     
     @IBOutlet weak var brand: UILabel!
     @IBOutlet weak var imgzap: UIImageView!
@@ -25,6 +28,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     @IBOutlet weak var numbers: UILabel!
     @IBOutlet weak var color: UILabel!
     @IBOutlet weak var collectionRelatedShoes: UICollectionView!
+    var numbersArray: [String] = [String]()
     
     var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
     var relatedShoes: [Shoe] = []
@@ -33,6 +37,8 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     var shoes: [Shoe] = []
     var categories:[Category] = []
     let preferences = UserDefaults.standard
+    
+    var numeroSeleccionado: Int!
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return relatedShoes.count
@@ -43,7 +49,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
+        
         let celda: DetailCollectionViewCell = collectionView.dequeueReusableCell(withReuseIdentifier: "shoeCell", for: indexPath) as! DetailCollectionViewCell
         let tamanioPantalla = UIScreen.main.bounds
         let anchoCelda = (tamanioPantalla.width/5.0)
@@ -64,9 +70,9 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             }
         }
         
-       // celda.brand.text = relatedShoes[indexPath.row].getBrand()
+        // celda.brand.text = relatedShoes[indexPath.row].getBrand()
         
-       // celda.price.text = "\(String(relatedShoes[indexPath.row].getPrice()))€"
+        // celda.price.text = "\(String(relatedShoes[indexPath.row].getPrice()))€"
         
         //  celda.brand.text =  relatedShoes[indexPath.row].getBrand()
         
@@ -79,8 +85,8 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-         self.shoe = relatedShoes[indexPath.row]
-        mostrarZapato()   
+        self.shoe = relatedShoes[indexPath.row]
+        mostrarZapato()
     }
     
     func actualizarZapatosRelacinados(shoeRelacionated:Shoe?){
@@ -91,7 +97,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
                     && shoe.model != zapatoRest.model){
                     //  if(shoe?.model != zapatoRest.modelo){
                     relatedShoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe.category ?? 0, idDestinatario: shoe.idDestinatario ?? 0, brand: zapatoRest.brand , model: zapatoRest.model, price: zapatoRest.price, color: zapatoRest.color, coverMaterial: zapatoRest.coverMaterial, insideMaterial: zapatoRest.insideMaterial, soleMaterial: zapatoRest.soleMaterial, numberFrom:zapatoRest.numberFrom, numberTo: zapatoRest.numberTo, desc: zapatoRest.desc, stock: zapatoRest.stock , image: zapatoRest.image))
-
+                    
                 }
             }
             collectionRelatedShoes.reloadData()
@@ -129,11 +135,11 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             }
             //Asignacion resto de campos
             brand.text = "\(shoe.brand)"
-            model.text = "\(shoe.model)"
+            model.text = "\(shoe.model) - \(shoe.color)"
             var categoriaDestinatario = ""
             for categoria in categories{
                 if (categoria.id == shoe.category){
-                   categoriaDestinatario = categoria.getName()
+                    categoriaDestinatario = categoria.getName()
                 }
             }
             if(shoe.idDestinatario == 1){
@@ -153,16 +159,36 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             coverMaterial.text = "\(shoe.coverMaterial)"
             insideMaterial.text = "\(shoe.insideMaterial)"
             soleMaterial.text = "\(shoe.soleMaterial)"
-            numbers.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
-            stock.text = "\(shoe.stock)"
-            color.text = "\(shoe.color)"
+            //  numbers.text = "\(shoe.numberFrom)...\(shoe.numberTo)"
+           // stock.text = "\(shoe.stock)"
+            if (shoe.stock > 0){
+                  color.text="En stock"
+            }else{
+                 color.text="Fuera de strock"
+                
+            }
+      //      color.text = "\(shoe.color)"
             
-        actualizarZapatosRelacinados(shoeRelacionated: shoe)
+            actualizarZapatosRelacinados(shoeRelacionated: shoe)
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //-------Selector de numeros para el zapato
+        selectNumber.delegate = self as? UIPickerViewDelegate
+        selectNumber.dataSource = self as? UIPickerViewDataSource
+        var cont: Int = (shoe?.numberFrom)!
+        let numMax: Int = (shoe?.numberTo)!
+        if (cont > 0){
+            while(cont < numMax+1){
+                numbersArray.append(String(cont))
+                cont = cont + 1
+            }
+            
+        }
+        
+        // selectNumber.selectRow(0, inComponent: 1, animated: true)
         
         activityIndicator.center = self.view.center
         activityIndicator.style = UIActivityIndicatorView.Style.gray
@@ -174,7 +200,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
         
         llamarCliente()
         llamarClienteCategorias()
-
+        
         //Asignacion imagen
         
     }
@@ -183,7 +209,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     @IBAction func addBag(_ sender: Any) {
         if let shoe = shoe {
-          saveShoe(shoe: shoe)
+            saveShoe(shoe: shoe)
         }
         
     }
@@ -213,10 +239,22 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     //-------------_CESTA_---------------
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (shoe!.stock <= 0){
+            let alerta = UIAlertController(title: "No hay stock",
+                                           message: "Lo sentimos, actualmente no hay stock de este modelo",
+                                           preferredStyle: UIAlertController.Style.alert)
+            let accion = UIAlertAction(title: "Cerrar",
+                                       style: UIAlertAction.Style.default) { _ in
+                                        alerta.dismiss(animated: true, completion: nil) }
+            alerta.addAction(accion)
+            self.present(alerta, animated: true, completion: nil)
+            
+        }else{
         super.prepare(for: segue, sender: sender)
+        }
         /*guard let ShopViewController = segue.destination as? ShopViewController else {
-            fatalError("Unexpected destination: \(segue.destination)")
-        }*/
+         fatalError("Unexpected destination: \(segue.destination)")
+         }*/
         /*guard let selectedShoeCell = sender as? HomeCellTableViewCell else {
          fatalError("Unexpected sender: \(sender)")
          }
@@ -224,7 +262,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
          fatalError("The selected cell is not bng displayed by the table")
          }*/
         /*let selectedShoe = shoe
-        ShopViewController.shoe = selectedShoe*/
+         ShopViewController.shoe = selectedShoe*/
     }
     
     //Funciones para zapatos relacionados
@@ -235,19 +273,6 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
             for zapatoRest in zapatos.zapato {
                 shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, idDestinatario: Int(zapatoRest.iddestinatario) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
             }
-            
-            
-            /*for zapatoRest in zapatos.zapato {
-                if  (shoe?.category  == Int(zapatoRest.idcategoria) ?? 0 && shoe?.idDestinatario == Int(zapatoRest.iddestinatario) ?? 0
-                    && shoe?.model != zapatoRest.modelo){
-                  //  if(shoe?.model != zapatoRest.modelo){
-                    relatedShoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: shoe?.category ?? 0, idDestinatario: shoe?.idDestinatario ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
-                    
-                    
-               // }
-                }
-            }*/
-            
             
             
         } catch {
@@ -270,8 +295,41 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     }
     
     
+    func pickerView(pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusingView view: UIView?) -> UIView {
+        guard let label = view as? UILabel else {
+            preconditionFailure ("Expected a Label")
+        }
+        
+        label.font = UIFont(name: "Times New Roman", size: 1.0)
+      //  selectNumber.text = pickerData[row]
+        return label
+    }
+    
+    
+    
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        print("entra en ppicker")
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        print("entra en ppicker")
+        return numbersArray.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        //   numbers.text = numbersArray[row]
+        var seleccionado: String = numbersArray[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        print("entra en ppicker")
+        return numbersArray[row]
+        
+    }
+    
+    
+    
     
 }
-
 
 
