@@ -12,6 +12,8 @@ class ShopViewController: UIViewController {
     
     @IBOutlet weak var shopBag: UITabBarItem!
 
+    
+    
     var shoe:Shoe?
     var shoes:[Shoe] = []
     let preferences = UserDefaults.standard
@@ -27,6 +29,11 @@ class ShopViewController: UIViewController {
             saveShoe(shoe: shoe)
         }
     }
+    
+    public func savePedido(){
+        
+    }
+    
     public func setBadgeValue(value: String){
         shopBag.badgeValue = value
     }
