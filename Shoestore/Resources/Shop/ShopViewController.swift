@@ -18,7 +18,6 @@ class ShopViewController: UIViewController {
         if  isLogged{
             //Pagar
         } else {
-            print("yujuuu")
             performSegue(withIdentifier: "loginSegue", sender: nil)
         }
     }
