@@ -355,6 +355,7 @@
                         <outlet property="emailTf" destination="LQb-hl-hgv" id="6on-QM-Hdp"/>
                         <outlet property="expirationDate" destination="e41-Ml-2Ra" id="kpF-zP-EUS"/>
                         <outlet property="nameTf" destination="ek0-dO-Tnq" id="Fzg-Zr-OKW"/>
+                        <outlet property="saveButton" destination="YWf-Ds-JQe" id="cPK-Rc-8Aq"/>
                         <outlet property="surnameTf" destination="azT-c6-3C2" id="r22-sT-gcZ"/>
                     </connections>
                 </viewController>
@@ -1126,7 +1127,7 @@
         <image name="user" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vBV-Yx-8FH"/>
+        <segue reference="8vS-Ji-kw4"/>
         <segue reference="112-bZ-kHi"/>
         <segue reference="4Dj-RX-4Mj"/>
     </inferredMetricsTieBreakers>
