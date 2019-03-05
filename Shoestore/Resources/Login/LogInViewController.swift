@@ -50,7 +50,7 @@ class LogInViewController: UIViewController, OnResponse {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.isSecureTextEntry = true
-        //UINavigationBar.display(self) = false
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     func onData(data: Data) {

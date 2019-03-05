@@ -261,7 +261,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xdt-fJ-TV1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-823.20000000000005" y="84.107946026986511"/>
+            <point key="canvasLocation" x="-327" y="54"/>
         </scene>
         <!--Account Settings Controller-->
         <scene sceneID="15F-v9-K4l">
@@ -783,7 +783,7 @@
                         <outlet property="loginText" destination="CzK-Qf-Ezf" id="JIa-iO-7M3"/>
                         <outlet property="passwordText" destination="Xo9-8A-WwK" id="WvW-IF-xDU"/>
                         <outlet property="wrongText" destination="2jK-2q-Z4S" id="ZQ3-5d-wku"/>
-                        <segue destination="UgE-8E-5nL" kind="show" identifier="loginSegue" id="vBV-Yx-8FH"/>
+                        <segue destination="UgE-8E-5nL" kind="presentation" identifier="loginSegue" id="vBV-Yx-8FH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gv3-4l-9K3" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1126,8 +1126,8 @@
         <image name="user" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="8vS-Ji-kw4"/>
+        <segue reference="vBV-Yx-8FH"/>
         <segue reference="112-bZ-kHi"/>
-        <segue reference="nmb-tX-66Q"/>
+        <segue reference="4Dj-RX-4Mj"/>
     </inferredMetricsTieBreakers>
 </document>
