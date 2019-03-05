@@ -12,8 +12,27 @@ class ShopViewController: UIViewController {
     
     @IBOutlet weak var shopBag: UITabBarItem!
 
+    @IBOutlet weak var loginPay: UIButton!
     
+    @IBAction func loginPay(_ sender: Any) {
+        if  isLogged{
+            //Pagar
+        } else {
+            performSegue(withIdentifier: "loginSegue", sender: nil)
+        }
+    }
     
+    public func checkButton(){
+        if UserDefaults.standard.object(forKey: "userData")  == nil{
+            loginPay.setTitle("Login", for: UIControl.State.normal)
+            isLogged = false
+        }else{
+            isLogged = true
+            loginPay.setTitle("Pagar", for: UIControl.State.normal)
+        }
+    }
+    
+    var isLogged = false
     var shoe:Shoe?
     var shoes:[Shoe] = []
     let preferences = UserDefaults.standard
@@ -23,6 +42,8 @@ class ShopViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.setEditing(true, animated: true)
+        
+        checkButton()
         loadShoes()
         
         if let shoe = shoe {
@@ -31,6 +52,32 @@ class ShopViewController: UIViewController {
     }
     
     public func savePedido(){
+        guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+            print("no hay usuario")
+            return
+        }
+        
+        guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+            print("Could not unarchive from placesData")
+            return
+        }
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let currentDate = formatter.string(from: date)
+        
+        let pedido: [String: Any] = ["idusuario" : user.getId(),
+                                     "fecha" : currentDate,
+                                     "numtarjeta": user.getCreditCard,
+                                     "validez": user.getExpiration(),
+                                     "cvv": user.getCvv()]
+    
+        guard RestClient(service: "pedido/", response: self as! OnResponse, "POST", pedido) != nil else{
+            print("error al grabar pedio")
+            return
+        }
+        
         
     }
     
@@ -110,9 +157,9 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
             shoes.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             if  shoes.count > 0 {
-                setBadgeValue(value: "\(shoes.count)")
+                self.tabBarController?.tabBar.items?[2].badgeValue = "\(shoes.count)"
             }else{
-                shopBag.badgeValue = nil
+                self.tabBarController?.tabBar.items?[2].badgeValue = nil
             }
             
             updateShoes()
@@ -122,3 +169,4 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
     
     
 }
+

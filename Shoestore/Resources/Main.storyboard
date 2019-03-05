@@ -355,7 +355,6 @@
                         <outlet property="emailTf" destination="LQb-hl-hgv" id="6on-QM-Hdp"/>
                         <outlet property="expirationDate" destination="e41-Ml-2Ra" id="kpF-zP-EUS"/>
                         <outlet property="nameTf" destination="ek0-dO-Tnq" id="Fzg-Zr-OKW"/>
-                        <outlet property="saveButton" destination="YWf-Ds-JQe" id="cPK-Rc-8Aq"/>
                         <outlet property="surnameTf" destination="azT-c6-3C2" id="r22-sT-gcZ"/>
                     </connections>
                 </viewController>
@@ -1017,6 +1016,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fpE-VT-OPe">
+                                <rect key="frame" x="313" y="562" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="loginPay:" destination="BYZ-38-t0r" eventType="touchUpInside" id="SbI-IW-LRx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -1030,8 +1037,10 @@
                     <navigationItem key="navigationItem" id="6Sj-Qq-VP4"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="loginPay" destination="fpE-VT-OPe" id="A3P-gy-Vg2"/>
                         <outlet property="shopBag" destination="Cba-8J-aZA" id="AvC-cY-yRb"/>
                         <outlet property="tableView" destination="poi-48-03i" id="fJl-O5-Npz"/>
+                        <segue destination="Myv-fe-aFt" kind="show" identifier="loginSegue" id="Mbe-Cw-4UV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -1093,7 +1102,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="caj-6K-LEs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1762.4000000000001" y="84.107946026986511"/>
+            <point key="canvasLocation" x="-1705" y="-95"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="pQg-8g-KdB">
@@ -1128,7 +1137,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8vS-Ji-kw4"/>
+        <segue reference="Mbe-Cw-4UV"/>
         <segue reference="112-bZ-kHi"/>
-        <segue reference="4Dj-RX-4Mj"/>
+        <segue reference="nmb-tX-66Q"/>
     </inferredMetricsTieBreakers>
 </document>
