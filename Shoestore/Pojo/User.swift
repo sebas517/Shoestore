@@ -52,9 +52,9 @@ class User: NSObject, NSCoding{
         self.signedUp = aDecoder.decodeObject(forKey: "signedUp") as! Date
         self.active = aDecoder.decodeBool(forKey: "active")
         self.admin = aDecoder.decodeBool(forKey: "admin")
-        self.cvv = aDecoder.decodeBool(forKey: "cvv")
-        self.expiration = aDecoder.decodeBool(forKey: "expiration")
-        self.creditCard = aDecoder.decodeBool(forKey: "creditCard")
+        self.cvv = aDecoder.decodeObject(forKey: "cvv") as? String ?? ""
+        self.expiration = aDecoder.decodeObject(forKey: "expiration")as? String ?? ""
+        self.creditCard = aDecoder.decodeObject(forKey: "creditCard")as? String ?? ""
         
     }
     
