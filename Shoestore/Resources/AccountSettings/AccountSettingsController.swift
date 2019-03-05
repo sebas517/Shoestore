@@ -13,6 +13,7 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     var usuario:User?
     let preferences = UserDefaults.standard
+    var registerClicked = false
     
     @IBOutlet weak var nameTf: UITextField!
     @IBOutlet weak var surnameTf: UITextField!
@@ -34,11 +35,17 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if registerClicked {
+            
+        } else {
+            loadUsers()
+            loadData()
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        loadUsers()
-        loadData()
     }
     
     func loadUsers() {

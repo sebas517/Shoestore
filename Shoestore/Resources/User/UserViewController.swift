@@ -16,26 +16,14 @@ class UserViewController: UIViewController, OnResponse {
         UserDefaults.standard.set(nil, forKey: "userData")
         UserDefaults.standard.set(nil, forKey: "userKey")
         
-        dismiss(animated: true, completion: nil)
+        checkUser()
+        //dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let usuario = UserDefaults.standard
         
-        if usuario.object(forKey: "userData") == nil {
-            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController
-            {
-                present(vc, animated: true, completion: nil)
-                //performSegue(withIdentifier: "toLogin", sender: self)
-            }
-        } else {
-            guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self) else {
-                return
-            }
-            cliente.request()
-        }
-
+        checkUser()
         // Do any additional setup after loading the view.
     }
     
@@ -57,6 +45,23 @@ class UserViewController: UIViewController, OnResponse {
     
     func onDataError(message: String) {
         print("error AccountSettings")
+    }
+    
+    public func checkUser() {
+        let usuario = UserDefaults.standard
+        
+        if usuario.object(forKey: "userData") == nil {
+            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController
+            {
+                present(vc, animated: true, completion: nil)
+                //performSegue(withIdentifier: "toLogin", sender: self)
+            }
+        } else {
+            guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self) else {
+                return
+            }
+            cliente.request()
+        }
     }
     
     public func stringToDate(_ strings: String) -> Date {
