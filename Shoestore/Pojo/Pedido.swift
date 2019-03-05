@@ -8,7 +8,27 @@
 
 import Foundation
 
-class Pedido {
+class Pedido: NSObject, NSCoding{
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(id, forKey: "id")
+        aCoder.encode(user, forKey: "user")
+        aCoder.encode(shoes, forKey: "shoes")
+        aCoder.encode(date, forKey: "date")
+        aCoder.encode(creditCard, forKey: "creditCard")
+        aCoder.encode(expiration, forKey: "expiration")
+        aCoder.encode(cvv, forKey: "cvv")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        self.id = aDecoder.decodeInteger(forKey: "id")
+        self.user = (aDecoder.decodeObject(forKey: "login") as? User ?? nil)!
+        self.shoes = (aDecoder.decodeObject(forKey: "shoes") as? [Shoe] ?? nil)!
+        self.date = aDecoder.decodeObject(forKey: "date") as! Date
+        self.creditCard = aDecoder.decodeObject(forKey: "creditCard") as? String ?? ""
+        self.cvv = aDecoder.decodeObject(forKey: "cvv") as? String ?? ""
+        self.expiration = aDecoder.decodeObject(forKey: "expiration") as? String ?? ""
+    }
+    
     var id: Int
     var user: User
     var shoes: [Shoe]

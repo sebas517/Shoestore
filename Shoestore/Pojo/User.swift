@@ -21,9 +21,9 @@ class User: NSObject, NSCoding{
     var signedUp: Date
     var active: Bool
     var admin: Bool
-    var cvv: String
-    var expiration: String
-    var creditCard: String
+    var cvv: String?
+    var expiration: String?
+    var creditCard: String?
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
@@ -58,7 +58,7 @@ class User: NSObject, NSCoding{
         
     }
     
-    init(id: Int, login: String, key: String, email: String, name: String, lastname: String, address: String, signedUp: Date, active: Bool, admin: Bool, cvv: String, expiration: String, creditCard: String) {
+    init(id: Int, login: String, key: String, email: String, name: String, lastname: String, address: String, signedUp: Date, active: Bool, admin: Bool, cvv: String?, expiration: String?, creditCard: String?) {
         self.id = id
         self.login = login
         self.key = key
@@ -115,15 +115,15 @@ class User: NSObject, NSCoding{
     }
     
     func getCvv() ->String{
-        return self.cvv
+        return self.cvv!
     }
     
     func getExpiration() -> String {
-        return self.expiration
+        return self.expiration!
     }
     
     func getCreditCard() -> String {
-        return self.creditCard
+        return self.creditCard!
     }
     
     func setId(id:Int) {
