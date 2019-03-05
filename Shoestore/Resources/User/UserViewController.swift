@@ -16,7 +16,9 @@ class UserViewController: UIViewController, OnResponse {
         UserDefaults.standard.set(nil, forKey: "userData")
         UserDefaults.standard.set(nil, forKey: "userKey")
         
-        checkUser()
+        
+    
+        //checkUser()
         //dismiss(animated: true, completion: nil)
     }
     
@@ -36,7 +38,7 @@ class UserViewController: UIViewController, OnResponse {
             if usuarios.usuario.count < 1 {
                 print("Usuario o clave incorrectos")
             } else {
-                user = User(id: Int(usuarios.usuario[0].id)!, login: usuarios.usuario[0].login, key: usuarios.usuario[0].clave, email: usuarios.usuario[0].correo, name: usuarios.usuario[0].nombre, lastname: usuarios.usuario[0].apellidos, address: usuarios.usuario[0].direccion, signedUp: stringToDate(usuarios.usuario[0].fecha_alta), active: Bool(usuarios.usuario[0].activo)!, admin: Bool(usuarios.usuario[0].admin)!)
+                user = User(id: Int(usuarios.usuario[0].id)!, login: usuarios.usuario[0].login, key: usuarios.usuario[0].clave, email: usuarios.usuario[0].correo, name: usuarios.usuario[0].nombre, lastname: usuarios.usuario[0].apellidos, address: usuarios.usuario[0].direccion, signedUp: stringToDate(usuarios.usuario[0].fecha_alta), active: Bool(usuarios.usuario[0].activo)!, admin: Bool(usuarios.usuario[0].admin)!, cvv: "", expiration: "", creditCard: "")
             }
         } catch let parsingError {
             print("Error", parsingError)
@@ -51,11 +53,8 @@ class UserViewController: UIViewController, OnResponse {
         let usuario = UserDefaults.standard
         
         if usuario.object(forKey: "userData") == nil {
-            if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "LogInViewController") as? LogInViewController
-            {
-                present(vc, animated: true, completion: nil)
-                //performSegue(withIdentifier: "toLogin", sender: self)
-            }
+                //present(vc, animated: true, completion: nil)
+                performSegue(withIdentifier: "toLogin", sender: self)
         } else {
             guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self) else {
                 return

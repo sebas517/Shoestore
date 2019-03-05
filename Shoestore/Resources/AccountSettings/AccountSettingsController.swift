@@ -19,6 +19,9 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var surnameTf: UITextField!
     @IBOutlet weak var adressTf: UITextField!
     @IBOutlet weak var emailTf: UITextField!
+    @IBOutlet weak var creditCard: UITextField!
+    @IBOutlet weak var cvv: UITextField!
+    @IBOutlet weak var expirationDate: UITextField!
     
     let imagePicker = UIImagePickerController()
     
@@ -75,6 +78,9 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         usuario?.setLastname(lastname: surnameTf.text!)
         usuario?.setAddress(address: adressTf.text!)
         usuario?.setEmail(email: emailTf.text!)
+        usuario?.setCreditCard(creditCard: creditCard.text!)
+        usuario?.setCvv(cvv: cvv.text!)
+        usuario?.setExpiration(expiration: expirationDate.text!)
         
         saveUser(user: usuario)
         

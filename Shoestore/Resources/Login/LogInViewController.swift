@@ -50,6 +50,7 @@ class LogInViewController: UIViewController, OnResponse {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.isSecureTextEntry = true
+        //UINavigationBar.display(self) = false
     }
     
     func onData(data: Data) {
@@ -64,7 +65,7 @@ class LogInViewController: UIViewController, OnResponse {
                 //print("\(usuarios.usuario[0])")
                 for usuarioRest in usuarios.usuario{
                     print("foreach---\(usuarioRest)" )
-                     user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false)
+                    user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false, cvv: "", expiration: "", creditCard: "")
                 }
                 print("\(user?.getName()) usuario ")
                 

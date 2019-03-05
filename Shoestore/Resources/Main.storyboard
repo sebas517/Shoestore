@@ -238,6 +238,7 @@
                                         </state>
                                         <connections>
                                             <action selector="logOut:" destination="re6-Gc-JoJ" eventType="touchUpInside" id="y2r-3T-cjm"/>
+                                            <segue destination="UgE-8E-5nL" kind="presentation" id="8vS-Ji-kw4"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -271,7 +272,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ek0-dO-Tnq">
-                                <rect key="frame" x="68" y="305" width="238" height="30"/>
+                                <rect key="frame" x="68" y="245" width="238" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <accessibility key="accessibilityConfiguration" identifier="usernameText"/>
                                 <nil key="textColor"/>
@@ -282,14 +283,14 @@
                                 </connections>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Surname" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="azT-c6-3C2">
-                                <rect key="frame" x="68" y="360" width="238" height="30"/>
+                                <rect key="frame" x="68" y="283" width="238" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="user" translatesAutoresizingMaskIntoConstraints="NO" id="UZ9-w0-tLt">
-                                <rect key="frame" x="102" y="111" width="171" height="171"/>
+                                <rect key="frame" x="123" y="96" width="128" height="121"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <gestureRecognizers/>
                                 <connections>
@@ -297,24 +298,19 @@
                                 </connections>
                             </imageView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="E-mal" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="LQb-hl-hgv">
-                                <rect key="frame" x="68" y="479" width="238" height="30"/>
+                                <rect key="frame" x="68" y="359" width="238" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Adress" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="QWV-zq-aRw">
-                                <rect key="frame" x="68" y="419" width="238" height="30"/>
+                                <rect key="frame" x="68" y="321" width="238" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-Ds-JQe">
-                                <rect key="frame" x="170" y="555" width="34" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Save"/>
-                            </button>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eiC-CW-hWE">
                                 <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -322,13 +318,42 @@
                                     <navigationItem title="Title" id="Xzc-Qz-gAW"/>
                                 </items>
                             </navigationBar>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Credit Card" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="D5B-cc-HVN">
+                                <rect key="frame" x="68" y="397" width="238" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="CVV" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1WO-lV-tVV">
+                                <rect key="frame" x="68" y="435" width="238" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Expiration Date (DD/MM/YY)" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="e41-Ml-2Ra">
+                                <rect key="frame" x="68" y="473" width="238" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YWf-Ds-JQe">
+                                <rect key="frame" x="170" y="532" width="34" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Save"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <viewLayoutGuide key="safeArea" id="VJL-NC-gW9"/>
                     </view>
                     <connections>
                         <outlet property="adressTf" destination="QWV-zq-aRw" id="kmc-r9-gey"/>
+                        <outlet property="creditCard" destination="D5B-cc-HVN" id="l6O-I4-Iv2"/>
+                        <outlet property="cvv" destination="1WO-lV-tVV" id="VTM-kU-6gY"/>
                         <outlet property="emailTf" destination="LQb-hl-hgv" id="6on-QM-Hdp"/>
+                        <outlet property="expirationDate" destination="e41-Ml-2Ra" id="kpF-zP-EUS"/>
                         <outlet property="nameTf" destination="ek0-dO-Tnq" id="Fzg-Zr-OKW"/>
                         <outlet property="surnameTf" destination="azT-c6-3C2" id="r22-sT-gcZ"/>
                     </connections>
@@ -341,7 +366,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="-1761" y="860"/>
+            <point key="canvasLocation" x="-1762.4000000000001" y="859.52023988005999"/>
         </scene>
         <!--Help View Controller-->
         <scene sceneID="rbY-P3-1OA">
@@ -1101,8 +1126,8 @@
         <image name="user" width="512" height="512"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vBV-Yx-8FH"/>
+        <segue reference="8vS-Ji-kw4"/>
         <segue reference="112-bZ-kHi"/>
-        <segue reference="4Dj-RX-4Mj"/>
+        <segue reference="nmb-tX-66Q"/>
     </inferredMetricsTieBreakers>
 </document>
