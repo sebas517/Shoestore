@@ -12,7 +12,11 @@ class ShopViewController: UIViewController {
     
     @IBOutlet weak var shopBag: UITabBarItem!
 
+    @IBOutlet weak var loginPay: UIButton!
     
+    @IBAction func loginPay(_ sender: Any) {
+        
+    }
     
     var shoe:Shoe?
     var shoes:[Shoe] = []
@@ -31,6 +35,32 @@ class ShopViewController: UIViewController {
     }
     
     public func savePedido(){
+        guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+            print("no hay usuario")
+            return
+        }
+        
+        guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+            print("Could not unarchive from placesData")
+            return
+        }
+        
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        let currentDate = formatter.string(from: date)
+        
+        let pedido: [String: Any] = ["idusuario" : user.getId(),
+                                     "fecha" : currentDate,
+                                     "numtarjeta": user.getCreditCard,
+                                     "validez": user.getExpiration(),
+                                     "cvv": user.getCvv()]
+    
+        guard RestClient(service: "pedido/", response: self as! OnResponse, "POST", pedido) != nil else{
+            print("error al grabar pedio")
+            return
+        }
+        
         
     }
     
@@ -122,3 +152,4 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
     
     
 }
+
