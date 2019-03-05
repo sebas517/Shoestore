@@ -26,6 +26,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         llamarCliente()
         // llamarClienteCategorias()
         print("Recibido \(categoria)  \(destinatario) \(search)")

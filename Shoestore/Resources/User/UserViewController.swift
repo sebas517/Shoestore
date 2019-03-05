@@ -24,7 +24,6 @@ class UserViewController: UIViewController, OnResponse {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         checkUser()
         // Do any additional setup after loading the view.
     }
@@ -51,7 +50,7 @@ class UserViewController: UIViewController, OnResponse {
     
     public func checkUser() {
         let usuario = UserDefaults.standard
-        
+        print("checkuser")
         if usuario.object(forKey: "userData") == nil {
                 //present(vc, animated: true, completion: nil)
                 performSegue(withIdentifier: "toLogin", sender: self)

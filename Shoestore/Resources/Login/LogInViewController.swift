@@ -50,7 +50,16 @@ class LogInViewController: UIViewController, OnResponse {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.isSecureTextEntry = true
+        
         self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.items?[3].isEnabled = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.items?[3].isEnabled = true
     }
     
     func onData(data: Data) {
@@ -90,7 +99,8 @@ class LogInViewController: UIViewController, OnResponse {
 //                        show(vc, sender: self)
 //                    }
                 //}
-                performSegue(withIdentifier: "loginSegue", sender: nil)
+                //performSegue(withIdentifier: "loginSegue", sender: nil)
+                dismiss(animated: true, completion: nil)
             }
         } catch let parsingError {
             print("Error", parsingError)
