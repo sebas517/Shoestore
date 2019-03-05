@@ -127,7 +127,8 @@ extension SearchViewController: UISearchBarDelegate {
             vc.destinatario = destinatario
             vc.search = searchBar.text
         }
-    }
+        }
+    
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         performSegue(withIdentifier: "searchSegue", sender: self)
