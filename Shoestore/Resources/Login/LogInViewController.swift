@@ -50,6 +50,16 @@ class LogInViewController: UIViewController, OnResponse {
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.isSecureTextEntry = true
+        
+        self.navigationController?.navigationBar.isHidden = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.items?[3].isEnabled = false
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.items?[3].isEnabled = true
     }
     
     func onData(data: Data) {
@@ -64,7 +74,7 @@ class LogInViewController: UIViewController, OnResponse {
                 //print("\(usuarios.usuario[0])")
                 for usuarioRest in usuarios.usuario{
                     print("foreach---\(usuarioRest)" )
-                    user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false, cvv: "asd", expiration: "asd",creditCard: "asd")
+                    user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false, cvv: "", expiration: "", creditCard: "")
                 }
                 print("\(user?.getName()) usuario ")
                 
@@ -89,7 +99,8 @@ class LogInViewController: UIViewController, OnResponse {
 //                        show(vc, sender: self)
 //                    }
                 //}
-                performSegue(withIdentifier: "loginSegue", sender: nil)
+                //performSegue(withIdentifier: "loginSegue", sender: nil)
+                dismiss(animated: true, completion: nil)
             }
         } catch let parsingError {
             print("Error", parsingError)

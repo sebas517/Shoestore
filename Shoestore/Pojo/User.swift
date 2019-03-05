@@ -167,5 +167,15 @@ class User: NSObject, NSCoding{
         self.admin = admin
     }
     
+    func setCvv(cvv: String){
+        self.cvv = cvv
+    }
     
+    func setExpiration(expiration: String){
+        self.expiration = expiration
+    }
+    
+    func setCreditCard(creditCard: String){
+        self.creditCard = creditCard
+    }
 }

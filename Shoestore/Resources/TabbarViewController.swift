@@ -13,7 +13,7 @@ class TabbarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.tabBarController?.tabBar.items?[3].isEnabled = true
         // Do any additional setup after loading the view.
     }
     

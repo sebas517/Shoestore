@@ -26,6 +26,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         llamarCliente()
         // llamarClienteCategorias()
         print("Recibido \(categoria)  \(destinatario) \(search)")
@@ -88,6 +89,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
             }
             collectionShoesFound.reloadData()
             //--Si no se encuentran zapatos en la busqueda, lanza un alert y carga todos los zapatos de la BD
+            if (search != nil && search != ""){
             if (shoesFound.count <= 0){
                 let alerta = UIAlertController(title: "No se ha encontrado la búsqueda",
                                                message: "Por favor, revise los datos introducidos",
@@ -99,7 +101,17 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                 self.present(alerta, animated: true, completion: nil)
                 loadAllShoes()
             }
-            
+            }else{
+                let alerta = UIAlertController(title: "No se han introducido datos",
+                                               message: "Por favor, introduzca datos para realizar la búsqueda",
+                                               preferredStyle: UIAlertController.Style.alert)
+                let accion = UIAlertAction(title: "Cerrar",
+                                           style: UIAlertAction.Style.default) { _ in
+                                            alerta.dismiss(animated: true, completion: nil) }
+                alerta.addAction(accion)
+                self.present(alerta, animated: true, completion: nil)
+                loadAllShoes()
+            }
             
             
             //      tabla.reloadData()
