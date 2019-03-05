@@ -31,6 +31,22 @@ class LogInViewController: UIViewController, OnResponse {
             cliente.request()
         }
     }
+    
+    @IBAction func registerbTN(_ sender: Any) {
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountSettingsViewController") as? AccountSettingsController
+        {
+            //present(vc, animated: true, completion: nil)
+            show(vc, sender: self)
+        }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "registerSegue" {
+            let mainVC: AccountSettingsController = segue.destination as! AccountSettingsController
+            mainVC.registerClicked = true
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         passwordText.isSecureTextEntry = true
@@ -66,12 +82,14 @@ class LogInViewController: UIViewController, OnResponse {
                 print("Nombre pref --- \(user.getName()) .. \(user.getSignedUp())")
                 
                 
-                if UserDefaults.standard.object(forKey: "userData") != nil {
-                    if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "UserViewController") as? UserViewController
-                    {
-                        present(vc, animated: true, completion: nil)
-                    }
-                }
+                //if UserDefaults.standard.object(forKey: "userData") != nil {
+//                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NavigationViewController") as? UINavigationController{
+//
+//                        //present(vc, animated: true, completion: nil)
+//                        show(vc, sender: self)
+//                    }
+                //}
+                performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         } catch let parsingError {
             print("Error", parsingError)
