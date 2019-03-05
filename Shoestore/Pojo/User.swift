@@ -21,6 +21,9 @@ class User: NSObject, NSCoding{
     var signedUp: Date
     var active: Bool
     var admin: Bool
+    var cvv: String
+    var expiration: String
+    var creditCard: String
     
     func encode(with aCoder: NSCoder) {
         aCoder.encode(id, forKey: "id")
@@ -33,6 +36,9 @@ class User: NSObject, NSCoding{
         aCoder.encode(signedUp, forKey: "signedUp")
         aCoder.encode(active, forKey: "active")
         aCoder.encode(admin, forKey: "admin")
+        aCoder.encode(cvv, forKey: "cvv")
+        aCoder.encode(expiration, forKey: "expiration")
+        aCoder.encode(creditCard, forKey: "creditCard")
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -46,10 +52,13 @@ class User: NSObject, NSCoding{
         self.signedUp = aDecoder.decodeObject(forKey: "signedUp") as! Date
         self.active = aDecoder.decodeBool(forKey: "active")
         self.admin = aDecoder.decodeBool(forKey: "admin")
+        self.cvv = aDecoder.decodeBool(forKey: "cvv")
+        self.expiration = aDecoder.decodeBool(forKey: "expiration")
+        self.creditCard = aDecoder.decodeBool(forKey: "creditCard")
         
     }
     
-    init(id: Int, login: String, key: String, email: String, name: String, lastname: String, address: String, signedUp: Date, active: Bool, admin: Bool) {
+    init(id: Int, login: String, key: String, email: String, name: String, lastname: String, address: String, signedUp: Date, active: Bool, admin: Bool, cvv: String, expiration: String, creditCard: String) {
         self.id = id
         self.login = login
         self.key = key
@@ -60,6 +69,9 @@ class User: NSObject, NSCoding{
         self.signedUp = signedUp
         self.active = active
         self.admin = admin
+        self.cvv = cvv
+        self.expiration = expiration
+        self.creditCard = creditCard
     }
     
     func getId() -> Int {
@@ -100,6 +112,18 @@ class User: NSObject, NSCoding{
     
     func isAdmin() -> Bool {
         return self.admin
+    }
+    
+    func getCvv() ->String{
+        return self.cvv
+    }
+    
+    func getExpiration() -> String {
+        return self.expiration
+    }
+    
+    func getCreditCard() -> String {
+        return self.creditCard
     }
     
     func setId(id:Int) {

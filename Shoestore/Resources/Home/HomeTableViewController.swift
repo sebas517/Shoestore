@@ -17,18 +17,6 @@ class HomeTableViewController: UITableViewController, OnResponse {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        /*guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
-            print("'shopBag' not found in UserDefaults")
-            return
-        }
-        
-        guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
-            print("Could not unarchive from placesData")
-            return
-        }
-            print("Nombre pref --- \(user.getName())")*/
-        
-        //Util.loadCategories()
         loadShoes()
         if  shoesShopBag.count > 0 {
             print("actualizamos Cesta")
