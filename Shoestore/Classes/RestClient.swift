@@ -14,7 +14,7 @@ class RestClient {
     let respuesta: OnResponse
     var urlPeticion: URLRequest
     
-    init?(service: String, response: OnResponse,
+    init?(service: String, response: OnResponse, _ extraHeader: [String: String],
           _ method: String = "GET", _ data : [String:Any] = [:]) {
         guard let url = URL(string: self.urlApi + service) else {
             return nil
@@ -24,6 +24,13 @@ class RestClient {
         self.urlPeticion.httpMethod = method
         self.urlPeticion.addValue("application/json",forHTTPHeaderField: "Content-Type")
         self.urlPeticion.addValue("application/json",forHTTPHeaderField: "Accept")
+        if extraHeader.count > 0 {
+            for key in extraHeader.keys{
+                if let value = extraHeader[key]{
+                    self.urlPeticion.addValue(value, forHTTPHeaderField: key)
+                }
+            }
+        }
         if method != "GET" && data.count > 0 {
             guard let json = Util.dictToJson(data: data) else {
                 return nil
@@ -33,11 +40,8 @@ class RestClient {
         }
     }
     func request() {
-        print("1")
         let sesion = URLSession(configuration: URLSessionConfiguration.default)
-        print("3")
         let task = sesion.dataTask(with: self.urlPeticion,completionHandler: self.callBack)
-        print("2")
         task.resume()
     }
     

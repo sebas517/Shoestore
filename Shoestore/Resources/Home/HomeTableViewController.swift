@@ -31,7 +31,7 @@ class HomeTableViewController: UITableViewController, OnResponse {
         view.addSubview(activityIndicator)
         activityIndicator.startAnimating()
         
-        guard let cliente = RestClient(service: "zapato/",response: self) else {
+        guard let cliente = RestClient(service: "zapato/",response: self, [:]) else {
             return
         }
         cliente.request()

@@ -55,7 +55,7 @@ class UserViewController: UIViewController, OnResponse {
                 //present(vc, animated: true, completion: nil)
                 performSegue(withIdentifier: "toLogin", sender: self)
         } else {
-            guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self) else {
+            guard let cliente = RestClient(service: "usuario/\(String(describing: usuario.string(forKey: "userId")))", response: self, [:]) else {
                 return
             }
             cliente.request()

@@ -107,7 +107,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     }
     
     func llamarCliente(){
-        guard let cliente = RestClient(service: "zapato/",response: self) else {
+        guard let cliente = RestClient(service: "zapato/",response: self, [:]) else {
             return
         }
         cliente.request()
@@ -115,7 +115,7 @@ class DetailViewController: UIViewController, OnResponse, UICollectionViewDelega
     
     
     func llamarClienteCategorias(){
-        guard let cliente = RestClient(service: "categoria/",response: self) else {
+        guard let cliente = RestClient(service: "categoria/",response: self, [:]) else {
             return
         }
         cliente.request()

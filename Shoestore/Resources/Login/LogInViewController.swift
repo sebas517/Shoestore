@@ -16,19 +16,29 @@ class LogInViewController: UIViewController, OnResponse {
     @IBOutlet weak var wrongText: UILabel!
     
     @IBAction func loginBtn(_ sender: Any) {
-        print("HEY")
         if loginText.text == "" || passwordText.text == ""{
             wrongText.isHidden = false
         } else {
             let login = loginText.text
             let password = passwordText.text
             print("\(login!), \(password!)")
+            let credenciales = "\(login!):\(password!)"
+            let credB64 = credenciales.data(using: String.Encoding.utf8)!.base64EncodedString()
+            print(credB64)
             
-            guard let cliente = RestClient(service: "usuario/\(login!)/key/\(password!)",response: self) else {
+            //token
+            let cabeceras = ["Authorization": "Basic \(credB64)"]
+            guard let cliente = RestClient(service: "",response: self, cabeceras) else {
                 return
             }
-            
             cliente.request()
+            
+            //usuario
+            guard let clienteUser = RestClient(service: "usuario/login/\(login!)",response: self, [:]) else {
+                return
+            }
+            clienteUser.request()
+        
         }
     }
     
@@ -64,38 +74,48 @@ class LogInViewController: UIViewController, OnResponse {
     }
     
     func onData(data: Data) {
+        print(String(data:data,encoding:String.Encoding.utf8)!)
         do {
-            let decoder = JSONDecoder()
-            let usuarios = try decoder.decode(Usuario.self, from:data)
+            var token = try JSONSerialization.jsonObject(with: data, options: []) as! [String: Any]
+            var tk = token["token"]
+            UserDefaults.standard.set(tk, forKey: "token")
             
             
-            if usuarios.usuario.count < 1 {
-                print("Usuario o clave incorrectos")
-            } else {
-                //print("\(usuarios.usuario[0])")
-                for usuarioRest in usuarios.usuario{
-                    print("foreach---\(usuarioRest)" )
-                    user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false, cvv: "", expiration: "", creditCard: "")
-                }
-                print("\(user?.getName()) usuario ")
-                
-                        
-                saveUser(user: user)
-                guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
-                    print("'shopBag' not found in UserDefaults")
-                    return
-                }
-                
-                guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
-                    print("Could not unarchive from placesData")
-                    return
-                }
-                print("Nombre pref --- \(user.getName()) .. \(user.getSignedUp())")
-                
-                performSegue(withIdentifier: "loginSegue", sender: nil)
-            }
         } catch let parsingError {
-            print("Error", parsingError)
+            print("Error porque estoy cogiendo el usuario en lugar del token", parsingError)
+        }
+        do{
+            print("en usuario")
+            print(String(data:data,encoding:String.Encoding.utf8)!)
+            let decoder = JSONDecoder()
+             let usuarios = try decoder.decode(Usuario.self, from:data)
+            if usuarios.usuario.count < 1 {
+             print("Usuario o clave incorrectos")
+             } else {
+             //print("\(usuarios.usuario[0])")
+             for usuarioRest in usuarios.usuario{
+             print("foreach---\(usuarioRest)" )
+             user = User(id: Int(usuarioRest.id) ?? 0, login: usuarioRest.login, key: usuarioRest.clave, email: usuarioRest.correo, name: usuarioRest.nombre, lastname: usuarioRest.apellidos, address: usuarioRest.direccion, signedUp: stringToDate(usuarioRest.fecha_alta), active: Bool(usuarioRest.activo) ?? false, admin: Bool(usuarioRest.activo) ?? false, cvv: "", expiration: "", creditCard: "")
+             }
+             print("\(user?.getName()) usuario ")
+             
+             
+             saveUser(user: user)
+             guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+             print("'shopBag' not found in UserDefaults")
+             return
+             }
+             
+             guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+             print("Could not unarchive from placesData")
+             return
+             }
+             print("Nombre pref --- \(user.getName()) .. \(user.getSignedUp())")
+             
+             performSegue(withIdentifier: "loginSegue", sender: nil)
+             }
+        } catch let parsingError {
+            print("Error porque estoy cogiendo el token en lugar del user", parsingError)
         }
     }
     

@@ -24,7 +24,7 @@ class SearchViewController: UIViewController, OnResponse {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        guard let cliente = RestClient(service: "categoria/",response: self) else {
+        guard let cliente = RestClient(service: "categoria/",response: self, [:]) else {
             return
         }
         cliente.request()

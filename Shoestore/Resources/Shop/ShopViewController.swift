@@ -36,7 +36,7 @@ class ShopViewController: UIViewController, OnResponse{
             pedidosRealizados.setTitle("Pedidos", for: UIControl.State.normal)
             loadShoes()
             if shoes.count == 0 {
-                shoes = []
+                self.total.text = "0.0€"
             }
             tableView.reloadData()
             c = 0
@@ -70,6 +70,7 @@ class ShopViewController: UIViewController, OnResponse{
         tableView.setEditing(true, animated: true)
         pedidosRealizados.isHidden = true
         
+        self.total.text = "0.0€"
         checkButton()
         loadShoes()
         checkPedidos()
@@ -99,32 +100,49 @@ class ShopViewController: UIViewController, OnResponse{
         if (pedidos.count > 0) {
             self.pedidos = pedidos
         }
-        for shoe in self.pedidos{
-            print("hola??")
-            print("\(shoe.brand)")
-        }
     }
     
     public func savePedido(){
 
-        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        /*let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "pedido")
         
         pedidosRealizados.isHidden = false
         
-        deleteShopBag()
-        /*pedido = ["idusuario" : user.getId(),
+        deleteShopBag()*/
+        guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
+            print("'shopBag' not found in UserDefaults")
+            return
+        }
+        
+        guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+            print("Could not unarchive from placesData")
+            return
+        }
+      
+        
+        pedido = ["id": 0,
+                  "idusuario" : user.getId(),
                   "fecha" : "10-9-21",
                   "numtarjeta": user.getCreditCard(),
                   "validez": user.getExpiration(),
                   "cvv": user.getCvv()]
         print("14")
         print(pedido)
-        guard let cliente = RestClient(service: "pedido/", response: self, "POST", pedido) else {
+        
+        
+        guard let token = UserDefaults.standard.object(forKey: "token") as? String else {
+            print("'shopBag' not found in UserDefaults")
+            return
+        }
+        
+        print(token)
+        
+        guard let cliente = RestClient(service: "", response: self, ["Authorization": "Bearer \(token)"], "POST", pedido) else {
             print("error al grabar pedio")
             return
         }
-        cliente.request()*/
+        cliente.request()
     }
     
     func onData(data: Data) {
@@ -160,6 +178,7 @@ class ShopViewController: UIViewController, OnResponse{
         tableView.reloadData()
     }
     func loadShoes() {
+        shoes = []
         guard let shopBag = UserDefaults.standard.object(forKey: "shopBag") as? NSData else {
             print("'shopBag' not found in UserDefaults")
             return
@@ -173,7 +192,6 @@ class ShopViewController: UIViewController, OnResponse{
             self.shoes = shoes
             tableView.reloadData()
         }
-        
     }
 }
 
@@ -206,15 +224,14 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
         }
         
         self.total.text = "\(total)€"
+       
         
         cell.brand.text = shoes[indexPath.row].getModel()
         cell.price.text = "\(String(shoes[indexPath.row].getPrice()))€"
         cell.model.text = shoes[indexPath.row].getBrand()
         return cell
     }
-    /*func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-     print("estoy pulsando la fila \(indexPath.row)")
-     }*/
+    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             // Delete the row from the data source

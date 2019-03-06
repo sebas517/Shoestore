@@ -144,7 +144,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     
     func llamarCliente(){
-        guard let cliente = RestClient(service: "zapato/",response: self) else {
+        guard let cliente = RestClient(service: "zapato/",response: self, [:]) else {
             return
         }
         cliente.request()
@@ -152,7 +152,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     
     
     func llamarClienteCategorias(){
-        guard let cliente = RestClient(service: "categoria/",response: self) else {
+        guard let cliente = RestClient(service: "categoria/",response: self, [:]) else {
             return
         }
         cliente.request()
