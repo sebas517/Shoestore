@@ -22,6 +22,7 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var creditCard: UITextField!
     @IBOutlet weak var cvv: UITextField!
     @IBOutlet weak var expirationDate: UITextField!
+    @IBOutlet weak var saveButton: UIButton!
     
     let imagePicker = UIImagePickerController()
     
@@ -40,7 +41,7 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     override func viewWillAppear(_ animated: Bool) {
         if registerClicked {
-            
+            //no carga datos
         } else {
             loadUsers()
             loadData()
@@ -49,6 +50,15 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        checkFields()
+    }
+    
+    func checkFields() {
+        saveButton.isEnabled = true
+        if nameTf.text != "" && surnameTf.text != "" && adressTf.text != "" && emailTf.text != "" && creditCard.text != "" && cvv.text != "" && expirationDate.text != "" {
+            saveButton.isEnabled = true
+        }
     }
     
     func loadUsers() {
@@ -92,6 +102,15 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         }
         
         cliente.request()*/
+        
+        let alerta = UIAlertController(title: "Cambios en el Usuario",
+                                       message: "Usuario modificado",
+                                       preferredStyle: UIAlertController.Style.alert)
+        let accion = UIAlertAction(title: "Aceptar",
+                                   style: UIAlertAction.Style.default) { _ in
+                                    /*alerta.dismiss(animated: true, completion: nil)*/ }
+        alerta.addAction(accion)
+        self.present(alerta, animated: true, completion: nil)
         
         dismiss(animated: true, completion: nil)
     }

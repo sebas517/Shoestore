@@ -266,7 +266,7 @@
         <!--Account Settings Controller-->
         <scene sceneID="15F-v9-K4l">
             <objects>
-                <viewController id="vxZ-tb-7yJ" customClass="AccountSettingsController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountSettingsController" id="vxZ-tb-7yJ" customClass="AccountSettingsController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1i7-M7-WKN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -343,6 +343,9 @@
                                 <rect key="frame" x="170" y="532" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Save"/>
+                                <connections>
+                                    <action selector="saveButton:" destination="vxZ-tb-7yJ" eventType="touchUpInside" id="toY-VQ-Rb1"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -355,6 +358,7 @@
                         <outlet property="emailTf" destination="LQb-hl-hgv" id="6on-QM-Hdp"/>
                         <outlet property="expirationDate" destination="e41-Ml-2Ra" id="kpF-zP-EUS"/>
                         <outlet property="nameTf" destination="ek0-dO-Tnq" id="Fzg-Zr-OKW"/>
+                        <outlet property="saveButton" destination="YWf-Ds-JQe" id="b4s-AC-Yxy"/>
                         <outlet property="surnameTf" destination="azT-c6-3C2" id="r22-sT-gcZ"/>
                     </connections>
                 </viewController>
@@ -1112,7 +1116,7 @@
         <!--Navigation View Controller-->
         <scene sceneID="T3x-p5-wzA">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="K0g-PJ-WSP" customClass="NavigationViewController" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="NavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="K0g-PJ-WSP" customClass="NavigationViewController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="" image="man-user (1)" id="hD2-om-XuX"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="n4E-Ag-KBn">
@@ -1161,8 +1165,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8vS-Ji-kw4"/>
-        <segue reference="Mbe-Cw-4UV"/>
+        <segue reference="1Va-5w-8AP"/>
         <segue reference="112-bZ-kHi"/>
-        <segue reference="nmb-tX-66Q"/>
+        <segue reference="4Dj-RX-4Mj"/>
     </inferredMetricsTieBreakers>
 </document>
