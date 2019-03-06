@@ -50,11 +50,12 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         checkFields()
     }
     
     func checkFields() {
-        saveButton.isEnabled = false
+        saveButton.isEnabled = true
         if nameTf.text != "" && surnameTf.text != "" && adressTf.text != "" && emailTf.text != "" && creditCard.text != "" && cvv.text != "" && expirationDate.text != "" {
             saveButton.isEnabled = true
         }
@@ -101,6 +102,15 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         }
         
         cliente.request()*/
+        
+        let alerta = UIAlertController(title: "Cambios en el Usuario",
+                                       message: "Usuario modificado",
+                                       preferredStyle: UIAlertController.Style.alert)
+        let accion = UIAlertAction(title: "Aceptar",
+                                   style: UIAlertAction.Style.default) { _ in
+                                    /*alerta.dismiss(animated: true, completion: nil)*/ }
+        alerta.addAction(accion)
+        self.present(alerta, animated: true, completion: nil)
         
         dismiss(animated: true, completion: nil)
     }

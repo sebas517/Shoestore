@@ -37,6 +37,7 @@ class LogInViewController: UIViewController, OnResponse {
         {
             //present(vc, animated: true, completion: nil)
             show(vc, sender: self)
+            vc.registerClicked = true
         }
     }
     
