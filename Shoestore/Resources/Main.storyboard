@@ -266,7 +266,7 @@
         <!--Account Settings Controller-->
         <scene sceneID="15F-v9-K4l">
             <objects>
-                <viewController id="vxZ-tb-7yJ" customClass="AccountSettingsController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AccountSettingsController" id="vxZ-tb-7yJ" customClass="AccountSettingsController" customModule="Shoestore" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="1i7-M7-WKN">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

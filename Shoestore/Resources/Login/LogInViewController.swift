@@ -33,7 +33,7 @@ class LogInViewController: UIViewController, OnResponse {
     }
     
     @IBAction func registerbTN(_ sender: Any) {
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountSettingsViewController") as? AccountSettingsController
+        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountSettingsController") as? AccountSettingsController
         {
             //present(vc, animated: true, completion: nil)
             show(vc, sender: self)
