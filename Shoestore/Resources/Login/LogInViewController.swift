@@ -91,16 +91,7 @@ class LogInViewController: UIViewController, OnResponse {
                 }
                 print("Nombre pref --- \(user.getName()) .. \(user.getSignedUp())")
                 
-                
-                //if UserDefaults.standard.object(forKey: "userData") != nil {
-//                if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "NavigationViewController") as? UINavigationController{
-//
-//                        //present(vc, animated: true, completion: nil)
-//                        show(vc, sender: self)
-//                    }
-                //}
-                //performSegue(withIdentifier: "loginSegue", sender: nil)
-                dismiss(animated: true, completion: nil)
+                performSegue(withIdentifier: "loginSegue", sender: nil)
             }
         } catch let parsingError {
             print("Error", parsingError)
@@ -114,7 +105,6 @@ class LogInViewController: UIViewController, OnResponse {
     public func saveUser(user: User?) {
         if let userToSave = user {
             let preferences = UserDefaults.standard
-            //preferences.set(user, forKey: "user")
             let userNS = NSKeyedArchiver.archivedData(withRootObject: userToSave)
             preferences.set(userNS, forKey: "userData")
             preferences.set(userToSave.getId(), forKey: "userId")

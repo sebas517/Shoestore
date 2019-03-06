@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ShopViewController: UIViewController {
+class ShopViewController: UIViewController, OnResponse{
+   
+    @IBOutlet weak var pedidosRealizados: UIButton!
+    
+    @IBOutlet weak var total: UILabel!
     
     @IBOutlet weak var shopBag: UITabBarItem!
 
@@ -16,10 +20,28 @@ class ShopViewController: UIViewController {
     
     @IBAction func loginPay(_ sender: Any) {
         if  isLogged{
-            //Pagar
+            savePedido()
         } else {
             performSegue(withIdentifier: "loginSegue", sender: nil)
         }
+    }
+    
+    @IBAction func showPedidos(_ sender: Any) {
+        if c == 0{
+            pedidosRealizados.setTitle("Cesta", for: UIControl.State.normal)
+            shoes = pedidos
+            tableView.reloadData()
+            c = 1
+        }else{
+            pedidosRealizados.setTitle("Pedidos", for: UIControl.State.normal)
+            loadShoes()
+            if shoes.count == 0 {
+                shoes = []
+            }
+            tableView.reloadData()
+            c = 0
+        }
+        
     }
     
     public func checkButton(){
@@ -32,8 +54,12 @@ class ShopViewController: UIViewController {
         }
     }
     
+    var c = 0
+    var havePedido = false
     var isLogged = false
+    var pedido: [String: Any] = [:]
     var shoe:Shoe?
+    var pedidos:[Shoe] = []
     var shoes:[Shoe] = []
     let preferences = UserDefaults.standard
     @IBOutlet weak var tableView: UITableView!
@@ -42,43 +68,75 @@ class ShopViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.setEditing(true, animated: true)
+        pedidosRealizados.isHidden = true
         
         checkButton()
         loadShoes()
-        
+        checkPedidos()
+        if  pedidos.count > 0 {
+            pedidosRealizados.isHidden = false
+        }
         if let shoe = shoe {
             saveShoe(shoe: shoe)
         }
     }
     
-    public func savePedido(){
-        guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
-            print("no hay usuario")
+    public func checkPedidos(){
+        print("checkeamosPedidos")
+        guard let pedidosData = UserDefaults.standard.object(forKey: "pedido") as? NSData else {
+            print("'shopBag' not found in UserDefaults")
             return
         }
         
-        guard let user = NSKeyedUnarchiver.unarchiveObject(with: userData as Data) as? User else {
+        guard let pedidos = NSKeyedUnarchiver.unarchiveObject(with: pedidosData as Data) as? [Shoe] else {
             print("Could not unarchive from placesData")
             return
         }
-        
-        let date = Date()
-        let formatter = DateFormatter()
-        formatter.dateFormat = "dd.MM.yyyy"
-        let currentDate = formatter.string(from: date)
-        
-        let pedido: [String: Any] = ["idusuario" : user.getId(),
-                                     "fecha" : currentDate,
-                                     "numtarjeta": user.getCreditCard,
-                                     "validez": user.getExpiration(),
-                                     "cvv": user.getCvv()]
+        for shoe in pedidos{
+            
+            print("\(shoe.brand)")
+        }
+        if (pedidos.count > 0) {
+            self.pedidos = pedidos
+        }
+        for shoe in self.pedidos{
+            print("hola??")
+            print("\(shoe.brand)")
+        }
+    }
     
-        guard RestClient(service: "pedido/", response: self as! OnResponse, "POST", pedido) != nil else{
+    public func savePedido(){
+
+        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        preferences.set(shopBag, forKey: "pedido")
+        
+        pedidosRealizados.isHidden = false
+        
+        deleteShopBag()
+        /*pedido = ["idusuario" : user.getId(),
+                  "fecha" : "10-9-21",
+                  "numtarjeta": user.getCreditCard(),
+                  "validez": user.getExpiration(),
+                  "cvv": user.getCvv()]
+        print("14")
+        print(pedido)
+        guard let cliente = RestClient(service: "pedido/", response: self, "POST", pedido) else {
             print("error al grabar pedio")
             return
         }
+        cliente.request()*/
+    }
+    
+    func onData(data: Data) {
+        print("respuesta")
+        print(String(data:data,encoding:String.Encoding.utf8)!)
+        //let encoder = JSONEncoder()
         
         
+    }
+    
+    func onDataError(message: String) {
+        print("error al grabar datos en BBDD")
     }
     
     public func setBadgeValue(value: String){
@@ -142,6 +200,12 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
                 }
             }
         }
+        var total:Float = 0
+        for shoe in shoes {
+            total += shoe.getPrice()
+        }
+        
+        self.total.text = "\(total)€"
         
         cell.brand.text = shoes[indexPath.row].getModel()
         cell.price.text = "\(String(shoes[indexPath.row].getPrice()))€"
@@ -161,7 +225,12 @@ extension ShopViewController: UITableViewDataSource, UITableViewDelegate {
             }else{
                 self.tabBarController?.tabBar.items?[2].badgeValue = nil
             }
+            var total:Float = 0
+            for shoe in shoes {
+                total += shoe.getPrice()
+            }
             
+            self.total.text = "\(total)€"
             updateShoes()
         }
     }

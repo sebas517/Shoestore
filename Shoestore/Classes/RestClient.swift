@@ -33,8 +33,11 @@ class RestClient {
         }
     }
     func request() {
+        print("1")
         let sesion = URLSession(configuration: URLSessionConfiguration.default)
+        print("3")
         let task = sesion.dataTask(with: self.urlPeticion,completionHandler: self.callBack)
+        print("2")
         task.resume()
     }
     
