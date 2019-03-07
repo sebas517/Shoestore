@@ -9,7 +9,15 @@
 import Foundation
 import UIKit
 
-class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate/*, OnResponse*/{
+class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate, OnResponse{
+    func onData(data: Data) {
+        print("respuesta usuar")
+    }
+    
+    func onDataError(message: String) {
+        print("error")
+    }
+    
     
     var usuario:User?
     let preferences = UserDefaults.standard
@@ -23,8 +31,13 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     @IBOutlet weak var cvv: UITextField!
     @IBOutlet weak var expirationDate: UITextField!
     @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var passwordTf: UITextField!
     
     let imagePicker = UIImagePickerController()
+    
+    @IBAction func cancelar(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
     
     @IBAction func imageTap(_ sender: Any) {
         imagePicker.allowsEditing = false
@@ -41,15 +54,23 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     override func viewWillAppear(_ animated: Bool) {
         if registerClicked {
-            //no carga datos
+            if  UserDefaults.standard.object(forKey: "userData") == nil{
+                self.tabBarController?.tabBar.items?[3].isEnabled = false
+            }
         } else {
+            passwordTf.isHidden = true
             loadUsers()
             loadData()
         }
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        self.tabBarController?.tabBar.items?[3].isEnabled = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        passwordTf.isSecureTextEntry = true
         
         checkFields()
     }
@@ -84,7 +105,10 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     }
     
     @IBAction func saveButton(_ sender: Any) {
+        
         usuario?.setName(name: nameTf.text!)
+        usuario?.setLogin(login: nameTf.text!)
+        usuario?.setKey(key: nameTf.text!)
         usuario?.setLastname(lastname: surnameTf.text!)
         usuario?.setAddress(address: adressTf.text!)
         usuario?.setEmail(email: emailTf.text!)
@@ -94,14 +118,28 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         
         saveUser(user: usuario)
         
-        let datosUser:[String : Any] = ["login" : usuario?.getId(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
+        let datosUser:[String : Any] = ["id" : usuario?.getId(), "login" : usuario?.getLogin(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
         print("\(datosUser)")
         
-        /*guard let cliente = RestClient(service: "usuario/", response: self, "PUT", datosUser) else {
-            return
+        if  UserDefaults.standard.object(forKey: "userData") != nil{
+            guard let token = UserDefaults.standard.object(forKey: "token") as? String else {
+                print("'shopBag' not found in UserDefaults")
+                return
+            }
+            guard let cliente = RestClient(service: "usuario/", response: self, ["Authorization":"Bearer \(token)"] ,"PUT", datosUser) else {
+                return
+            }
+            
+            cliente.request()
+        }else{
+            guard let cliente = RestClient(service: "usuario/", response: self, [:] ,"POST", datosUser) else {
+                return
+            }
+            
+            cliente.request()
         }
         
-        cliente.request()*/
+        /**/
         
         let alerta = UIAlertController(title: "Cambios en el Usuario",
                                        message: "Usuario modificado",

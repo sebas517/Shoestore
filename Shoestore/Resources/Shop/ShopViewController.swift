@@ -99,17 +99,16 @@ class ShopViewController: UIViewController, OnResponse{
         }
         if (pedidos.count > 0) {
             self.pedidos = pedidos
+            pedidosRealizados.isHidden = false
         }
     }
     
     public func savePedido(){
 
-        /*let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
+        let shopBag = NSKeyedArchiver.archivedData(withRootObject: shoes)
         preferences.set(shopBag, forKey: "pedido")
-        
         pedidosRealizados.isHidden = false
-        
-        deleteShopBag()*/
+    
         guard let userData = UserDefaults.standard.object(forKey: "userData") as? NSData else {
             print("'shopBag' not found in UserDefaults")
             return
@@ -123,11 +122,10 @@ class ShopViewController: UIViewController, OnResponse{
         
         pedido = ["id": 0,
                   "idusuario" : user.getId(),
-                  "fecha" : "10-9-21",
+                  "fecha" : "2019-03-07",
                   "numtarjeta": user.getCreditCard(),
                   "validez": user.getExpiration(),
                   "cvv": user.getCvv()]
-        print("14")
         print(pedido)
         
         
@@ -138,7 +136,7 @@ class ShopViewController: UIViewController, OnResponse{
         
         print(token)
         
-        guard let cliente = RestClient(service: "", response: self, ["Authorization": "Bearer \(token)"], "POST", pedido) else {
+        guard let cliente = RestClient(service: "pedido/", response: self, ["Authorization": "Bearer \(token)"], "POST", pedido) else {
             print("error al grabar pedio")
             return
         }
@@ -148,6 +146,10 @@ class ShopViewController: UIViewController, OnResponse{
     func onData(data: Data) {
         print("respuesta")
         print(String(data:data,encoding:String.Encoding.utf8)!)
+        deleteShopBag()
+        checkPedidos()
+        self.tabBarController?.tabBar.items?[2].badgeValue = nil
+        performSegue(withIdentifier: "pagarSegue", sender: self)
         //let encoder = JSONEncoder()
         
         

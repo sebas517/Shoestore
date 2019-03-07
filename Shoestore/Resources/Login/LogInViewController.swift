@@ -43,13 +43,15 @@ class LogInViewController: UIViewController, OnResponse {
     }
     
     @IBAction func registerbTN(_ sender: Any) {
-        if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountSettingsController") as? AccountSettingsController
+        /*if let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "AccountSettingsController") as? AccountSettingsController
         {
             //present(vc, animated: true, completion: nil)
             show(vc, sender: self)
             vc.registerClicked = true
-        }
+        }*/
     }
+    
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "registerSegue" {
