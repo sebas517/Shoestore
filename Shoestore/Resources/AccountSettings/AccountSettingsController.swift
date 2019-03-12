@@ -121,7 +121,7 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         formatter.dateFormat = "yyyy-MM-dd"
         let result = formatter.string(from: date)
         
-        let datosUser:[String : Any] = ["id" : 4, "login" : nameTf.text!, "clave" : passwordTf.text!, "correo" : emailTf.text!, "direccion" : adressTf.text!, "nombre" : nameTf.text!, "apellidos" : surnameTf.text!, "fecha_alta" : result, "activo" : 1, "admin" : 0]
+        let datosUser:[String : Any] = ["id" : Int.random(in: 0...10), "login" : nameTf.text!, "clave" : passwordTf.text!, "correo" : emailTf.text!, "direccion" : adressTf.text!, "nombre" : nameTf.text!, "apellidos" : surnameTf.text!, "fecha_alta" : result, "activo" : 1, "admin" : 0]
         
 //        let datosUser:[String : Any] = ["id" : usuario?.getId(), "login" : usuario?.getLogin(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
         
