@@ -41,14 +41,12 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
     
     @IBAction func imageTap(_ sender: Any) {
         imagePicker.allowsEditing = false
-        imagePicker.sourceType = .photoLibrary
-        
+        imagePicker.sourceType = .photoLibrary    
         present(imagePicker, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if info[UIImagePickerController.InfoKey.originalImage] != nil {
-            
         }
     }
     

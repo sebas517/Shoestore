@@ -20,33 +20,21 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
     var categories:[Category] = []
     var shoe: Shoe!
     var shoeSelected: Shoe!
-    
+    var busquedaVacia: Bool!
     @IBOutlet weak var collectionShoesFound: UICollectionView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        busquedaVacia = false
+        if ("\(search)" == Optional("") || "\(search)" == "" || search!.isEmpty || search! == nil || search! == " "){
+            busquedaVacia = true
+            print("entrada de datos vacia")
+        }
         llamarCliente()
         // llamarClienteCategorias()
         print("Recibido \(categoria)  \(destinatario) \(search)")
-        
-        /*  if (search != "" && categoria != -1){
-         guard let cliente = RestClient(service: "zapato/\(categoria)/destinatario/\(destinatario)/busqueda/\(search)",response: self)
-         else {
-         return
-         }
-         cliente.request()
-         }else if(categoria != -1){
-         guard let cliente = RestClient(service: "zapato/destinatario/\(destinatario)/busqueda/\(search)",response: self) else {
-         return
-         }
-         cliente.request()
-         
-         }*/
-        // Do any additional setup after loading the view.
     }
-    
     func onData(data: Data) {
         do {
             let decoder = JSONDecoder()
@@ -55,41 +43,40 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                 shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, idDestinatario: Int(zapatoRest.iddestinatario) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
             }
             print ("entra en el ONDATA")
-            if (categoria != nil){
+            if (busquedaVacia == true){
                 for shoe in shoes {
-                    if (shoe.category == categoria && shoe.idDestinatario == destinatario){
-                        if (shoe.model == search || shoe.brand == search){
-                            shoesFound.append(shoe)
-                            print ("entra en el primer if")
-                        }
-                    }
-                }
-            }else {
-                for shoe in shoes {
-                    if (shoe.idDestinatario == destinatario){
-                        var comprobar = shoe.brand
-                        comprobar += " "
-                        comprobar += shoe.model
-                      
-                        print ("buscnado")
-                        print ("\(comprobar.uppercased())")
-                        if (shoe.model.uppercased() == search?.uppercased() || shoe.brand.uppercased() == search?.uppercased() ){
-                            if (!shoesFound.contains(shoe)){
-                            shoesFound.append(shoe)
+                    if (destinatario == shoe.idDestinatario && categoria == shoe.category){
+                        shoesFound.append(shoe)
+                        print("Buscando solo por caregoria y destinatario")
+                    }}
+                
+            }  else {
+               
+                    for shoe in shoes {
+                        if (shoe.idDestinatario == destinatario){
+                            var comprobar = shoe.brand
+                            comprobar += " "
+                            comprobar += shoe.model
+                            print ("buscnado")
+                            print ("\(comprobar.uppercased())")
+                            if (shoe.model.uppercased() == search?.uppercased() || shoe.brand.uppercased() == search?.uppercased()){
+                                if (!shoesFound.contains(shoe)){
+                                    shoesFound.append(shoe)
+                                }
+                                print("entra, son iguales")
                             }
-                            print("entra, son iguales")
-                        }
-                        else if (comprobar.uppercased() == search?.uppercased() ){
-                            print("BSUUSQUEDA IGUAL A  ")
-                            print(comprobar)
-                             shoesFound.append(shoe)
-                        }
+                            else if (comprobar.uppercased() == search?.uppercased() ){
+                                print("BSUUSQUEDA IGUAL A  ")
+                                print(comprobar)
+                                shoesFound.append(shoe)
+                            }
                     }
                 }
             }
+               // }
             collectionShoesFound.reloadData()
             //--Si no se encuentran zapatos en la busqueda, lanza un alert y carga todos los zapatos de la BD
-            if (search != nil && search != ""){
+           // if (search != nil && search != ""){
             if (shoesFound.count <= 0){
                 let alerta = UIAlertController(title: "No se ha encontrado la búsqueda",
                                                message: "Por favor, revise los datos introducidos",
@@ -101,17 +88,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                 self.present(alerta, animated: true, completion: nil)
                 loadAllShoes()
             }
-            }else{
-                let alerta = UIAlertController(title: "No se han introducido datos",
-                                               message: "Por favor, introduzca datos para realizar la búsqueda",
-                                               preferredStyle: UIAlertController.Style.alert)
-                let accion = UIAlertAction(title: "Cerrar",
-                                           style: UIAlertAction.Style.default) { _ in
-                                            alerta.dismiss(animated: true, completion: nil) }
-                alerta.addAction(accion)
-                self.present(alerta, animated: true, completion: nil)
-                loadAllShoes()
-            }
+         //   }
             
             
             //      tabla.reloadData()
@@ -240,14 +217,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
         
         let selectedShoe = shoesFound[indexPath.row]
         DetailViewController.shoe = selectedShoe
-        
-       
+   
         
     }
-    
-    
-    
 }
-
-
-
