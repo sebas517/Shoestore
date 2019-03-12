@@ -12,10 +12,8 @@ class SearchViewController: UIViewController, OnResponse {
     
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
-    
     //let testArray = ["Spain", "Canada", "Venezuela", "Suiza", "Italia", "Eslovenia", "China", "Australia", "Marruecos", "India"];
     private var categories: [Category] = []
-    
     var categoriaId : Int?
     var destinatario: Int?
     var search : String?
@@ -76,7 +74,6 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         categoriaId = categories[indexPath.row].getId()
         //print(categoriaId)
     }
-    
 }
 
 extension SearchViewController: UISearchBarDelegate {
@@ -118,7 +115,6 @@ extension SearchViewController: UISearchBarDelegate {
         if segue.identifier == "searchSegue" {
             if (destinatario != 1 && destinatario != 2 && destinatario != 3 && destinatario != 4)
             {destinatario = 3
-                
             }
             
             print("manda en el segue: \(categoriaId) , \(destinatario), \(search)")

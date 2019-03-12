@@ -42,12 +42,12 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
             for zapatoRest in zapatos.zapato {
                 shoes.append(Shoe(id: Int(zapatoRest.id) ?? 0, category: Int(zapatoRest.idcategoria) ?? 0, idDestinatario: Int(zapatoRest.iddestinatario) ?? 0, brand: zapatoRest.marca , model: zapatoRest.modelo, price: Float(zapatoRest.precio) ?? 0.0, color: zapatoRest.color, coverMaterial: zapatoRest.material_cubierta, insideMaterial: zapatoRest.material_forro, soleMaterial: zapatoRest.material_suela, numberFrom: Int(zapatoRest.numero_desde) ?? 0, numberTo: Int(zapatoRest.numero_hasta) ?? 0, desc: zapatoRest.descripcion, stock: Int(zapatoRest.disponibilidad) ?? 0, image: zapatoRest.imagen))
             }
-            print ("entra en el ONDATA")
+          //  print ("entra en el ONDATA")
             if (busquedaVacia == true){
                 for shoe in shoes {
                     if (destinatario == shoe.idDestinatario && categoria == shoe.category){
                         shoesFound.append(shoe)
-                        print("Buscando solo por caregoria y destinatario")
+                    //    print("Buscando solo por caregoria y destinatario")
                     }}
                 
             }  else {
@@ -63,11 +63,11 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                                 if (!shoesFound.contains(shoe)){
                                     shoesFound.append(shoe)
                                 }
-                                print("entra, son iguales")
+                              
                             }
                             else if (comprobar.uppercased() == search?.uppercased() ){
-                                print("BSUUSQUEDA IGUAL A  ")
-                                print(comprobar)
+                            //    print("BSUUSQUEDA IGUAL A  ")
+                             //   print(comprobar)
                                 shoesFound.append(shoe)
                             }
                     }
@@ -88,9 +88,7 @@ class ShoesResultViewController: UIViewController, OnResponse, UICollectionViewD
                 self.present(alerta, animated: true, completion: nil)
                 loadAllShoes()
             }
-         //   }
-            
-            
+         //   }    
             //      tabla.reloadData()
             
         } catch let parsingError {

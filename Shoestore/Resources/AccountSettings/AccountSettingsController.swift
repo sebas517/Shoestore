@@ -11,18 +11,17 @@ import UIKit
 
 class AccountSettingsController: UIViewController, UIImagePickerControllerDelegate, OnResponse{
     func onData(data: Data) {
+        print(String(data:data,encoding:String.Encoding.utf8)!)
         print("respuesta usuar")
     }
     
     func onDataError(message: String) {
         print("error")
     }
-    
-    
+        
     var usuario:User?
     let preferences = UserDefaults.standard
     var registerClicked = false
-    
     @IBOutlet weak var nameTf: UITextField!
     @IBOutlet weak var surnameTf: UITextField!
     @IBOutlet weak var adressTf: UITextField!
@@ -106,17 +105,26 @@ class AccountSettingsController: UIViewController, UIImagePickerControllerDelega
         
         usuario?.setName(name: nameTf.text!)
         usuario?.setLogin(login: nameTf.text!)
-        usuario?.setKey(key: nameTf.text!)
+        usuario?.setKey(key: passwordTf.text!)
         usuario?.setLastname(lastname: surnameTf.text!)
         usuario?.setAddress(address: adressTf.text!)
         usuario?.setEmail(email: emailTf.text!)
         usuario?.setCreditCard(creditCard: creditCard.text!)
         usuario?.setCvv(cvv: cvv.text!)
         usuario?.setExpiration(expiration: expirationDate.text!)
+        print(nameTf.text)
         
         saveUser(user: usuario)
         
-        let datosUser:[String : Any] = ["id" : usuario?.getId(), "login" : usuario?.getLogin(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
+        let date = Date()
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let result = formatter.string(from: date)
+        
+        let datosUser:[String : Any] = ["id" : 4, "login" : nameTf.text!, "clave" : passwordTf.text!, "correo" : emailTf.text!, "direccion" : adressTf.text!, "nombre" : nameTf.text!, "apellidos" : surnameTf.text!, "fecha_alta" : result, "activo" : 1, "admin" : 0]
+        
+//        let datosUser:[String : Any] = ["id" : usuario?.getId(), "login" : usuario?.getLogin(), "clave" : usuario?.getKey(), "correo" : usuario?.getEmail(), "direccion" : usuario?.getAddress(), "nombre" : usuario?.getName(), "apellidos" : usuario?.getLastname(), "fecha_alta" : usuario?.getSignedUp(), "activo" : usuario?.active, "admin" : usuario?.admin]
+        
         print("\(datosUser)")
         
         if  UserDefaults.standard.object(forKey: "userData") != nil{
